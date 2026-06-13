@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface CompoundElement {
+  symbol: string;
+  name: string;
+  oxidation: number;
+  count: number;
 }

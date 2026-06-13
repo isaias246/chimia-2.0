@@ -1,22 +1,34 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: CHEMIA Chemistry Platform API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: elements
+    description: Periodic table elements
+  - name: calculations
+    description: Chemistry calculations
+  - name: compounds
+    description: Compound builder
+  - name: equations
+    description: Equation balancer
+  - name: chat
+    description: AI Chemistry Tutor chat
+  - name: auth
+    description: Authentication
+  - name: formulas
+    description: Saved formulas
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +36,426 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: Registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "204":
+          description: Logged out
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /elements:
+    get:
+      operationId: listElements
+      tags: [elements]
+      summary: List all elements
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of elements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Element"
+
+  /elements/{atomicNumber}:
+    get:
+      operationId: getElement
+      tags: [elements]
+      summary: Get element by atomic number
+      parameters:
+        - name: atomicNumber
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Element details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Element"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /elements/stats/summary:
+    get:
+      operationId: getElementStats
+      tags: [elements]
+      summary: Get element category stats
+      responses:
+        "200":
+          description: Category counts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ElementCategoryStat"
+
+  /calculations/molecular-mass:
+    post:
+      operationId: calculateMolecularMass
+      tags: [calculations]
+      summary: Calculate molecular mass and percent composition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FormulaInput"
+      responses:
+        "200":
+          description: Molecular mass result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MolecularMassResult"
+        "400":
+          description: Invalid formula
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /calculations/parse-formula:
+    post:
+      operationId: parseFormula
+      tags: [calculations]
+      summary: Parse a chemical formula
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FormulaInput"
+      responses:
+        "200":
+          description: Parsed formula result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParsedFormula"
+        "400":
+          description: Invalid formula
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /calculations/balance-equation:
+    post:
+      operationId: balanceEquation
+      tags: [calculations]
+      summary: Balance a chemical equation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EquationInput"
+      responses:
+        "200":
+          description: Balanced equation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalancedEquation"
+        "400":
+          description: Invalid equation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /compounds/build:
+    post:
+      operationId: buildCompound
+      tags: [compounds]
+      summary: Build a compound from two elements and oxidation states
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompoundBuilderInput"
+      responses:
+        "200":
+          description: Built compound
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompoundResult"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /formulas:
+    get:
+      operationId: listFormulas
+      tags: [formulas]
+      summary: List saved formulas
+      responses:
+        "200":
+          description: Saved formulas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SavedFormula"
+    post:
+      operationId: saveFormula
+      tags: [formulas]
+      summary: Save a formula
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedFormulaInput"
+      responses:
+        "201":
+          description: Saved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SavedFormula"
+
+  /formulas/{id}:
+    delete:
+      operationId: deleteFormula
+      tags: [formulas]
+      summary: Delete a saved formula
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /chat/conversations:
+    get:
+      operationId: listConversations
+      tags: [chat]
+      summary: List chat conversations
+      responses:
+        "200":
+          description: Conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conversation"
+    post:
+      operationId: createConversation
+      tags: [chat]
+      summary: Create a new conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conversation"
+
+  /chat/conversations/{id}:
+    get:
+      operationId: getConversation
+      tags: [chat]
+      summary: Get conversation with messages
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Conversation with messages
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationWithMessages"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteConversation
+      tags: [chat]
+      summary: Delete a conversation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /chat/conversations/{id}/messages:
+    post:
+      operationId: sendMessage
+      tags: [chat]
+      summary: Send a message and get a chemistry tutor response
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInput"
+      responses:
+        "200":
+          description: AI response message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatMessage"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /calculations/history:
+    get:
+      operationId: listCalculationHistory
+      tags: [calculations]
+      summary: List recent calculations
+      responses:
+        "200":
+          description: Recent calculations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CalculationRecord"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +466,453 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    RegisterInput:
+      type: object
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - username
+        - password
+
+    LoginInput:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        username:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - email
+        - username
+        - createdAt
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+      required:
+        - user
+        - token
+
+    Element:
+      type: object
+      properties:
+        atomicNumber:
+          type: integer
+        symbol:
+          type: string
+        name:
+          type: string
+        atomicMass:
+          type: number
+        category:
+          type: string
+        group:
+          type: ["integer", "null"]
+        period:
+          type: integer
+        electronConfiguration:
+          type: string
+        oxidationStates:
+          type: string
+        electronegativity:
+          type: ["number", "null"]
+        atomicRadius:
+          type: ["number", "null"]
+        meltingPoint:
+          type: ["number", "null"]
+        boilingPoint:
+          type: ["number", "null"]
+        density:
+          type: ["number", "null"]
+        discoveredBy:
+          type: ["string", "null"]
+        phase:
+          type: string
+        color:
+          type: string
+      required:
+        - atomicNumber
+        - symbol
+        - name
+        - atomicMass
+        - category
+        - period
+        - electronConfiguration
+        - oxidationStates
+        - phase
+        - color
+
+    ElementCategoryStat:
+      type: object
+      properties:
+        category:
+          type: string
+        count:
+          type: integer
+      required:
+        - category
+        - count
+
+    FormulaInput:
+      type: object
+      properties:
+        formula:
+          type: string
+      required:
+        - formula
+
+    ElementComposition:
+      type: object
+      properties:
+        symbol:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+        atomicMass:
+          type: number
+        totalMass:
+          type: number
+        percentComposition:
+          type: number
+      required:
+        - symbol
+        - name
+        - count
+        - atomicMass
+        - totalMass
+        - percentComposition
+
+    MolecularMassResult:
+      type: object
+      properties:
+        formula:
+          type: string
+        molecularMass:
+          type: number
+        molarMass:
+          type: number
+        composition:
+          type: array
+          items:
+            $ref: "#/components/schemas/ElementComposition"
+      required:
+        - formula
+        - molecularMass
+        - molarMass
+        - composition
+
+    ParsedFormula:
+      type: object
+      properties:
+        formula:
+          type: string
+        isValid:
+          type: boolean
+        elements:
+          type: array
+          items:
+            $ref: "#/components/schemas/ParsedElement"
+        totalAtoms:
+          type: integer
+        error:
+          type: ["string", "null"]
+      required:
+        - formula
+        - isValid
+        - elements
+        - totalAtoms
+
+    ParsedElement:
+      type: object
+      properties:
+        symbol:
+          type: string
+        count:
+          type: integer
+      required:
+        - symbol
+        - count
+
+    EquationInput:
+      type: object
+      properties:
+        equation:
+          type: string
+      required:
+        - equation
+
+    BalancedEquation:
+      type: object
+      properties:
+        original:
+          type: string
+        balanced:
+          type: string
+        reactants:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquationSide"
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquationSide"
+        isBalanced:
+          type: boolean
+        steps:
+          type: array
+          items:
+            type: string
+      required:
+        - original
+        - balanced
+        - reactants
+        - products
+        - isBalanced
+        - steps
+
+    EquationSide:
+      type: object
+      properties:
+        formula:
+          type: string
+        coefficient:
+          type: integer
+      required:
+        - formula
+        - coefficient
+
+    CompoundBuilderInput:
+      type: object
+      properties:
+        element1Symbol:
+          type: string
+        element1Oxidation:
+          type: integer
+        element2Symbol:
+          type: string
+        element2Oxidation:
+          type: integer
+      required:
+        - element1Symbol
+        - element1Oxidation
+        - element2Symbol
+        - element2Oxidation
+
+    CompoundResult:
+      type: object
+      properties:
+        formula:
+          type: string
+        name:
+          type: string
+        element1:
+          $ref: "#/components/schemas/CompoundElement"
+        element2:
+          $ref: "#/components/schemas/CompoundElement"
+        molecularMass:
+          type: number
+        description:
+          type: string
+      required:
+        - formula
+        - name
+        - element1
+        - element2
+        - molecularMass
+        - description
+
+    CompoundElement:
+      type: object
+      properties:
+        symbol:
+          type: string
+        name:
+          type: string
+        oxidation:
+          type: integer
+        count:
+          type: integer
+      required:
+        - symbol
+        - name
+        - oxidation
+        - count
+
+    SavedFormula:
+      type: object
+      properties:
+        id:
+          type: integer
+        formula:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        molecularMass:
+          type: ["number", "null"]
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - formula
+        - name
+        - type
+        - createdAt
+
+    SavedFormulaInput:
+      type: object
+      properties:
+        formula:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        molecularMass:
+          type: ["number", "null"]
+      required:
+        - formula
+        - name
+        - type
+
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - createdAt
+        - updatedAt
+
+    ConversationInput:
+      type: object
+      properties:
+        title:
+          type: string
+      required:
+        - title
+
+    ConversationWithMessages:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChatMessage"
+      required:
+        - id
+        - title
+        - createdAt
+        - updatedAt
+        - messages
+
+    ChatMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        conversationId:
+          type: integer
+        role:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - conversationId
+        - role
+        - content
+        - createdAt
+
+    MessageInput:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+
+    CalculationRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        input:
+          type: string
+        result:
+          type: string
+        userId:
+          type: ["integer", "null"]
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - type
+        - input
+        - result
+        - createdAt

@@ -6,6 +6,10 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface SavedFormulaInput {
+  formula: string;
+  name: string;
+  type: string;
+  /** @nullable */
+  molecularMass?: number | null;
 }
