@@ -24,7 +24,7 @@ const navItems = [
   { href: "/periodic-table", label: "Tabla Periódica", icon: Grid },
   { href: "/compound-library", label: "Biblioteca de Compuestos", icon: BookOpen },
   { href: "/molecular-mass", label: "Masa Molecular", icon: Calculator },
-  { href: "/compound-builder", label: "Constructor de Compuestos", icon: Beaker },
+  { href: "/compound-builder", label: "Perfil de Compuesto", icon: Beaker },
   { href: "/equation-balancer", label: "Balanceador de Ecuaciones", icon: Scale },
   { href: "/stoichiometry", label: "Estequiometría", icon: FlaskConical },
   { href: "/ai-tutor", label: "Tutor de Química", icon: MessageSquare },

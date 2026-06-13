@@ -219,6 +219,78 @@ export const BuildCompoundResponse = zod.object({
 
 
 /**
+ * @summary Genera el Perfil Universal de un compuesto MVP (7 motores determinísticos)
+ */
+export const GenerarPerfilUniversalBody = zod.object({
+  "formula": zod.string()
+})
+
+export const GenerarPerfilUniversalResponse = zod.object({
+  "formula": zod.string(),
+  "formulaDisplay": zod.string(),
+  "nombre": zod.string(),
+  "familia": zod.string(),
+  "color": zod.string(),
+  "masaMolar": zod.number(),
+  "esCompuestoMVP": zod.boolean(),
+  "nomenclatura": zod.object({
+  "tradicional": zod.string(),
+  "stock": zod.string(),
+  "sistematica": zod.string(),
+  "tipo": zod.string(),
+  "nota": zod.string().optional()
+}),
+  "lewis": zod.object({
+  "descripcion": zod.string(),
+  "esIonico": zod.boolean(),
+  "electronosValenciaTotal": zod.number(),
+  "atomoCentral": zod.string().optional(),
+  "paresLibresCentral": zod.number().optional(),
+  "enlacesSimples": zod.number().optional(),
+  "enlacesDobles": zod.number().optional(),
+  "enlacesTriples": zod.number().optional(),
+  "notaResonancia": zod.string().optional()
+}),
+  "vsepr": zod.object({
+  "descripcion": zod.string(),
+  "esIonico": zod.boolean(),
+  "notacionAXE": zod.string().optional(),
+  "geometriaElectronica": zod.string().optional(),
+  "geometriaMolecular": zod.string().optional(),
+  "anguloEnlace": zod.string().optional(),
+  "hibridacion": zod.string().optional()
+}),
+  "polaridad": zod.object({
+  "esPolar": zod.boolean(),
+  "tipoEnlace": zod.string(),
+  "diferenciaEN": zod.number(),
+  "momentoDipolar": zod.string(),
+  "explicacion": zod.string()
+}),
+  "formacion": zod.object({
+  "proceso": zod.string(),
+  "ecuacion": zod.string(),
+  "tipoEnlaceFormado": zod.string(),
+  "estadosOxidacion": zod.record(zod.string(), zod.string()),
+  "entalpiaFormacion": zod.string().optional()
+}),
+  "reacciones": zod.array(zod.object({
+  "nombre": zod.string(),
+  "ecuacion": zod.string(),
+  "tipo": zod.string(),
+  "descripcion": zod.string()
+})),
+  "educacion": zod.object({
+  "teoriaResumida": zod.string(),
+  "erroresComunes": zod.array(zod.string()),
+  "ejerciciosPrincipiante": zod.array(zod.string()),
+  "ejerciciosSecundario": zod.array(zod.string()),
+  "ejerciciosUniversitario": zod.array(zod.string())
+})
+})
+
+
+/**
  * @summary List saved formulas
  */
 export const ListFormulasResponseItem = zod.object({

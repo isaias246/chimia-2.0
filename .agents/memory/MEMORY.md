@@ -1,0 +1,1 @@
+- [CHEMIA stack quirks](chemia-stack-quirks.md) — esbuild can't resolve zod/v4 in api-server; ApiError.data pattern for 422 bodies in frontend

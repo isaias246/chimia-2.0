@@ -414,6 +414,96 @@ export interface CalculationRecord {
   createdAt: string;
 }
 
+export interface PerfilInput {
+  formula: string;
+}
+
+export interface PerfilFueraMVP {
+  error: string;
+  formula: string;
+  compuestosMVP: string[];
+}
+
+export interface PerfilNomenclatura {
+  tradicional: string;
+  stock: string;
+  sistematica: string;
+  tipo: string;
+  nota?: string;
+}
+
+export interface PerfilLewis {
+  descripcion: string;
+  esIonico: boolean;
+  electronosValenciaTotal: number;
+  atomoCentral?: string;
+  paresLibresCentral?: number;
+  enlacesSimples?: number;
+  enlacesDobles?: number;
+  enlacesTriples?: number;
+  notaResonancia?: string;
+}
+
+export interface PerfilVSEPR {
+  descripcion: string;
+  esIonico: boolean;
+  notacionAXE?: string;
+  geometriaElectronica?: string;
+  geometriaMolecular?: string;
+  anguloEnlace?: string;
+  hibridacion?: string;
+}
+
+export interface PerfilPolaridad {
+  esPolar: boolean;
+  tipoEnlace: string;
+  diferenciaEN: number;
+  momentoDipolar: string;
+  explicacion: string;
+}
+
+export type PerfilFormacionEstadosOxidacion = {[key: string]: string};
+
+export interface PerfilFormacion {
+  proceso: string;
+  ecuacion: string;
+  tipoEnlaceFormado: string;
+  estadosOxidacion: PerfilFormacionEstadosOxidacion;
+  entalpiaFormacion?: string;
+}
+
+export interface PerfilReaccion {
+  nombre: string;
+  ecuacion: string;
+  tipo: string;
+  descripcion: string;
+}
+
+export interface PerfilEducacion {
+  teoriaResumida: string;
+  erroresComunes: string[];
+  ejerciciosPrincipiante: string[];
+  ejerciciosSecundario: string[];
+  ejerciciosUniversitario: string[];
+}
+
+export interface PerfilUniversal {
+  formula: string;
+  formulaDisplay: string;
+  nombre: string;
+  familia: string;
+  color: string;
+  masaMolar: number;
+  esCompuestoMVP: boolean;
+  nomenclatura: PerfilNomenclatura;
+  lewis: PerfilLewis;
+  vsepr: PerfilVSEPR;
+  polaridad: PerfilPolaridad;
+  formacion: PerfilFormacion;
+  reacciones: PerfilReaccion[];
+  educacion: PerfilEducacion;
+}
+
 export type ListElementsParams = {
 search?: string;
 category?: string;

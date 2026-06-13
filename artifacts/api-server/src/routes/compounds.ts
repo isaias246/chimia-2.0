@@ -3,6 +3,7 @@ import { db, elementsTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { BuildCompoundBody } from "@workspace/api-zod";
 import { buildCompound } from "../lib/chemistry.js";
+import { generarPerfil, MVP_COMPOUNDS } from "../lib/perfilUniversal.js";
 
 const router: IRouter = Router();
 
@@ -31,6 +32,24 @@ router.post("/compounds/build", async (req, res): Promise<void> => {
   );
 
   res.json(result);
+});
+
+router.post("/compounds/perfil", async (req, res): Promise<void> => {
+  const { formula } = req.body as { formula?: unknown };
+  if (!formula || typeof formula !== "string" || !formula.trim()) {
+    res.status(400).json({ error: "Se requiere el campo 'formula' (string)" });
+    return;
+  }
+  const perfil = generarPerfil(formula.trim());
+  if (!perfil) {
+    res.status(422).json({
+      error: `El compuesto '${formula}' está fuera del alcance del MVP. Solo se soportan los 11 compuestos fundamentales.`,
+      compuestosMVP: MVP_COMPOUNDS,
+      formula: formula.trim(),
+    });
+    return;
+  }
+  res.json(perfil);
 });
 
 export default router;

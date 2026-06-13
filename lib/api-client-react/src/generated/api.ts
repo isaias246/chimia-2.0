@@ -43,6 +43,9 @@ import type {
   MessageInput,
   MolecularMassResult,
   ParsedFormula,
+  PerfilFueraMVP,
+  PerfilInput,
+  PerfilUniversal,
   RegisterInput,
   SavedFormula,
   SavedFormulaInput,
@@ -951,6 +954,77 @@ export const useBuildCompound = <TError = ErrorType<ErrorResponse>,
         TContext
       > => {
       return useMutation(getBuildCompoundMutationOptions(options));
+    }
+
+export const getGenerarPerfilUniversalUrl = () => {
+
+
+
+
+  return `/api/compounds/perfil`
+}
+
+/**
+ * @summary Genera el Perfil Universal de un compuesto MVP (7 motores determinísticos)
+ */
+export const generarPerfilUniversal = async (perfilInput: PerfilInput, options?: RequestInit): Promise<PerfilUniversal> => {
+
+  return customFetch<PerfilUniversal>(getGenerarPerfilUniversalUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      perfilInput,)
+  }
+);}
+
+
+
+
+export const getGenerarPerfilUniversalMutationOptions = <TError = ErrorType<ErrorResponse | PerfilFueraMVP>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generarPerfilUniversal>>, TError,{data: BodyType<PerfilInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof generarPerfilUniversal>>, TError,{data: BodyType<PerfilInput>}, TContext> => {
+
+const mutationKey = ['generarPerfilUniversal'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof generarPerfilUniversal>>, {data: BodyType<PerfilInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  generarPerfilUniversal(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GenerarPerfilUniversalMutationResult = NonNullable<Awaited<ReturnType<typeof generarPerfilUniversal>>>
+    export type GenerarPerfilUniversalMutationBody = BodyType<PerfilInput>
+    export type GenerarPerfilUniversalMutationError = ErrorType<ErrorResponse | PerfilFueraMVP>
+
+    /**
+ * @summary Genera el Perfil Universal de un compuesto MVP (7 motores determinísticos)
+ */
+export const useGenerarPerfilUniversal = <TError = ErrorType<ErrorResponse | PerfilFueraMVP>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generarPerfilUniversal>>, TError,{data: BodyType<PerfilInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof generarPerfilUniversal>>,
+        TError,
+        {data: BodyType<PerfilInput>},
+        TContext
+      > => {
+      return useMutation(getGenerarPerfilUniversalMutationOptions(options));
     }
 
 export const getListFormulasUrl = () => {

@@ -287,6 +287,37 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /compounds/perfil:
+    post:
+      operationId: generarPerfilUniversal
+      tags: [compounds]
+      summary: Genera el Perfil Universal de un compuesto MVP (7 motores determinísticos)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerfilInput"
+      responses:
+        "200":
+          description: Perfil universal completo (compuesto dentro del MVP)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerfilUniversal"
+        "400":
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Compuesto fuera del alcance del MVP
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerfilFueraMVP"
+
   /formulas:
     get:
       operationId: listFormulas
@@ -1388,3 +1419,228 @@ components:
         - input
         - result
         - createdAt
+
+    PerfilInput:
+      type: object
+      properties:
+        formula:
+          type: string
+      required:
+        - formula
+
+    PerfilFueraMVP:
+      type: object
+      properties:
+        error:
+          type: string
+        formula:
+          type: string
+        compuestosMVP:
+          type: array
+          items:
+            type: string
+      required:
+        - error
+        - formula
+        - compuestosMVP
+
+    PerfilNomenclatura:
+      type: object
+      properties:
+        tradicional:
+          type: string
+        stock:
+          type: string
+        sistematica:
+          type: string
+        tipo:
+          type: string
+        nota:
+          type: string
+      required:
+        - tradicional
+        - stock
+        - sistematica
+        - tipo
+
+    PerfilLewis:
+      type: object
+      properties:
+        descripcion:
+          type: string
+        esIonico:
+          type: boolean
+        electronosValenciaTotal:
+          type: integer
+        atomoCentral:
+          type: string
+        paresLibresCentral:
+          type: integer
+        enlacesSimples:
+          type: integer
+        enlacesDobles:
+          type: integer
+        enlacesTriples:
+          type: integer
+        notaResonancia:
+          type: string
+      required:
+        - descripcion
+        - esIonico
+        - electronosValenciaTotal
+
+    PerfilVSEPR:
+      type: object
+      properties:
+        descripcion:
+          type: string
+        esIonico:
+          type: boolean
+        notacionAXE:
+          type: string
+        geometriaElectronica:
+          type: string
+        geometriaMolecular:
+          type: string
+        anguloEnlace:
+          type: string
+        hibridacion:
+          type: string
+      required:
+        - descripcion
+        - esIonico
+
+    PerfilPolaridad:
+      type: object
+      properties:
+        esPolar:
+          type: boolean
+        tipoEnlace:
+          type: string
+        diferenciaEN:
+          type: number
+        momentoDipolar:
+          type: string
+        explicacion:
+          type: string
+      required:
+        - esPolar
+        - tipoEnlace
+        - diferenciaEN
+        - momentoDipolar
+        - explicacion
+
+    PerfilFormacion:
+      type: object
+      properties:
+        proceso:
+          type: string
+        ecuacion:
+          type: string
+        tipoEnlaceFormado:
+          type: string
+        estadosOxidacion:
+          type: object
+          additionalProperties:
+            type: string
+        entalpiaFormacion:
+          type: string
+      required:
+        - proceso
+        - ecuacion
+        - tipoEnlaceFormado
+        - estadosOxidacion
+
+    PerfilReaccion:
+      type: object
+      properties:
+        nombre:
+          type: string
+        ecuacion:
+          type: string
+        tipo:
+          type: string
+        descripcion:
+          type: string
+      required:
+        - nombre
+        - ecuacion
+        - tipo
+        - descripcion
+
+    PerfilEducacion:
+      type: object
+      properties:
+        teoriaResumida:
+          type: string
+        erroresComunes:
+          type: array
+          items:
+            type: string
+        ejerciciosPrincipiante:
+          type: array
+          items:
+            type: string
+        ejerciciosSecundario:
+          type: array
+          items:
+            type: string
+        ejerciciosUniversitario:
+          type: array
+          items:
+            type: string
+      required:
+        - teoriaResumida
+        - erroresComunes
+        - ejerciciosPrincipiante
+        - ejerciciosSecundario
+        - ejerciciosUniversitario
+
+    PerfilUniversal:
+      type: object
+      properties:
+        formula:
+          type: string
+        formulaDisplay:
+          type: string
+        nombre:
+          type: string
+        familia:
+          type: string
+        color:
+          type: string
+        masaMolar:
+          type: number
+        esCompuestoMVP:
+          type: boolean
+        nomenclatura:
+          $ref: "#/components/schemas/PerfilNomenclatura"
+        lewis:
+          $ref: "#/components/schemas/PerfilLewis"
+        vsepr:
+          $ref: "#/components/schemas/PerfilVSEPR"
+        polaridad:
+          $ref: "#/components/schemas/PerfilPolaridad"
+        formacion:
+          $ref: "#/components/schemas/PerfilFormacion"
+        reacciones:
+          type: array
+          items:
+            $ref: "#/components/schemas/PerfilReaccion"
+        educacion:
+          $ref: "#/components/schemas/PerfilEducacion"
+      required:
+        - formula
+        - formulaDisplay
+        - nombre
+        - familia
+        - color
+        - masaMolar
+        - esCompuestoMVP
+        - nomenclatura
+        - lewis
+        - vsepr
+        - polaridad
+        - formacion
+        - reacciones
+        - educacion
