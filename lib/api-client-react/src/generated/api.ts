@@ -25,7 +25,9 @@ import type {
   CalculationRecord,
   ChatMessage,
   CompoundBuilderInput,
+  CompoundDetail,
   CompoundResult,
+  CompoundSummary,
   Conversation,
   ConversationInput,
   ConversationWithMessages,
@@ -35,6 +37,7 @@ import type {
   ErrorResponse,
   FormulaInput,
   HealthStatus,
+  ListCompoundLibraryParams,
   ListElementsParams,
   LoginInput,
   MessageInput,
@@ -1534,6 +1537,167 @@ export const useSendMessage = <TError = ErrorType<ErrorResponse>,
       > => {
       return useMutation(getSendMessageMutationOptions(options));
     }
+
+export const getListCompoundLibraryUrl = (params?: ListCompoundLibraryParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/compounds/library?${stringifiedParams}` : `/api/compounds/library`
+}
+
+/**
+ * @summary List all compounds in the library with optional search and filter
+ */
+export const listCompoundLibrary = async (params?: ListCompoundLibraryParams, options?: RequestInit): Promise<CompoundSummary[]> => {
+
+  return customFetch<CompoundSummary[]>(getListCompoundLibraryUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListCompoundLibraryQueryKey = (params?: ListCompoundLibraryParams,) => {
+    return [
+    `/api/compounds/library`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getListCompoundLibraryQueryOptions = <TData = Awaited<ReturnType<typeof listCompoundLibrary>>, TError = ErrorType<unknown>>(params?: ListCompoundLibraryParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listCompoundLibrary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListCompoundLibraryQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listCompoundLibrary>>> = ({ signal }) => listCompoundLibrary(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listCompoundLibrary>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListCompoundLibraryQueryResult = NonNullable<Awaited<ReturnType<typeof listCompoundLibrary>>>
+export type ListCompoundLibraryQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all compounds in the library with optional search and filter
+ */
+
+export function useListCompoundLibrary<TData = Awaited<ReturnType<typeof listCompoundLibrary>>, TError = ErrorType<unknown>>(
+ params?: ListCompoundLibraryParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listCompoundLibrary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListCompoundLibraryQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetCompoundDetailUrl = (id: string,) => {
+
+
+
+
+  return `/api/compounds/library/${id}`
+}
+
+/**
+ * @summary Get full compound detail by ID
+ */
+export const getCompoundDetail = async (id: string, options?: RequestInit): Promise<CompoundDetail> => {
+
+  return customFetch<CompoundDetail>(getGetCompoundDetailUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetCompoundDetailQueryKey = (id: string,) => {
+    return [
+    `/api/compounds/library/${id}`
+    ] as const;
+    }
+
+
+export const getGetCompoundDetailQueryOptions = <TData = Awaited<ReturnType<typeof getCompoundDetail>>, TError = ErrorType<ErrorResponse>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getCompoundDetail>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetCompoundDetailQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getCompoundDetail>>> = ({ signal }) => getCompoundDetail(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getCompoundDetail>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetCompoundDetailQueryResult = NonNullable<Awaited<ReturnType<typeof getCompoundDetail>>>
+export type GetCompoundDetailQueryError = ErrorType<ErrorResponse>
+
+
+/**
+ * @summary Get full compound detail by ID
+ */
+
+export function useGetCompoundDetail<TData = Awaited<ReturnType<typeof getCompoundDetail>>, TError = ErrorType<ErrorResponse>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getCompoundDetail>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetCompoundDetailQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
 
 export const getSmartSolveUrl = () => {
 

@@ -206,6 +206,66 @@ export interface StoichiometryReagentAmount {
   unit: StoichiometryReagentAmountUnit;
 }
 
+export interface CompoundReaction {
+  name: string;
+  equation: string;
+  description: string;
+  type: string;
+}
+
+export interface CompoundProperty {
+  label: string;
+  value: string;
+  unit?: string | null;
+}
+
+export interface CompoundExplanation {
+  beginner: string;
+  highschool: string;
+  university: string;
+}
+
+export interface CompoundSummary {
+  id: string;
+  formula: string;
+  name: string;
+  category: string;
+  state: string;
+  molarMass: number;
+  color: string;
+  tagline: string;
+  tags: string[];
+}
+
+export interface CompoundDetail {
+  id: string;
+  formula: string;
+  name: string;
+  iupacName: string;
+  commonNames: string[];
+  category: string;
+  color: string;
+  state: string;
+  appearance: string;
+  smell: string;
+  molarMass: number;
+  meltingPoint?: number | null;
+  boilingPoint?: number | null;
+  density: string;
+  solubility: string;
+  bondType: string;
+  geometry: string;
+  dipole: boolean;
+  phInWater?: string | null;
+  hazards: string[];
+  uses: string[];
+  funFacts: string[];
+  reactions: CompoundReaction[];
+  properties: CompoundProperty[];
+  explanation: CompoundExplanation;
+  tags: string[];
+}
+
 export type SmartSolverInputTopic = typeof SmartSolverInputTopic[keyof typeof SmartSolverInputTopic];
 
 
@@ -341,5 +401,11 @@ export interface CalculationRecord {
 export type ListElementsParams = {
 search?: string;
 category?: string;
+};
+
+export type ListCompoundLibraryParams = {
+search?: string;
+category?: string;
+state?: string;
 };
 

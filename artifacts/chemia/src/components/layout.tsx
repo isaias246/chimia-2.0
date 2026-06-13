@@ -13,6 +13,7 @@ import {
   Hexagon,
   FlaskConical,
   Sparkles,
+  BookOpen,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ const navItems = [
   { href: "/smart-solver", label: "Smart Solver", icon: Sparkles, featured: true },
   { href: "/", label: "Dashboard", icon: Activity },
   { href: "/periodic-table", label: "Periodic Table", icon: Grid },
+  { href: "/compound-library", label: "Compound Library", icon: BookOpen },
   { href: "/molecular-mass", label: "Molecular Mass", icon: Calculator },
   { href: "/compound-builder", label: "Compound Builder", icon: Beaker },
   { href: "/equation-balancer", label: "Equation Balancer", icon: Scale },

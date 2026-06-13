@@ -7,6 +7,7 @@ import compoundsRouter from "./compounds";
 import formulasRouter from "./formulas";
 import chatRouter from "./chat";
 import solverRouter from "./solver";
+import compoundLibraryRouter from "./compoundLibrary";
 
 const router: IRouter = Router();
 
@@ -15,6 +16,7 @@ router.use(authRouter);
 router.use(elementsRouter);
 router.use(calculationsRouter);
 router.use(compoundsRouter);
+router.use(compoundLibraryRouter);
 router.use(formulasRouter);
 router.use(chatRouter);
 router.use(solverRouter);

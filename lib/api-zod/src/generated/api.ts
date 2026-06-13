@@ -322,6 +322,79 @@ export const SendMessageResponse = zod.object({
 
 
 /**
+ * @summary List all compounds in the library with optional search and filter
+ */
+export const ListCompoundLibraryQueryParams = zod.object({
+  "search": zod.coerce.string().optional(),
+  "category": zod.coerce.string().optional(),
+  "state": zod.coerce.string().optional()
+})
+
+export const ListCompoundLibraryResponseItem = zod.object({
+  "id": zod.string(),
+  "formula": zod.string(),
+  "name": zod.string(),
+  "category": zod.string(),
+  "state": zod.string(),
+  "molarMass": zod.number(),
+  "color": zod.string(),
+  "tagline": zod.string(),
+  "tags": zod.array(zod.string())
+})
+export const ListCompoundLibraryResponse = zod.array(ListCompoundLibraryResponseItem)
+
+
+/**
+ * @summary Get full compound detail by ID
+ */
+export const GetCompoundDetailParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GetCompoundDetailResponse = zod.object({
+  "id": zod.string(),
+  "formula": zod.string(),
+  "name": zod.string(),
+  "iupacName": zod.string(),
+  "commonNames": zod.array(zod.string()),
+  "category": zod.string(),
+  "color": zod.string(),
+  "state": zod.string(),
+  "appearance": zod.string(),
+  "smell": zod.string(),
+  "molarMass": zod.number(),
+  "meltingPoint": zod.number().nullish(),
+  "boilingPoint": zod.number().nullish(),
+  "density": zod.string(),
+  "solubility": zod.string(),
+  "bondType": zod.string(),
+  "geometry": zod.string(),
+  "dipole": zod.boolean(),
+  "phInWater": zod.string().nullish(),
+  "hazards": zod.array(zod.string()),
+  "uses": zod.array(zod.string()),
+  "funFacts": zod.array(zod.string()),
+  "reactions": zod.array(zod.object({
+  "name": zod.string(),
+  "equation": zod.string(),
+  "description": zod.string(),
+  "type": zod.string()
+})),
+  "properties": zod.array(zod.object({
+  "label": zod.string(),
+  "value": zod.string(),
+  "unit": zod.string().nullish()
+})),
+  "explanation": zod.object({
+  "beginner": zod.string(),
+  "highschool": zod.string(),
+  "university": zod.string()
+}),
+  "tags": zod.array(zod.string())
+})
+
+
+/**
  * @summary CHEMIA Smart Solver — step-by-step chemistry problem solver with multi-level explanations
  */
 export const SmartSolveBody = zod.object({

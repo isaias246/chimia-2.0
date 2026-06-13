@@ -441,6 +441,62 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /compounds/library:
+    get:
+      operationId: listCompoundLibrary
+      tags: [calculations]
+      summary: List all compounds in the library with optional search and filter
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of compound summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CompoundSummary"
+
+  /compounds/library/{id}:
+    get:
+      operationId: getCompoundDetail
+      tags: [calculations]
+      summary: Get full compound detail by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Full compound detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompoundDetail"
+        "404":
+          description: Compound not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /solver/solve:
     post:
       operationId: smartSolve
@@ -958,6 +1014,141 @@ components:
         - formula
         - amount
         - unit
+
+    CompoundReaction:
+      type: object
+      required: [name, equation, description, type]
+      properties:
+        name:
+          type: string
+        equation:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+
+    CompoundProperty:
+      type: object
+      required: [label, value]
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+        unit:
+          type: string
+          nullable: true
+
+    CompoundExplanation:
+      type: object
+      required: [beginner, highschool, university]
+      properties:
+        beginner:
+          type: string
+        highschool:
+          type: string
+        university:
+          type: string
+
+    CompoundSummary:
+      type: object
+      required: [id, formula, name, category, state, molarMass, color, tagline, tags]
+      properties:
+        id:
+          type: string
+        formula:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        state:
+          type: string
+        molarMass:
+          type: number
+        color:
+          type: string
+        tagline:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+
+    CompoundDetail:
+      type: object
+      required: [id, formula, name, iupacName, commonNames, category, color, state, appearance, smell, molarMass, density, solubility, bondType, geometry, dipole, hazards, uses, funFacts, reactions, properties, explanation, tags]
+      properties:
+        id:
+          type: string
+        formula:
+          type: string
+        name:
+          type: string
+        iupacName:
+          type: string
+        commonNames:
+          type: array
+          items:
+            type: string
+        category:
+          type: string
+        color:
+          type: string
+        state:
+          type: string
+        appearance:
+          type: string
+        smell:
+          type: string
+        molarMass:
+          type: number
+        meltingPoint:
+          type: number
+          nullable: true
+        boilingPoint:
+          type: number
+          nullable: true
+        density:
+          type: string
+        solubility:
+          type: string
+        bondType:
+          type: string
+        geometry:
+          type: string
+        dipole:
+          type: boolean
+        phInWater:
+          type: string
+          nullable: true
+        hazards:
+          type: array
+          items:
+            type: string
+        uses:
+          type: array
+          items:
+            type: string
+        funFacts:
+          type: array
+          items:
+            type: string
+        reactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompoundReaction"
+        properties:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompoundProperty"
+        explanation:
+          $ref: "#/components/schemas/CompoundExplanation"
+        tags:
+          type: array
+          items:
+            type: string
 
     SmartSolverInput:
       type: object
