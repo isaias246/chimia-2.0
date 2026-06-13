@@ -43,6 +43,8 @@ import type {
   RegisterInput,
   SavedFormula,
   SavedFormulaInput,
+  SmartSolverInput,
+  SmartSolverResult,
   StoichiometryInput,
   StoichiometryResult,
   User
@@ -1531,6 +1533,77 @@ export const useSendMessage = <TError = ErrorType<ErrorResponse>,
         TContext
       > => {
       return useMutation(getSendMessageMutationOptions(options));
+    }
+
+export const getSmartSolveUrl = () => {
+
+
+
+
+  return `/api/solver/solve`
+}
+
+/**
+ * @summary CHEMIA Smart Solver — step-by-step chemistry problem solver with multi-level explanations
+ */
+export const smartSolve = async (smartSolverInput: SmartSolverInput, options?: RequestInit): Promise<SmartSolverResult> => {
+
+  return customFetch<SmartSolverResult>(getSmartSolveUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      smartSolverInput,)
+  }
+);}
+
+
+
+
+export const getSmartSolveMutationOptions = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof smartSolve>>, TError,{data: BodyType<SmartSolverInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof smartSolve>>, TError,{data: BodyType<SmartSolverInput>}, TContext> => {
+
+const mutationKey = ['smartSolve'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof smartSolve>>, {data: BodyType<SmartSolverInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  smartSolve(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SmartSolveMutationResult = NonNullable<Awaited<ReturnType<typeof smartSolve>>>
+    export type SmartSolveMutationBody = BodyType<SmartSolverInput>
+    export type SmartSolveMutationError = ErrorType<ErrorResponse>
+
+    /**
+ * @summary CHEMIA Smart Solver — step-by-step chemistry problem solver with multi-level explanations
+ */
+export const useSmartSolve = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof smartSolve>>, TError,{data: BodyType<SmartSolverInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof smartSolve>>,
+        TError,
+        {data: BodyType<SmartSolverInput>},
+        TContext
+      > => {
+      return useMutation(getSmartSolveMutationOptions(options));
     }
 
 export const getCalculateStoichiometryUrl = () => {

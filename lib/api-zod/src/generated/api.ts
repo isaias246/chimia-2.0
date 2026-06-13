@@ -322,6 +322,61 @@ export const SendMessageResponse = zod.object({
 
 
 /**
+ * @summary CHEMIA Smart Solver — step-by-step chemistry problem solver with multi-level explanations
+ */
+export const SmartSolveBody = zod.object({
+  "problem": zod.string().describe('The chemistry problem or question to solve'),
+  "topic": zod.enum(['molecular-mass', 'stoichiometry', 'gas-laws', 'acids-bases', 'equilibrium', 'thermodynamics', 'electrochemistry', 'general']),
+  "level": zod.enum(['beginner', 'highschool', 'university']),
+  "action": zod.enum(['solve', 'simplify', 'example', 'practice', 'formula', 'mistakes'])
+})
+
+export const SmartSolveResponse = zod.object({
+  "detectedType": zod.string(),
+  "topic": zod.string(),
+  "problem": zod.string(),
+  "level": zod.string(),
+  "answer": zod.string(),
+  "steps": zod.array(zod.object({
+  "number": zod.number(),
+  "title": zod.string(),
+  "content": zod.string(),
+  "formula": zod.string().nullish(),
+  "substitution": zod.string().nullish(),
+  "result": zod.string().nullish(),
+  "unit": zod.string().nullish()
+})),
+  "formulas": zod.array(zod.string()),
+  "levelExplanations": zod.object({
+  "beginner": zod.string(),
+  "highschool": zod.string(),
+  "university": zod.string()
+}),
+  "workedExample": zod.object({
+  "problem": zod.string(),
+  "steps": zod.array(zod.object({
+  "number": zod.number(),
+  "title": zod.string(),
+  "content": zod.string(),
+  "formula": zod.string().nullish(),
+  "substitution": zod.string().nullish(),
+  "result": zod.string().nullish(),
+  "unit": zod.string().nullish()
+})),
+  "answer": zod.string()
+}),
+  "practiceExercise": zod.object({
+  "problem": zod.string(),
+  "hint": zod.string(),
+  "answer": zod.string()
+}),
+  "commonMistakes": zod.array(zod.string()),
+  "relatedTopics": zod.array(zod.string()),
+  "canCompute": zod.boolean()
+})
+
+
+/**
  * @summary Stoichiometry calculation with limiting reagent, theoretical yield, and percent yield
  */
 export const CalculateStoichiometryBody = zod.object({

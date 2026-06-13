@@ -441,6 +441,31 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /solver/solve:
+    post:
+      operationId: smartSolve
+      tags: [calculations]
+      summary: CHEMIA Smart Solver — step-by-step chemistry problem solver with multi-level explanations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SmartSolverInput"
+      responses:
+        "200":
+          description: Smart solver result with steps, explanations, and practice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SmartSolverResult"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /calculations/stoichiometry:
     post:
       operationId: calculateStoichiometry
@@ -933,6 +958,120 @@ components:
         - formula
         - amount
         - unit
+
+    SmartSolverInput:
+      type: object
+      required: [problem, topic, level, action]
+      properties:
+        problem:
+          type: string
+          description: The chemistry problem or question to solve
+        topic:
+          type: string
+          enum: [molecular-mass, stoichiometry, gas-laws, acids-bases, equilibrium, thermodynamics, electrochemistry, general]
+        level:
+          type: string
+          enum: [beginner, highschool, university]
+        action:
+          type: string
+          enum: [solve, simplify, example, practice, formula, mistakes]
+
+    SolverStep:
+      type: object
+      required: [number, title, content]
+      properties:
+        number:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        formula:
+          type: string
+          nullable: true
+        substitution:
+          type: string
+          nullable: true
+        result:
+          type: string
+          nullable: true
+        unit:
+          type: string
+          nullable: true
+
+    WorkedExample:
+      type: object
+      required: [problem, steps, answer]
+      properties:
+        problem:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: "#/components/schemas/SolverStep"
+        answer:
+          type: string
+
+    PracticeExercise:
+      type: object
+      required: [problem, hint, answer]
+      properties:
+        problem:
+          type: string
+        hint:
+          type: string
+        answer:
+          type: string
+
+    LevelExplanations:
+      type: object
+      required: [beginner, highschool, university]
+      properties:
+        beginner:
+          type: string
+        highschool:
+          type: string
+        university:
+          type: string
+
+    SmartSolverResult:
+      type: object
+      required: [detectedType, topic, problem, level, answer, steps, formulas, levelExplanations, workedExample, practiceExercise, commonMistakes, relatedTopics, canCompute]
+      properties:
+        detectedType:
+          type: string
+        topic:
+          type: string
+        problem:
+          type: string
+        level:
+          type: string
+        answer:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: "#/components/schemas/SolverStep"
+        formulas:
+          type: array
+          items:
+            type: string
+        levelExplanations:
+          $ref: "#/components/schemas/LevelExplanations"
+        workedExample:
+          $ref: "#/components/schemas/WorkedExample"
+        practiceExercise:
+          $ref: "#/components/schemas/PracticeExercise"
+        commonMistakes:
+          type: array
+          items:
+            type: string
+        relatedTopics:
+          type: array
+          items:
+            type: string
+        canCompute:
+          type: boolean
 
     StoichiometryInput:
       type: object

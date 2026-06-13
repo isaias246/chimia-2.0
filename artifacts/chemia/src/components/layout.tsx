@@ -12,11 +12,13 @@ import {
   Scale,
   Hexagon,
   FlaskConical,
+  Sparkles,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
+  { href: "/smart-solver", label: "Smart Solver", icon: Sparkles, featured: true },
   { href: "/", label: "Dashboard", icon: Activity },
   { href: "/periodic-table", label: "Periodic Table", icon: Grid },
   { href: "/molecular-mass", label: "Molecular Mass", icon: Calculator },
@@ -66,18 +68,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
           {navItems.map((item) => {
             const isActive = location === item.href || (item.href !== "/" && location.startsWith(item.href));
+            const isFeatured = (item as { featured?: boolean }).featured;
             return (
               <Link key={item.href} href={item.href}>
                 <span
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors cursor-pointer text-sm font-medium ${
-                    isActive
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all cursor-pointer text-sm font-medium ${
+                    isActive && isFeatured
+                      ? "border-l-2 border-primary bg-primary/15 text-primary shadow-[0_0_12px_rgba(0,229,255,0.1)]"
+                      : isActive
                       ? "border-l-2 border-primary bg-primary/10 text-primary"
+                      : isFeatured
+                      ? "text-primary/80 hover:bg-primary/10 hover:text-primary border border-primary/20 bg-primary/5"
                       : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <item.icon className="h-4 w-4" />
+                  <item.icon className={`h-4 w-4 ${isFeatured && !isActive ? "text-primary/70" : ""}`} />
                   {item.label}
+                  {isFeatured && !isActive && (
+                    <span className="ml-auto text-[9px] font-bold uppercase tracking-wider text-primary/60 bg-primary/10 px-1.5 py-0.5 rounded-full border border-primary/20">
+                      NEW
+                    </span>
+                  )}
                 </span>
               </Link>
             );

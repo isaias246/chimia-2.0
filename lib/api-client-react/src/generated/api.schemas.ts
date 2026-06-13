@@ -206,6 +206,93 @@ export interface StoichiometryReagentAmount {
   unit: StoichiometryReagentAmountUnit;
 }
 
+export type SmartSolverInputTopic = typeof SmartSolverInputTopic[keyof typeof SmartSolverInputTopic];
+
+
+export const SmartSolverInputTopic = {
+  'molecular-mass': 'molecular-mass',
+  stoichiometry: 'stoichiometry',
+  'gas-laws': 'gas-laws',
+  'acids-bases': 'acids-bases',
+  equilibrium: 'equilibrium',
+  thermodynamics: 'thermodynamics',
+  electrochemistry: 'electrochemistry',
+  general: 'general',
+} as const;
+
+export type SmartSolverInputLevel = typeof SmartSolverInputLevel[keyof typeof SmartSolverInputLevel];
+
+
+export const SmartSolverInputLevel = {
+  beginner: 'beginner',
+  highschool: 'highschool',
+  university: 'university',
+} as const;
+
+export type SmartSolverInputAction = typeof SmartSolverInputAction[keyof typeof SmartSolverInputAction];
+
+
+export const SmartSolverInputAction = {
+  solve: 'solve',
+  simplify: 'simplify',
+  example: 'example',
+  practice: 'practice',
+  formula: 'formula',
+  mistakes: 'mistakes',
+} as const;
+
+export interface SmartSolverInput {
+  /** The chemistry problem or question to solve */
+  problem: string;
+  topic: SmartSolverInputTopic;
+  level: SmartSolverInputLevel;
+  action: SmartSolverInputAction;
+}
+
+export interface SolverStep {
+  number: number;
+  title: string;
+  content: string;
+  formula?: string | null;
+  substitution?: string | null;
+  result?: string | null;
+  unit?: string | null;
+}
+
+export interface WorkedExample {
+  problem: string;
+  steps: SolverStep[];
+  answer: string;
+}
+
+export interface PracticeExercise {
+  problem: string;
+  hint: string;
+  answer: string;
+}
+
+export interface LevelExplanations {
+  beginner: string;
+  highschool: string;
+  university: string;
+}
+
+export interface SmartSolverResult {
+  detectedType: string;
+  topic: string;
+  problem: string;
+  level: string;
+  answer: string;
+  steps: SolverStep[];
+  formulas: string[];
+  levelExplanations: LevelExplanations;
+  workedExample: WorkedExample;
+  practiceExercise: PracticeExercise;
+  commonMistakes: string[];
+  relatedTopics: string[];
+  canCompute: boolean;
+}
+
 export interface StoichiometryInput {
   equation: string;
   reactantAmounts: StoichiometryReagentAmount[];

@@ -1,0 +1,111 @@
+Add a flagship feature called CHEMIA SMART SOLVER.
+
+This must become the core feature of the platform.
+
+The Smart Solver should work like a chemistry-specific version of Photomath, Wolfram Alpha, and a personal chemistry professor combined.
+
+====================================================
+STEP-BY-STEP SOLUTIONS
+======================
+
+For every chemistry problem:
+
+* Show the final answer.
+* Show every calculation step.
+* Show formulas used.
+* Show substitutions.
+* Show units.
+* Show reasoning.
+
+Never provide only the final answer.
+
+====================================================
+MULTI-LEVEL EXPLANATIONS
+========================
+
+Provide:
+
+* Beginner explanation
+* High school explanation
+* University explanation
+
+Users can switch between levels.
+
+====================================================
+LEARNING BUTTONS
+================
+
+Add:
+
+"Explain Simpler"
+
+"Dame un ejemplo parecido"
+
+"Generate Practice Exercise"
+
+"Show Formula"
+
+"Common Mistakes"
+
+====================================================
+EXAMPLE GENERATION
+==================
+
+If the student is confused:
+
+Generate a similar example.
+
+Solve it step by step.
+
+Explain why each step is performed.
+
+====================================================
+EDUCATIONAL MODE
+================
+
+The AI should act as a professor.
+
+Never skip steps.
+
+Never assume knowledge.
+
+Always explain concepts before calculations.
+
+====================================================
+VISUAL LEARNING
+===============
+
+Whenever possible:
+
+* Show diagrams
+* Show molecular structures
+* Show reaction schemes
+* Show calculation flowcharts
+
+====================================================
+PHOTOMATH FOR CHEMISTRY
+=======================
+
+The goal is:
+
+If a student can learn math using Photomath,
+
+they should be able to learn chemistry using CHEMIA.
+
+This feature should be integrated into:
+
+* Molecular Mass Calculator
+* Stoichiometry
+* Gas Laws
+* Acids and Bases
+* Equilibrium
+* Electrochemistry
+* Thermodynamics
+
+====================================================
+FINAL REQUIREMENT
+=================
+
+Transform CHEMIA from a calculator platform into a chemistry learning platform.
+
+The priority is understanding, not only answers.

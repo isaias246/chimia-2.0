@@ -14,6 +14,7 @@ import EquationBalancer from "@/pages/equation-balancer";
 import AiTutor from "@/pages/ai-tutor";
 import SavedFormulas from "@/pages/saved-formulas";
 import Stoichiometry from "@/pages/stoichiometry";
+import SmartSolver from "@/pages/smart-solver";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 
@@ -33,6 +34,7 @@ function AppRoutes() {
             <Route path="/compound-builder" component={CompoundBuilder} />
             <Route path="/equation-balancer" component={EquationBalancer} />
             <Route path="/stoichiometry" component={Stoichiometry} />
+            <Route path="/smart-solver" component={SmartSolver} />
             <Route path="/ai-tutor" component={AiTutor} />
             <Route path="/saved-formulas" component={SavedFormulas} />
             <Route component={NotFound} />
