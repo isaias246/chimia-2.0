@@ -10,6 +10,7 @@ import {
   Loader2, Search, Atom, FlaskConical, Triangle, Link2,
   TestTube2, BookOpen, AlertTriangle, ArrowRight, Zap,
   ChevronRight, Info, GraduationCap, RotateCcw,
+  Thermometer, Globe,
 } from "lucide-react";
 
 // ── MVP compound registry ────────────────────────────────────────────────────
@@ -17,6 +18,7 @@ const MVP = [
   { formula: "H2O",     display: "H₂O",      nombre: "Agua",      color: "cyan"    },
   { formula: "CO2",     display: "CO₂",      nombre: "CO₂",       color: "gray"    },
   { formula: "NH3",     display: "NH₃",      nombre: "Amoníaco",  color: "blue"    },
+  { formula: "NH4+",    display: "NH₄⁺",     nombre: "Amonio",    color: "indigo"  },
   { formula: "CH4",     display: "CH₄",      nombre: "Metano",    color: "orange"  },
   { formula: "NaCl",    display: "NaCl",     nombre: "Sal",       color: "yellow"  },
   { formula: "HCl",     display: "HCl",      nombre: "HCl",       color: "green"   },
@@ -24,6 +26,7 @@ const MVP = [
   { formula: "H2SO4",   display: "H₂SO₄",   nombre: "Sulfúrico", color: "rose"    },
   { formula: "Ca(OH)2", display: "Ca(OH)₂", nombre: "Cal",       color: "violet"  },
   { formula: "CH3COOH", display: "CH₃COOH", nombre: "Acético",   color: "emerald" },
+  { formula: "NaOH",    display: "NaOH",     nombre: "Sosa",      color: "teal"    },
   { formula: "MgS",     display: "MgS",      nombre: "MgS",       color: "purple"  },
 ] as const;
 
@@ -32,11 +35,13 @@ const C: Record<string, { text: string; border: string; bg: string; chip: string
   cyan:    { text: "text-cyan-400",    border: "border-cyan-500/40",    bg: "bg-cyan-500/10",    chip: "border-cyan-500/40 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20"    },
   gray:    { text: "text-slate-400",   border: "border-slate-500/40",   bg: "bg-slate-500/10",   chip: "border-slate-500/40 bg-slate-500/10 text-slate-300 hover:bg-slate-500/20" },
   blue:    { text: "text-blue-400",    border: "border-blue-500/40",    bg: "bg-blue-500/10",    chip: "border-blue-500/40 bg-blue-500/10 text-blue-400 hover:bg-blue-500/20"    },
+  indigo:  { text: "text-indigo-400",  border: "border-indigo-500/40",  bg: "bg-indigo-500/10",  chip: "border-indigo-500/40 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20" },
   orange:  { text: "text-orange-400",  border: "border-orange-500/40",  bg: "bg-orange-500/10",  chip: "border-orange-500/40 bg-orange-500/10 text-orange-400 hover:bg-orange-500/20" },
   yellow:  { text: "text-yellow-400",  border: "border-yellow-500/40",  bg: "bg-yellow-500/10",  chip: "border-yellow-500/40 bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20" },
   green:   { text: "text-green-400",   border: "border-green-500/40",   bg: "bg-green-500/10",   chip: "border-green-500/40 bg-green-500/10 text-green-400 hover:bg-green-500/20"  },
   red:     { text: "text-red-400",     border: "border-red-500/40",     bg: "bg-red-500/10",     chip: "border-red-500/40 bg-red-500/10 text-red-400 hover:bg-red-500/20"        },
   rose:    { text: "text-rose-400",    border: "border-rose-500/40",    bg: "bg-rose-500/10",    chip: "border-rose-500/40 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20"    },
+  teal:    { text: "text-teal-400",    border: "border-teal-500/40",    bg: "bg-teal-500/10",    chip: "border-teal-500/40 bg-teal-500/10 text-teal-400 hover:bg-teal-500/20"    },
   violet:  { text: "text-violet-400",  border: "border-violet-500/40",  bg: "bg-violet-500/10",  chip: "border-violet-500/40 bg-violet-500/10 text-violet-400 hover:bg-violet-500/20" },
   emerald: { text: "text-emerald-400", border: "border-emerald-500/40", bg: "bg-emerald-500/10", chip: "border-emerald-500/40 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20" },
   purple:  { text: "text-purple-400",  border: "border-purple-500/40",  bg: "bg-purple-500/10",  chip: "border-purple-500/40 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20" },
@@ -93,7 +98,7 @@ export default function PerfilUniversalPage() {
           <h1 className="text-3xl font-bold tracking-tight">Perfil Universal de Compuesto</h1>
         </div>
         <p className="text-muted-foreground text-sm">
-          Motor determinístico · 11 compuestos MVP ·{" "}
+          Motor determinístico · 13 compuestos MVP ·{" "}
           <span className="text-foreground/60">Datos de IUPAC 2021 + NIST WebBook · Sin datos inventados</span>
         </p>
       </div>
@@ -500,6 +505,75 @@ export default function PerfilUniversalPage() {
             </CardContent>
           </Card>
 
+          {/* ── Row 5: Propiedades + Aplicaciones ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            {/* Propiedades físicas y químicas */}
+            <Card className="glass border-border/50">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xs uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                  <Thermometer className="h-3.5 w-3.5" /> Propiedades
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-2">
+                  <PropRow label="Estado físico" value={perfil.propiedades.estadoFisico} span />
+                  <PropRow label="Color" value={perfil.propiedades.color} />
+                  <PropRow label="Olor" value={perfil.propiedades.olor} />
+                  <PropRow label="Punto de fusión" value={perfil.propiedades.puntoFusion} />
+                  <PropRow label="Punto de ebullición" value={perfil.propiedades.puntoEbullicion} />
+                  <PropRow label="Densidad" value={perfil.propiedades.densidad} span />
+                  <PropRow label="Solubilidad en agua" value={perfil.propiedades.solubilidadAgua} span />
+                </div>
+                <Separator className="opacity-20" />
+                <div>
+                  <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-2">Propiedades químicas</div>
+                  <ul className="space-y-2">
+                    {perfil.propiedades.propiedadesQuimicas.map((p, i) => (
+                      <li key={i} className="flex gap-2 items-start text-xs text-foreground/80 leading-relaxed">
+                        <span className={`shrink-0 w-1.5 h-1.5 rounded-full ${ac.bg} border ${ac.border} mt-1.5`} />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Aplicaciones */}
+            <Card className="glass border-border/50">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xs uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                  <Globe className="h-3.5 w-3.5" /> Aplicaciones
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="industrial">
+                  <TabsList className="bg-secondary/40 h-8 mb-4">
+                    <TabsTrigger value="industrial" className="text-[11px]">Industrial</TabsTrigger>
+                    <TabsTrigger value="cotidiano" className="text-[11px]">Cotidiano</TabsTrigger>
+                    <TabsTrigger value="biologico" className="text-[11px]">Biológico</TabsTrigger>
+                    <TabsTrigger value="ambiental" className="text-[11px]">Ambiental</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="industrial" className="mt-0">
+                    <AppList items={perfil.aplicaciones.industrial} acBg={ac.bg} acBorder={ac.border} />
+                  </TabsContent>
+                  <TabsContent value="cotidiano" className="mt-0">
+                    <AppList items={perfil.aplicaciones.cotidiano} acBg={ac.bg} acBorder={ac.border} />
+                  </TabsContent>
+                  <TabsContent value="biologico" className="mt-0">
+                    <AppList items={perfil.aplicaciones.biologico} acBg={ac.bg} acBorder={ac.border} />
+                  </TabsContent>
+                  <TabsContent value="ambiental" className="mt-0">
+                    <div className={`p-3 rounded-lg ${ac.bg} ${ac.border} border`}>
+                      <p className="text-xs text-foreground/80 leading-relaxed">{perfil.aplicaciones.importanciaAmbiental}</p>
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          </div>
+
         </div>
       )}
 
@@ -512,12 +586,12 @@ export default function PerfilUniversalPage() {
           <div>
             <p className="text-lg font-semibold text-foreground/70">Selecciona un compuesto</p>
             <p className="text-sm text-muted-foreground mt-1 max-w-md">
-              Haz clic en cualquiera de los 11 chips del MVP o escribe una fórmula para ver el análisis completo.
+              Haz clic en cualquiera de los 13 chips del MVP o escribe una fórmula para ver el análisis completo.
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground/50">
             <ArrowRight className="h-3.5 w-3.5" />
-            <span>Nomenclatura · Lewis · VSEPR · Polaridad · Formación · Reacciones · Educación</span>
+            <span>Nomenclatura · Lewis · VSEPR · Polaridad · Formación · Reacciones · Educación · Propiedades · Aplicaciones</span>
           </div>
         </div>
       )}
@@ -572,6 +646,28 @@ function ExerciseList({ items }: { items: string[] }) {
         <li key={i} className="flex gap-3 items-start">
           <span className="shrink-0 w-5 h-5 rounded bg-primary/15 border border-primary/20 flex items-center justify-center text-primary text-[10px] font-bold mt-0.5">{i + 1}</span>
           <span className="text-sm text-foreground/80 leading-relaxed">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function PropRow({ label, value, span }: { label: string; value: string; span?: boolean }) {
+  return (
+    <div className={`rounded-lg px-2.5 py-1.5 border bg-secondary/30 border-border/40 ${span ? "col-span-2" : ""}`}>
+      <div className="text-[9px] font-semibold text-muted-foreground uppercase tracking-wider">{label}</div>
+      <div className="text-xs font-medium text-foreground/85 mt-0.5 leading-snug">{value}</div>
+    </div>
+  );
+}
+
+function AppList({ items, acBg, acBorder }: { items: string[]; acBg: string; acBorder: string }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item, i) => (
+        <li key={i} className={`flex gap-2.5 items-start px-3 py-2 rounded-lg ${acBg} border ${acBorder}`}>
+          <span className="shrink-0 text-[10px] font-bold text-muted-foreground mt-0.5">{i + 1}.</span>
+          <span className="text-xs text-foreground/80 leading-relaxed">{item}</span>
         </li>
       ))}
     </ul>

@@ -5,11 +5,13 @@
  * CHEMIA Chemistry Platform API
  * OpenAPI spec version: 0.1.0
  */
+import type { PerfilAplicaciones } from './perfilAplicaciones';
 import type { PerfilEducacion } from './perfilEducacion';
 import type { PerfilFormacion } from './perfilFormacion';
 import type { PerfilLewis } from './perfilLewis';
 import type { PerfilNomenclatura } from './perfilNomenclatura';
 import type { PerfilPolaridad } from './perfilPolaridad';
+import type { PerfilPropiedades } from './perfilPropiedades';
 import type { PerfilReaccion } from './perfilReaccion';
 import type { PerfilVSEPR } from './perfilVSEPR';
 
@@ -28,4 +30,6 @@ export interface PerfilUniversal {
   formacion: PerfilFormacion;
   reacciones: PerfilReaccion[];
   educacion: PerfilEducacion;
+  propiedades: PerfilPropiedades;
+  aplicaciones: PerfilAplicaciones;
 }

@@ -1599,6 +1599,60 @@ components:
         - ejerciciosSecundario
         - ejerciciosUniversitario
 
+    PerfilPropiedades:
+      type: object
+      properties:
+        estadoFisico:
+          type: string
+        color:
+          type: string
+        olor:
+          type: string
+        puntoFusion:
+          type: string
+        puntoEbullicion:
+          type: string
+        densidad:
+          type: string
+        solubilidadAgua:
+          type: string
+        propiedadesQuimicas:
+          type: array
+          items:
+            type: string
+      required:
+        - estadoFisico
+        - color
+        - olor
+        - puntoFusion
+        - puntoEbullicion
+        - densidad
+        - solubilidadAgua
+        - propiedadesQuimicas
+
+    PerfilAplicaciones:
+      type: object
+      properties:
+        industrial:
+          type: array
+          items:
+            type: string
+        cotidiano:
+          type: array
+          items:
+            type: string
+        biologico:
+          type: array
+          items:
+            type: string
+        importanciaAmbiental:
+          type: string
+      required:
+        - industrial
+        - cotidiano
+        - biologico
+        - importanciaAmbiental
+
     PerfilUniversal:
       type: object
       properties:
@@ -1632,6 +1686,10 @@ components:
             $ref: "#/components/schemas/PerfilReaccion"
         educacion:
           $ref: "#/components/schemas/PerfilEducacion"
+        propiedades:
+          $ref: "#/components/schemas/PerfilPropiedades"
+        aplicaciones:
+          $ref: "#/components/schemas/PerfilAplicaciones"
       required:
         - formula
         - formulaDisplay
@@ -1647,3 +1705,5 @@ components:
         - formacion
         - reacciones
         - educacion
+        - propiedades
+        - aplicaciones

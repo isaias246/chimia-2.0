@@ -43,7 +43,7 @@ router.post("/compounds/perfil", async (req, res): Promise<void> => {
   const perfil = generarPerfil(formula.trim());
   if (!perfil) {
     res.status(422).json({
-      error: `El compuesto '${formula}' está fuera del alcance del MVP. Solo se soportan los 11 compuestos fundamentales.`,
+      error: `El compuesto '${formula}' está fuera del alcance del MVP. Solo se soportan los 13 compuestos fundamentales.`,
       compuestosMVP: MVP_COMPOUNDS,
       formula: formula.trim(),
     });

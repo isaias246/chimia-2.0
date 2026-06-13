@@ -1,0 +1,145 @@
+# MVP COMPOUND SET
+
+The first production release must be perfect for:
+
+* H2O
+* CO2
+* NH3
+* NH4+
+* CH4
+* NaCl
+* HCl
+* HNO3
+* H2SO4
+* CH3COOH
+* NaOH
+* Ca(OH)2
+* MgS
+
+For these compounds CHEMIA must provide:
+
+* Identification
+* Nomenclature
+* Lewis Structure
+* VSEPR
+* Polarity
+* Electronegativity
+* Formation
+* Properties
+* Applications
+* Exercises
+* Exam Questions
+
+Quality before quantity.
+
+It is better to have 15 compounds explained perfectly than 5000 compounds explained poorly.
+
+---
+
+# EDUCATIONAL QUALITY GATE
+
+Before any feature is released:
+
+Verify:
+
+* Scientific accuracy
+* Educational clarity
+* Student usability
+* Mobile usability
+* Accessibility
+* Performance
+
+A feature is considered incomplete if:
+
+* It works technically but does not teach effectively.
+* It teaches but is confusing to use.
+* It is accurate but lacks examples and exercises.
+
+---
+
+# PROFESSOR REVIEW STANDARD
+
+Every chemistry explanation must be able to pass review by:
+
+* Secondary School Chemistry Teacher
+* University Chemistry Professor
+* Chemistry Tutor
+
+If an educator would not recommend the explanation:
+
+Redesign it.
+
+---
+
+# STUDENT SUCCESS METRICS
+
+Track:
+
+* Exercise completion rate
+* Exam scores
+* Time spent learning
+* Topic mastery
+* Common mistakes
+* Retention rate
+
+Success is measured by learning outcomes, not feature count.
+
+---
+
+# RELEASE CRITERIA
+
+A release is approved only if:
+
+✓ Tutor answers common chemistry questions correctly.
+
+✓ Compound Profile works correctly.
+
+✓ Stoichiometry works from natural language.
+
+✓ Exercises are available.
+
+✓ Explanations include theory and examples.
+
+✓ No empty pages.
+
+✓ No inactive buttons.
+
+✓ No placeholder content.
+
+✓ No fake chemistry.
+
+✓ Mobile experience is usable.
+
+If any requirement fails:
+
+Do not release.
+
+Fix first.
+
+---
+
+# ULTIMATE CHEMIA VISION
+
+The goal is not to create the largest chemistry platform.
+
+The goal is to create the most effective chemistry learning platform.
+
+When a student has a chemistry question they should choose CHEMIA before:
+
+* Google
+* YouTube
+* ChatGPT
+* Quimify
+* Khan Academy
+* Wolfram Alpha
+
+because CHEMIA provides:
+
+* Better explanations
+* Better exercises
+* Better learning progression
+* Better chemistry understanding
+
+The final success metric is simple:
+
+A student enters CHEMIA with zero chemistry knowledge and leaves with university-level chemistry understanding.

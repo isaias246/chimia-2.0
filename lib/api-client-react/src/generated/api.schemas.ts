@@ -489,6 +489,24 @@ export interface PerfilEducacion {
   ejerciciosUniversitario: string[];
 }
 
+export interface PerfilPropiedades {
+  estadoFisico: string;
+  color: string;
+  olor: string;
+  puntoFusion: string;
+  puntoEbullicion: string;
+  densidad: string;
+  solubilidadAgua: string;
+  propiedadesQuimicas: string[];
+}
+
+export interface PerfilAplicaciones {
+  industrial: string[];
+  cotidiano: string[];
+  biologico: string[];
+  importanciaAmbiental: string;
+}
+
 export interface PerfilUniversal {
   formula: string;
   formulaDisplay: string;
@@ -504,6 +522,8 @@ export interface PerfilUniversal {
   formacion: PerfilFormacion;
   reacciones: PerfilReaccion[];
   educacion: PerfilEducacion;
+  propiedades: PerfilPropiedades;
+  aplicaciones: PerfilAplicaciones;
 }
 
 export type ListElementsParams = {

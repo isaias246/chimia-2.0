@@ -69,6 +69,24 @@ export interface PerfilEducacion {
   ejerciciosUniversitario: string[];
 }
 
+export interface PerfilPropiedades {
+  estadoFisico: string;
+  color: string;
+  olor: string;
+  puntoFusion: string;
+  puntoEbullicion: string;
+  densidad: string;
+  solubilidadAgua: string;
+  propiedadesQuimicas: string[];
+}
+
+export interface PerfilAplicaciones {
+  industrial: string[];
+  cotidiano: string[];
+  biologico: string[];
+  importanciaAmbiental: string;
+}
+
 export interface PerfilUniversal {
   formula: string;
   formulaDisplay: string;
@@ -84,13 +102,16 @@ export interface PerfilUniversal {
   formacion: PerfilFormacion;
   reacciones: PerfilReaccion[];
   educacion: PerfilEducacion;
+  propiedades: PerfilPropiedades;
+  aplicaciones: PerfilAplicaciones;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MVP compound data
 // ─────────────────────────────────────────────────────────────────────────────
 
-const PERFILES: Record<string, PerfilUniversal> = {
+type PerfilBase = Omit<PerfilUniversal, 'propiedades' | 'aplicaciones'>;
+const PERFILES: Record<string, PerfilBase> = {
 
   // ── H₂O ──────────────────────────────────────────────────────────────────
   "H2O": {
@@ -697,6 +718,613 @@ const PERFILES: Record<string, PerfilUniversal> = {
       ejerciciosUniversitario: ["Usando las reglas de Fajans, predice si MgS tiene más o menos carácter covalente que NaCl. Justifica.", "Calcula la energía reticular del MgS usando el ciclo de Born-Haber.", "Explica por qué MgS puede funcionar como semiconductor comparado con MgO."],
     },
   },
+
+  // ── NH₄⁺ ─────────────────────────────────────────────────────────────────
+  "NH4+": {
+    formula: "NH4+", formulaDisplay: "NH₄⁺",
+    nombre: "Ion Amonio", familia: "Ion poliatómico (catión)", color: "indigo", masaMolar: 18.04,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Ion amonio",
+      stock: "Ion amonio",
+      sistematica: "Azanio",
+      tipo: "Ion poliatómico derivado del amoníaco (base conjugada del NH₃)",
+      nota: "El nombre sistemático IUPAC es 'azanio'. Es un catión, no una molécula neutra. Se escribe NH₄⁺ con la carga formal +1 en el N.",
+    },
+    lewis: {
+      descripcion: "El N central (5 e⁻ de valencia) usa su par libre para formar un cuarto enlace N–H con el H⁺ (enlace dativo/coordinado). Total: 4 enlaces simples, 0 pares libres en N. El N tiene carga formal +1. La carga global del ion es +1.",
+      esIonico: false, electronosValenciaTotal: 8,
+      atomoCentral: "N", paresLibresCentral: 0, enlacesSimples: 4, enlacesDobles: 0, enlacesTriples: 0,
+      notaResonancia: "Los 4 enlaces N–H son equivalentes. El par libre del NH₃ forma el cuarto enlace mediante una donación dativa al H⁺.",
+    },
+    vsepr: {
+      descripcion: "4 pares enlazantes + 0 pares libres → geometría tetraédrica perfecta. Ángulo H–N–H = 109.5°. Al eliminar el par libre de NH₃, desaparece la distorsión y el ángulo vuelve al ideal tetraédrico.",
+      esIonico: false, notacionAXE: "AX₄",
+      geometriaElectronica: "Tetraédrica", geometriaMolecular: "Tetraédrica",
+      anguloEnlace: "109.5°", hibridacion: "sp³",
+    },
+    polaridad: {
+      esPolar: false, tipoEnlace: "Covalente polar (enlace N–H) / ion simétrico",
+      diferenciaEN: 0.84, momentoDipolar: "0 D",
+      explicacion: "Aunque cada enlace N–H es polar (ΔEN = 0.84), la simetría tetraédrica perfecta cancela los 4 vectores dipolares → μ = 0 D. Análogo al CH₄. La carga +1 del ion no genera dipolo molecular neto.",
+    },
+    formacion: {
+      proceso: "Reacción ácido-base de Brønsted-Lowry: NH₃ (base) acepta un protón H⁺ de un ácido. También es una reacción ácido-base de Lewis: el par libre del N en NH₃ dona al H⁺ (ácido de Lewis) formando un enlace dativo.",
+      ecuacion: "NH₃(g) + H⁺(aq) → NH₄⁺(aq)   K = 1/Ka = 1.8×10⁹",
+      tipoEnlaceFormado: "Covalente dativo (coordinado) N→H",
+      estadosOxidacion: { "N": "−3", "H": "+1" },
+    },
+    reacciones: [
+      { nombre: "Formación desde NH₃", ecuacion: "NH₃(aq) + H⁺(aq) → NH₄⁺(aq)", tipo: "ácido-base", descripcion: "Reacción de protonación. NH₃ actúa como base de Brønsted. Muy favorable (K ≈ 1.8×10⁹)." },
+      { nombre: "Tampón NH₃ / NH₄⁺", ecuacion: "NH₄⁺(aq) ⇌ NH₃(aq) + H⁺(aq)   Ka = 5.6×10⁻¹⁰  (pKa = 9.25)", tipo: "ácido-base", descripcion: "Equilibrio del par ácido-base conjugado. Base del tampón fisiológico y de laboratorio en rango pH 8–10." },
+      { nombre: "Descomposición del cloruro de amonio", ecuacion: "NH₄Cl(s) ⇿ NH₃(g) + HCl(g)   (∼340°C)", tipo: "descomposición", descripcion: "Sales de amonio se descomponen al calentar, liberando NH₃. Proceso reversible: NH₃ + HCl → NH₄Cl al enfriarse." },
+      { nombre: "Neutralización con base fuerte", ecuacion: "NH₄⁺(aq) + OH⁻(aq) → NH₃(g) + H₂O(l)", tipo: "ácido-base", descripcion: "Reacción que libera NH₃ gaseoso (olor característico). Prueba analítica para detectar iones NH₄⁺: caliente + NaOH → vaho de NH₃ enrojece papel tornasol." },
+    ],
+    educacion: {
+      teoriaResumida: "NH₄⁺ es el ácido conjugado del NH₃ (pKa = 9.25). Es un ácido débil: en solución acuosa establece el equilibrio NH₄⁺ ⇌ NH₃ + H⁺. Sus sales (NH₄Cl, (NH₄)₂SO₄, NH₄NO₃) son electrolitos fuertes ampliamente usados como fertilizantes. La geometría tetraédrica perfecta del NH₄⁺ (sin pares libres) contrasta con la pirámide distorsionada del NH₃.",
+      erroresComunes: [
+        "Confundir NH₃ con NH₄⁺: NH₃ es la molécula neutra (base débil); NH₄⁺ es su ácido conjugado (catión).",
+        "Creer que el enlace N–H en NH₄⁺ es diferente a los otros tres — los 4 enlaces son idénticos e indistinguibles.",
+        "Olvidar la carga +1 del ion al escribir reacciones — NH₄⁺ no es neutro.",
+        "Pensar que NH₄⁺ es polar — la geometría tetraédrica simétrica da μ = 0 D.",
+      ],
+      ejerciciosPrincipiante: ["¿Qué ocurre cuando disuelves NH₃ en un ácido fuerte?", "¿Cuál es la diferencia entre NH₃ y NH₄⁺?", "¿Por qué el NH₄Cl en solución tiene pH < 7?"],
+      ejerciciosSecundario: ["Dibuja la estructura de Lewis del NH₄⁺ y explica el enlace dativo N→H.", "Calcula el pH de una solución 0.20 M de NH₄Cl (Ka = 5.6×10⁻¹⁰).", "Compara la geometría de NH₃ y NH₄⁺: ángulos, hibridación y pares libres."],
+      ejerciciosUniversitario: ["Usando el principio de Le Châtelier, explica cómo el pH afecta la distribución NH₃/NH₄⁺ en un sistema acuoso.", "Calcula el pH de un tampón preparado con 0.15 M NH₃ y 0.25 M NH₄Cl (pKa = 9.25).", "Explica por qué el Ka(NH₄⁺) × Kb(NH₃) = Kw y usa esto para calcular Ka del NH₄⁺."],
+    },
+  },
+
+  // ── NaOH ─────────────────────────────────────────────────────────────────
+  "NaOH": {
+    formula: "NaOH", formulaDisplay: "NaOH",
+    nombre: "Hidróxido de Sodio", familia: "Hidróxido (base fuerte)", color: "teal", masaMolar: 40.00,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Sosa cáustica",
+      stock: "Hidróxido de sodio",
+      sistematica: "Hidróxido de sodio",
+      tipo: "Hidróxido metálico de metal alcalino (base fuerte de Arrhenius)",
+      nota: "Popularmente 'lejía' en solución concentrada, 'sosa cáustica' en pellets/escamas. El término 'lejía' en España también se aplica a NaClO (hipoclorito); no confundir.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: Na⁺ cede su único e⁻ de valencia al O. El ion OH⁻ tiene 1 enlace covalente O–H y 3 pares libres en O. El Na⁺ tiene configuración electrónica de Ne (8 e⁻ en capa de valencia del anión; 0 en Na⁺).",
+      esIonico: true, electronosValenciaTotal: 8,
+      atomoCentral: "O", paresLibresCentral: 3, enlacesSimples: 1, enlacesDobles: 0, enlacesTriples: 0,
+      notaResonancia: "En solución, OH⁻ tiene 3 pares libres en O disponibles para coordinar con cationes metálicos (Lewis).",
+    },
+    vsepr: {
+      descripcion: "Compuesto iónico. El ion OH⁻ aislado tiene geometría lineal (O–H). En la red cristalina, NaOH tiene estructura laminar (Pbnm) con capas de Na⁺ y OH⁻. Al fundir o disolver, los iones se separan completamente.",
+      esIonico: true,
+      geometriaMolecular: "Red iónica laminar (cristal); iones libres en solución",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (Na⁺ · OH⁻) con enlace covalente polar O–H en el ion OH⁻",
+      diferenciaEN: 2.23, momentoDipolar: "N/A (compuesto iónico)",
+      explicacion: "ΔEN(Na–O) = 3.44 − 1.21 = 2.23 → enlace predominantemente iónico. El ion OH⁻ también tiene enlace O–H covalente polar (ΔEN = 1.24). NaOH en solución disocia completamente: Na⁺(aq) + OH⁻(aq).",
+    },
+    formacion: {
+      proceso: "Proceso cloro-álcali (industrial principal): electrólisis de salmuera (NaCl diluido). En laboratorio: reacción directa del metal Na con agua.",
+      ecuacion: "2 NaCl(aq) + 2 H₂O(l) → 2 NaOH(aq) + Cl₂(g) + H₂(g)  (electrólisis, 2.2 V)",
+      tipoEnlaceFormado: "Iónico (Na⁺ · OH⁻)",
+      estadosOxidacion: { "Na": "+1", "O": "−2", "H": "+1" },
+    },
+    reacciones: [
+      { nombre: "Neutralización con ácido fuerte", ecuacion: "NaOH(aq) + HCl(aq) → NaCl(aq) + H₂O(l)  ΔH = −57.3 kJ/mol", tipo: "neutralización", descripcion: "Reacción prácticamente irreversible. Neutralización ácido fuerte-base fuerte. El ΔH = −57.3 kJ/mol corresponde a H⁺ + OH⁻ → H₂O." },
+      { nombre: "Absorción de CO₂", ecuacion: "2 NaOH(aq) + CO₂(g) → Na₂CO₃(aq) + H₂O(l)", tipo: "ácido-base", descripcion: "Base de depuradores de CO₂ (submarinos, laboratorios, EPIs). Impide el uso de NaOH como estándar primario (absorbe CO₂ del aire)." },
+      { nombre: "Saponificación", ecuacion: "RCOOR'(ac) + NaOH(aq) → RCOONa(ac) + R'OH(ac)", tipo: "síntesis", descripcion: "Hidrólisis básica de ésteres. Base de la fabricación de jabones (triglicéridos + NaOH → jabones de ácidos grasos + glicerol)." },
+      { nombre: "Disolución del aluminio (anfótero)", ecuacion: "2 Al(s) + 2 NaOH(aq) + 2 H₂O(l) → 2 NaAlO₂(aq) + 3 H₂(g)", tipo: "redox", descripcion: "Reacción peligrosa: produce H₂ inflamable. Diferencia el Al de otros metales; prueba de carácter anfótero del Al₂O₃." },
+    ],
+    educacion: {
+      teoriaResumida: "NaOH es una base fuerte de Arrhenius: en solución acuosa disocia completamente en Na⁺ + OH⁻. Concentraciones de 0.1 M dan pH ≈ 13. Es extremadamente cáustico — destruye tejido biológico por hidrólisis de proteínas y saponificación de lípidos. La reacción de disolución en agua es altamente exotérmica (ΔHdis = −44.5 kJ/mol): NUNCA añadir agua a NaOH sólido, siempre al contrario.",
+      erroresComunes: [
+        "Confundir NaOH (base fuerte, disociación total) con NH₃ (base débil, Kb = 1.8×10⁻⁵).",
+        "Disolver NaOH sólido añadiendo agua encima — provoca ebullición y salpicaduras cáusticas. Añadir NaOH AL agua.",
+        "Olvidar que NaOH absorbe CO₂ del aire y no puede usarse como estándar primario en volumetría.",
+        "Usar NaOH en recipientes de vidrio borosilicado durante largo tiempo — el álcali ataca la sílice del vidrio.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el NaOH es peligroso al contacto con la piel?", "¿Qué pH tiene una solución 0.1 M de NaOH?", "¿Para qué sirve el NaOH en la fabricación de jabones?"],
+      ejerciciosSecundario: ["Calcula el pH de una solución 0.050 M de NaOH.", "Escribe la ecuación de neutralización de NaOH con H₂SO₄ y ajusta los coeficientes.", "Explica por qué NaOH no puede usarse como estándar primario en análisis volumétrico."],
+      ejerciciosUniversitario: ["Usando termoquímica, explica por qué la disolución de NaOH en agua es exotérmica a nivel de enlace iónico.", "Calcula el volumen de NaOH 0.25 M necesario para neutralizar 25.0 mL de H₂SO₄ 0.15 M.", "Diseña un experimento para determinar la pureza de una muestra de NaOH usando HCl estándar y un indicador adecuado."],
+    },
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Properties + Applications data (all 13 MVP compounds)
+// ─────────────────────────────────────────────────────────────────────────────
+const PROPIEDADES_DATA: Record<string, { propiedades: PerfilPropiedades; aplicaciones: PerfilAplicaciones }> = {
+  "H2O": {
+    propiedades: {
+      estadoFisico: "Líquido (25°C, 1 atm)",
+      color: "Incoloro",
+      olor: "Inodoro",
+      puntoFusion: "0°C (273.15 K)",
+      puntoEbullicion: "100°C (373.15 K)",
+      densidad: "0.997 g/mL (25°C); máxima a 4°C (1.000 g/mL)",
+      solubilidadAgua: "Miscible consigo misma — disolvente universal polar",
+      propiedadesQuimicas: [
+        "Anfótera: actúa como ácido (dona H⁺) o base (acepta H⁺) según el medio",
+        "Kw = [H⁺][OH⁻] = 1.0×10⁻¹⁴ a 25°C — base del pH",
+        "Forma puentes de hidrógeno intermoleculares (∼20 kJ/mol), explicando su alto Peb",
+        "Hidroliza sales, ésteres, proteínas y carbohidratos",
+        "Alto calor específico: 4.184 J/(g·K) — excelente regulador térmico",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Refrigerante en reactores nucleares y plantas termoeléctricas",
+        "Vapor de agua en turbinas para generación eléctrica (ciclo Rankine)",
+        "Disolvente en síntesis química, electrodeposición y extracción",
+        "Producción de hidrógeno por electrólisis (hidrógeno verde)",
+      ],
+      cotidiano: [
+        "Agua potable: 2 L/día de ingesta recomendada por la OMS",
+        "Cocción, higiene personal, limpieza doméstica",
+        "Riego agrícola: 70% del agua dulce mundial se destina a riego",
+        "Piscinas, fontanería, calefacción por agua caliente",
+      ],
+      biologico: [
+        "Principal componente celular: 60–70% de la masa corporal humana",
+        "Disolvente de nutrientes, iones y gases en sangre y linfa",
+        "Reactivo en fotosíntesis y respiración celular aerobia",
+        "Termorregulación: el sudor (evaporación) extrae ∼2400 kJ/L",
+      ],
+      importanciaAmbiental: "Ciclo hidrológico global: regula el clima, erosión, transporte de nutrientes y hábitat de todos los ecosistemas acuáticos. El vapor de agua es el gas de efecto invernadero más abundante de la Tierra.",
+    },
+  },
+  "CO2": {
+    propiedades: {
+      estadoFisico: "Gas (25°C, 1 atm); sólido ('hielo seco') a −78.5°C",
+      color: "Incoloro",
+      olor: "Inodoro; levemente ácido a concentraciones >5%",
+      puntoFusion: "−78.5°C (sublimación a 1 atm; punto triple a 5.11 atm, −56.6°C)",
+      puntoEbullicion: "−78.5°C (sublima directamente a 1 atm)",
+      densidad: "1.977 g/L (gas, 0°C, 1 atm); 1.562 g/mL (líquido, 20°C, 57 atm)",
+      solubilidadAgua: "0.035 g/100 mL (25°C, 1 atm); Ka₁ = 4.3×10⁻⁷ → H₂CO₃/HCO₃⁻",
+      propiedadesQuimicas: [
+        "Óxido ácido: reacciona con bases → carbonatos y bicarbonatos",
+        "Absorbente de radiación infrarroja (15 μm): gas de efecto invernadero",
+        "Solvente supercrítico a T > 31.1°C, P > 73.8 atm (CO₂-sc): extrae cafeína, aromas",
+        "No es inflamable ni comburente; apaga fuegos al desplazar O₂",
+        "Sublima a −78.5°C: no deja residuo líquido a presión normal",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Extintores de CO₂ (clase B y C: líquidos inflamables, equipos eléctricos)",
+        "Refrigerante R-744 en sistemas de aire acondicionado (bajo GWP = 1)",
+        "Solvente supercrítico para descafeinado del café y extracción de lúpulo",
+        "Neutralización de aguas alcalinas en tratamiento de aguas residuales",
+      ],
+      cotidiano: [
+        "Gasificación de bebidas (refrescos, agua mineral, cerveza, champán)",
+        "Hielo seco: transporte y conservación de alimentos y vacunas",
+        "Atmósfera modificada (MAP) para prolongar vida útil de alimentos",
+        "Fotografía e industria creativa: máquinas de humo y efectos especiales",
+      ],
+      biologico: [
+        "Producto final de la respiración celular aerobia: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
+        "Reactivo en fotosíntesis: 6CO₂ + 6H₂O + hν → glucosa + 6O₂",
+        "Regulador del pH sanguíneo: sistema tampón CO₂/HCO₃⁻ (pH 7.35–7.45)",
+        "Estímulo respiratorio: aumento de CO₂ activa receptores de quimiorreceptores",
+      ],
+      importanciaAmbiental: "Principal gas de efecto invernadero de origen antropogénico. La concentración atmosférica superó 420 ppm en 2024 (vs. 280 ppm preindustrial). Causa calentamiento global, acidificación oceánica (pH bajó de 8.25 a 8.10 desde 1750) y blanqueamiento de corales.",
+    },
+  },
+  "NH3": {
+    propiedades: {
+      estadoFisico: "Gas (25°C, 1 atm); licuado a 20°C a solo 8.5 atm",
+      color: "Incoloro",
+      olor: "Penetrante, urticante y sofocante; detectable a 5 ppm",
+      puntoFusion: "−77.7°C (195.45 K)",
+      puntoEbullicion: "−33.4°C (239.75 K)",
+      densidad: "0.769 g/L (gas, 0°C); 0.682 g/mL (líquido, −33.4°C)",
+      solubilidadAgua: "89.9 g/100 mL (0°C); 31.1 g/100 mL (25°C). Muy soluble. Kb = 1.8×10⁻⁵",
+      propiedadesQuimicas: [
+        "Base débil de Brønsted (Kb = 1.8×10⁻⁵, pKb = 4.74): NH₃ + H₂O ⇌ NH₄⁺ + OH⁻",
+        "Base de Lewis: el par libre del N dona a ácidos de Lewis (metales de transición → complejos)",
+        "Combustible: arde en O₂ → N₂ + H₂O (llama amarilla-verde); no autoignición",
+        "Refrigerante natural R-717: bajo GWP (0) y alto calor de vaporización (1371 kJ/kg)",
+        "Forma puentes de hidrógeno N–H···N; Peb = −33.4°C (mucho mayor que PH₃ = −87.8°C)",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Fertilizantes: urea (CH₄N₂O), nitrato amónico (NH₄NO₃), sulfato amónico — alimenta ∼50% humanidad",
+        "Síntesis de HNO₃ vía proceso Ostwald (4NH₃ + 5O₂ → 4NO + 6H₂O)",
+        "Refrigerante industrial R-717 en plantas frigoríficas grandes",
+        "Síntesis de plásticos (nylon, melamina), explosivos (TNT), colorantes",
+      ],
+      cotidiano: [
+        "Limpiadores domésticos (solución acuosa 5–10%): vidrios, superficies",
+        "Tintes capilares: abre la cutícula del cabello para penetrar el color",
+        "Tratamiento de agua potable (cloraminas como desinfectante)",
+      ],
+      biologico: [
+        "Producto del catabolismo de aminoácidos; detoxificado en hígado como urea (ciclo de la urea)",
+        "NH₃ libre es tóxico para neuronas a concentraciones > 50 μM en sangre (encefalopatía hepática)",
+        "Sustrato del ciclo del nitrógeno: bacterias nitrificantes (Nitrosomonas) oxidan NH₃ → NO₂⁻",
+        "En plantas: fuente de N para síntesis de aminoácidos y nucleótidos",
+      ],
+      importanciaAmbiental: "Principal contaminante nitrogenado atmosférico de origen agrícola (emisiones de excrementos animales y fertilizantes). Contribuye a la deposición ácida y eutrofización de ecosistemas acuáticos. Ciclo del nitrógeno: fijación biológica (Rhizobium) y proceso Haber-Bosch transforman N₂ → NH₃.",
+    },
+  },
+  "NH4+": {
+    propiedades: {
+      estadoFisico: "Ion en solución acuosa; sus sales son sólidos cristalinos (ej. NH₄Cl: blanco, 25°C)",
+      color: "Incoloro (ion); sus sales suelen ser blancas",
+      olor: "Inodoro (ion); NH₄Cl emite NH₃ al calentar",
+      puntoFusion: "N/A (ion); NH₄Cl: 338°C (descomp.); NH₄NO₃: 210°C (descomp.)",
+      puntoEbullicion: "N/A (ion en solución)",
+      densidad: "N/A (ion); NH₄Cl: 1.527 g/cm³; (NH₄)₂SO₄: 1.769 g/cm³",
+      solubilidadAgua: "Ion totalmente soluble; NH₄Cl: 39.5 g/100 mL (25°C). pH de solución 0.1 M NH₄Cl ≈ 5.12 (solución levemente ácida)",
+      propiedadesQuimicas: [
+        "Ácido débil de Brønsted: NH₄⁺ ⇌ NH₃ + H⁺ (Ka = 5.56×10⁻¹⁰, pKa = 9.25)",
+        "Par ácido-base conjugado con NH₃ (pKb = 4.74 → pKa + pKb = pKw = 14.00)",
+        "Sus sales son electrolitos fuertes: se disocian completamente en agua",
+        "Sales de amonio se descomponen al calentar: NH₄Cl → NH₃ + HCl (∼340°C)",
+        "NH₄NO₃ es oxidante potente; explosivo cuando se calienta bruscamente",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "NH₄Cl: fundente en soldadura; fabricación de baterías de carbono-zinc",
+        "(NH₄)₂SO₄: fertilizante nitrogenado de liberación rápida (21% N)",
+        "NH₄NO₃: fertilizante (34% N) y componente de explosivos ANFO",
+        "Carbonato de amonio: agente leudante en pastelería industrial",
+      ],
+      cotidiano: [
+        "NH₄Cl ('sal de amoniaco'): usado en confitería (regaliz nórdico) y medicina tradicional",
+        "NH₄HCO₃: levadura química en galletas y panes planos",
+        "Cloruro de amonio: componente de las pastillas para la tos y gargarismos",
+      ],
+      biologico: [
+        "Principal forma transportable del N metabólico en organismos acuáticos (excreción amoniotélica)",
+        "En vertebrados: la urea (vía ciclo de la urea) desintoxica el NH₄⁺ libre",
+        "Tampón NH₃/NH₄⁺ (pKa = 9.25) relevante en soluciones laboratorio de pH 8–10",
+        "Ion esencial para la asimilación de nitrógeno en plantas a través de GS/GOGAT",
+      ],
+      importanciaAmbiental: "Sales de amonio (especialmente NH₄NO₃) son los fertilizantes nitrogenados más usados globalmente. Su exceso causa eutrofización de aguas. El ciclo del nitrógeno convierte NH₄⁺ → NO₃⁻ (nitrificación) y NO₃⁻ → N₂ (desnitrificación).",
+    },
+  },
+  "CH4": {
+    propiedades: {
+      estadoFisico: "Gas (25°C, 1 atm)",
+      color: "Incoloro",
+      olor: "Inodoro puro (el 'olor a gas' es del mercaptano añadido como odorant de seguridad)",
+      puntoFusion: "−182.5°C (90.65 K)",
+      puntoEbullicion: "−161.5°C (111.65 K)",
+      densidad: "0.656 g/L (gas, 25°C); 0.422 g/mL (líquido, −161.5°C)",
+      solubilidadAgua: "0.0023 g/100 mL (25°C) — prácticamente insoluble (apolar)",
+      propiedadesQuimicas: [
+        "Alcano más simple: reactivo por radicales (sustitución radicalaria: CH₄ + Cl₂ → CH₃Cl + HCl)",
+        "Combustión completa: CH₄ + 2O₂ → CO₂ + 2H₂O (ΔH = −890 kJ/mol, combustible limpio)",
+        "Reformado de vapor: CH₄ + H₂O → CO + 3H₂ (800°C, Ni) — fuente de H₂ industrial",
+        "Inerte frente a ácidos, bases y oxidantes comunes a temperatura ambiente",
+        "Gas de efecto invernadero: GWP₁₀₀ = 27–30 (27–30× más potente que CO₂ en 100 años)",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Gas natural (∼90% CH₄): generación eléctrica en turbinas de ciclo combinado",
+        "Síntesis de H₂ y CO (gas de síntesis) para proceso Fischer-Tropsch (combustibles sintéticos)",
+        "Producción de negro de humo (C): pigmentos, caucho, tintas",
+        "Materia prima para metanol (CH₄ + H₂O → CO + 3H₂ → CH₃OH) y amoniaco",
+      ],
+      cotidiano: [
+        "Gas natural doméstico: calefacción, cocina, agua caliente",
+        "GNC (gas natural comprimido) y GNL: combustible para vehículos y barcos",
+        "Biogás (fermentación anaeróbica): aprovechamiento de residuos agrícolas y urbanos",
+      ],
+      biologico: [
+        "Producido por metanógenos (arqueas anaerobias) en pantanos, tracto digestivo de rumiantes y depósitos de carbono",
+        "Vacas: ∼100–200 L CH₄/día (eructos); contribución significativa al calentamiento global",
+        "Metabolismo humano: algunas bacterias intestinales producen pequeñas cantidades de CH₄",
+      ],
+      importanciaAmbiental: "Gas de efecto invernadero con GWP₁₀₀ ≈ 27. Las fuentes principales son: ganadería (32%), explotación de gas/petróleo (33%) y vertederos (20%). Las concentraciones atmosféricas han aumentado de 700 ppb (preindustrial) a más de 1900 ppb (2024).",
+    },
+  },
+  "NaCl": {
+    propiedades: {
+      estadoFisico: "Sólido cristalino (25°C)",
+      color: "Blanco (incoloro como cristal puro)",
+      olor: "Inodoro",
+      puntoFusion: "801°C (1074 K)",
+      puntoEbullicion: "1413°C (1686 K)",
+      densidad: "2.165 g/cm³",
+      solubilidadAgua: "35.7 g/100 mL (20°C); solución 0.9% m/v = suero fisiológico",
+      propiedadesQuimicas: [
+        "Electrolito fuerte: disocia completamente en Na⁺(aq) + Cl⁻(aq) → conductividad eléctrica",
+        "Sal neutra (pH ≈ 7): catión Na⁺ (ácido muy débil) y anión Cl⁻ (base muy débil) no hidrolizan",
+        "Reduce el punto de congelación del agua (crióscopia): 58.5 g NaCl eleva Kb en ∼1.82°C",
+        "Fundido conduce electricidad: electrólisis → Na(l) + Cl₂(g) (proceso Downs)",
+        "Solubilidad casi independiente de T (solubilidad retrógrada muy pequeña)",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Proceso cloro-álcali: electrólisis salmuera → Cl₂ + NaOH + H₂ (base de la industria química)",
+        "Conservante alimentario: deshidratación osmótica, inhibición bacteriana",
+        "Fundente vial: deshielo de carreteras (baja Pfus a −21°C con 23% NaCl)",
+        "Curtido de pieles, fabricación de vidrio (Na₂CO₃ de Solvay usa NaCl)",
+      ],
+      cotidiano: [
+        "Condimento universal: amplificador de sabores por estimulación del receptor ENaC",
+        "Conservación de alimentos (salazón): jamones, bacalao, encurtidos, quesos",
+        "Solución salina isotónica 0.9%: suero fisiológico, solución de contactos",
+        "Gargarismos salinos: alivio de dolor de garganta por efecto osmótico",
+      ],
+      biologico: [
+        "Principal catión extracelular (Na⁺): regula presión osmótica y volumen plasmático",
+        "Potencial de acción neuronal: la entrada de Na⁺ (canales de Na⁺ voltaje-dependientes) despolariza la membrana",
+        "Ingesta diaria recomendada: <5 g NaCl/día (OMS); el exceso causa hipertensión arterial",
+        "Equilibrio ácido-base renal: reabsorción de Na⁺ acoplada a secreción de H⁺",
+      ],
+      importanciaAmbiental: "Fuentes: evaporación del agua de mar (sal marina) y minería de halita. La salinización de suelos agrícolas por riego con agua salina afecta a >20% de las tierras irrigadas mundiales. La contaminación de acuíferos con NaCl de las carreteras es un problema creciente en climas fríos.",
+    },
+  },
+  "HCl": {
+    propiedades: {
+      estadoFisico: "Gas (25°C, 1 atm) / líquido como solución acuosa (ácido clorhídrico)",
+      color: "Incoloro",
+      olor: "Fuertemente ácido, picante e irritante; TLV = 5 ppm (ACGIH)",
+      puntoFusion: "−114.2°C (158.95 K)",
+      puntoEbullicion: "−85.1°C (188.05 K) para el gas puro",
+      densidad: "1.639 g/L (gas, 25°C); 1.179 g/mL (sol. 37% en agua, 'ácido muriático')",
+      solubilidadAgua: "82.3 g/100 mL (0°C); 72 g/100 mL (20°C); azeótropo 20.22% m/m a 108.6°C",
+      propiedadesQuimicas: [
+        "Ácido fuerte: disocia completamente en agua → H₃O⁺ + Cl⁻ (Ka ≈ 10⁷)",
+        "Reacciona con metales activos (Zn, Fe, Al): libera H₂ y forma cloruros",
+        "Disuelve la mayoría de hidróxidos y carbonatos metálicos",
+        "Forma agua regia con HNO₃ (3:1 HCl:HNO₃): disuelve Au y Pt",
+        "Fuertemente corrosivo con metales; humos blancos con NH₃",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Decapado de acero: elimina óxido de superficies antes de galvanizado o pintado",
+        "Síntesis de cloruro de vinilo (PVC): CH₂=CH₂ + Cl₂ → CH₂ClCH₂Cl → CH₂=CHCl + HCl",
+        "Producción de gelatina y gluten hidrolizados (hidrólisis ácida de proteínas)",
+        "Regulación de pH en piscinas, tratamiento de agua y fabricación de papel",
+      ],
+      cotidiano: [
+        "Componente del jugo gástrico (0.5% HCl, pH 1–2): digestión de proteínas",
+        "Limpiadores de baño y piscinas ('salfumán'): elimina cal, óxido y manchas amarillas",
+        "Descalcificación de calderas y equipos industriales",
+      ],
+      biologico: [
+        "Jugo gástrico: 0.5% HCl (pH 1.5–2.0) activa el pepsinógeno → pepsina (digestión de proteínas)",
+        "Barrera antimicrobiana: mata patógenos ingeridos (Salmonella, H. pylori parcialmente)",
+        "El déficit de HCl (hipoclorhidria) causa malabsorción de B₁₂, hierro y calcio",
+        "H. pylori sobrevive al HCl gástrico produciendo ureasa (NH₃ tampona el ácido local)",
+      ],
+      importanciaAmbiental: "El HCl gaseoso, liberado en incendios de PVC y volcanes, contribuye a la lluvia ácida. Los clorofluorocarbonos (CFC) liberan Cl· en la estratosfera, destruyendo el ozono. Tratamiento adecuado de residuos ácidos en industria para prevenir contaminación de acuíferos.",
+    },
+  },
+  "HNO3": {
+    propiedades: {
+      estadoFisico: "Líquido (25°C, 1 atm)",
+      color: "Incoloro (puro); amarillo pálido a naranja (por descomposición parcial → NO₂)",
+      olor: "Sofocante, fuertemente oxidante; irritante de vías respiratorias",
+      puntoFusion: "−41.6°C (231.55 K)",
+      puntoEbullicion: "83°C (puro); azeótropo 68.4% → 120.5°C",
+      densidad: "1.51 g/mL (puro, 100%); 1.42 g/mL (concentrado 68%)",
+      solubilidadAgua: "Miscible en todas proporciones",
+      propiedadesQuimicas: [
+        "Ácido fuerte: disocia completamente en solución diluida → H₃O⁺ + NO₃⁻",
+        "Oxidante potente: HNO₃ concentrado pasiva Fe, Al, Cr, Co, Ni (óxido protector)",
+        "Con cobre: HNO₃ diluido → NO; concentrado → NO₂ (gases tóxicos)",
+        "Forma agua regia (3:1 HCl:HNO₃): disuelve Au y Pt",
+        "Reacción de nitración con aromáticos (HNO₃ + H₂SO₄ → NO₂⁺): síntesis de explosivos y colorantes",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Fabricación de fertilizantes: NH₃ + HNO₃ → NH₄NO₃ (nitrato de amonio, 34% N)",
+        "Síntesis de explosivos: nitración de glicerina (nitroglicerina), tolueno (TNT), celulosa (piroxilina)",
+        "Procesado de metales: decapado y grabado del acero inoxidable",
+        "Síntesis de colorantes, plásticos y productos farmacéuticos vía nitración aromática",
+      ],
+      cotidiano: [
+        "Muy pocas aplicaciones domésticas directas por su peligrosidad",
+        "Grabado artístico en cobre y zinc (aguafuerte/etching)",
+      ],
+      biologico: [
+        "No tiene rol biológico directo; los nitratos (NO₃⁻) de fertilizantes llegan a agua potable y pueden causar metahemoglobinemia en lactantes (síndrome del bebé azul)",
+        "El NO₃⁻ en saliva se reduce a NO₂⁻ por bacterias bucales → precursor del óxido nítrico (NO) vasodilatador",
+      ],
+      importanciaAmbiental: "La lluvia ácida contiene HNO₃ (del NO₂ → HNO₃ en la atmósfera, émision de vehículos y plantas). El exceso de nitratos en aguas superficiales causa eutrofización. Tema central en química ambiental y legislación de calidad del agua.",
+    },
+  },
+  "H2SO4": {
+    propiedades: {
+      estadoFisico: "Líquido viscoso (oleoso) (25°C, 1 atm)",
+      color: "Incoloro a amarillo pálido",
+      olor: "Inodoro (diluido); vapores de SO₃ acre en concentrado caliente",
+      puntoFusion: "10.4°C (283.55 K) — solidifica cerca de temperatura ambiente",
+      puntoEbullicion: "337°C (610 K) (concentrado)",
+      densidad: "1.840 g/mL (concentrado 98%); 1.225 g/mL (solución 35%)",
+      solubilidadAgua: "Miscible; disolución ALTAMENTE exotérmica (ΔH = −880 kJ/kg). SIEMPRE añadir ácido al agua, nunca al revés.",
+      propiedadesQuimicas: [
+        "Ácido dibásico fuerte: Ka₁ ≈ ∞ (primer H); Ka₂ = 1.2×10⁻² (segundo H, ligeramente débil)",
+        "Agente deshidratante: carboniza sacarosa C₁₂H₂₂O₁₁ → 12C + 11H₂O (efecto espectacular)",
+        "Oxidante concentrado en caliente: disuelve Cu, S, C; produce SO₂",
+        "Forma HSO₄⁻ (bisulfato) con 1 mol base; SO₄²⁻ (sulfato) con 2 mol base",
+        "Produce SO₃ por deshidratación: H₂SO₄ → SO₃ + H₂O (oleum en exceso de SO₃)",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Fertilizantes: reacción con fosfatos → superfosfato de calcio (mayor producción química mundial)",
+        "Baterías de plomo-ácido: PbO₂ + Pb + 2H₂SO₄ ⇌ 2PbSO₄ + 2H₂O",
+        "Petroquímica: alquilación del isobutano; refinado de petróleo",
+        "Síntesis química: producción de HCl, HNO₃, ácido fosfórico y decenas de compuestos",
+      ],
+      cotidiano: [
+        "Baterías de automóvil (ácido de batería, 37% H₂SO₄)",
+        "Limpiadores de desagüe y desincrustantes de cal (concentrado)",
+        "Antifúngico en algunos productos para pieles (muy diluido)",
+      ],
+      biologico: [
+        "No tiene función biológica directa",
+        "El SO₄²⁻ es un anión biológico importante: conjugación hepática (sulfatación) de xenobióticos",
+        "Lluvia ácida (SO₂ → H₂SO₄): acidifica suelos y lagos, daña ecosistemas forestales",
+      ],
+      importanciaAmbiental: "La lluvia ácida contiene H₂SO₄ derivado del SO₂ (emisiones de centrales térmicas de carbón y fundiciones). La producción de H₂SO₄ (proceso de contacto: S→SO₂→SO₃→H₂SO₄) es un indicador del desarrollo industrial. El ácido de lluvia ha dañado bosques y acidificado lagos en Europa y Norteamérica.",
+    },
+  },
+  "CH3COOH": {
+    propiedades: {
+      estadoFisico: "Líquido (25°C, 1 atm); sólido 'ácido acético glacial' < 16.6°C",
+      color: "Incoloro",
+      olor: "Vinagre, ácre, punzante; TLV = 10 ppm",
+      puntoFusion: "16.6°C (289.75 K) — 'glacial' porque se solidifica en días fríos",
+      puntoEbullicion: "117.9°C (391.05 K)",
+      densidad: "1.049 g/mL (25°C, puro); 1.005 g/mL (5% en agua = vinagre)",
+      solubilidadAgua: "Miscible en todas proporciones. Ka = 1.76×10⁻⁵ (pKa = 4.76)",
+      propiedadesQuimicas: [
+        "Ácido débil monocarboxílico: CH₃COOH ⇌ CH₃COO⁻ + H⁺ (Ka = 1.76×10⁻⁵, pKa = 4.76)",
+        "Par ácido-base conjugado con acetato CH₃COO⁻: tampón acético en pH 3.76–5.76",
+        "Reacciona con alcoholes (esterificación Fischer): CH₃COOH + ROH ⇌ RCOO R + H₂O",
+        "Reacciona con bases fuertes: CH₃COOH + NaOH → CH₃COONa + H₂O",
+        "Anhídrido acético ((CH₃CO)₂O) y cloruro de acetilo (CH₃COCl) son agentes acetilantes más reactivos",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Fabricación de acetato de celulosa (fibra textil, películas fotográficas, filtros de cigarrillos)",
+        "Síntesis de aspirina (ácido acetilsalicílico): HOC₆H₄COOH + (CH₃CO)₂O → ASA",
+        "Producción de acetona (CH₃COCH₃) y acetato de etilo (disolvente, esmaltes)",
+        "Conservante alimentario (E260): encurtidos, mayonesa, salsas",
+      ],
+      cotidiano: [
+        "Vinagre (5–8% CH₃COOH): condimento, conservación, limpieza de cal y óxido",
+        "Descalcificador doméstico: reacciona con CaCO₃ de la cal",
+        "Eliminación de manchas de pH alcalino (jabón, detergente)",
+      ],
+      biologico: [
+        "Acetil-CoA (thioéster del ácido acético): molécula central del metabolismo energético (ciclo de Krebs)",
+        "Producto de la fermentación acética: Acetobacter oxida etanol → ácido acético",
+        "Neurotransmisor indirecto: la colina + Acetil-CoA → acetilcolina (ACh) por colin-acetiltransferasa",
+        "Regulador epigenético: la acetilación de histonas (por HATs) activa genes",
+      ],
+      importanciaAmbiental: "Biodegradable: los microorganismos lo utilizan como fuente de carbono (acetoclástica metanogénesis en condiciones anaerobias). No persiste en el ambiente. El vinagre se ha usado milenariamente como conservante y limpiador, reduciendo el uso de biocidas sintéticos.",
+    },
+  },
+  "NaOH": {
+    propiedades: {
+      estadoFisico: "Sólido (pellets, escamas o polvo) (25°C)",
+      color: "Blanco",
+      olor: "Inodoro",
+      puntoFusion: "318°C (591 K)",
+      puntoEbullicion: "1388°C (1661 K)",
+      densidad: "2.13 g/cm³",
+      solubilidadAgua: "111 g/100 mL (20°C) — muy soluble; exotérmica (ΔH = −44.5 kJ/mol). pH 0.1 M ≈ 13.0",
+      propiedadesQuimicas: [
+        "Base fuerte de Arrhenius: disocia completamente → Na⁺(aq) + OH⁻(aq)",
+        "Absorbe CO₂ y H₂O del aire: NaOH + CO₂ → Na₂CO₃; debe guardarse herméticamente",
+        "Corrosivo protéico: hidrólisis de enlaces peptídicos → destruye tejido biológico (quemadura química)",
+        "Saponifica grasas: triglicérido + 3NaOH → 3 jabones (RCOO⁻Na⁺) + glicerol",
+        "Ataca al vidrio a largo plazo: SiO₂ + 2NaOH → Na₂SiO₃ + H₂O (no guardar en vidrio)",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Proceso cloro-álcali: coproducto con Cl₂ en electrólisis de salmuera (industria química básica)",
+        "Fabricación de papel kraft: digestión de madera → pulpa de celulosa (proceso Kraft)",
+        "Tratamiento de aguas residuales: neutralización de efluentes ácidos",
+        "Producción de jabones, detergentes y biodiesel (transesterificación)",
+      ],
+      cotidiano: [
+        "Sosa cáustica: limpiador de hornos, desatascadores de tuberías (hidroliza grasas y pelo)",
+        "Lejía (en combinación con NaClO): limpieza y desinfección del hogar",
+        "Curaduría alimentaria: pretzel, olivas negras, huevos centenarios (tratamiento alcalino)",
+        "Tintura capilar: abre la cutícula del cabello (pH > 10)",
+      ],
+      biologico: [
+        "Sin función biológica directa; altamente tóxico para tejidos vivos",
+        "Quemaduras por NaOH son más profundas que por ácidos (necrosis licuefactiva vs. coagulativa)",
+        "El NaOH se usa en laboratorio para ajustar pH de tampones y soluciones biológicas",
+        "Digestión alcalina de muestras biológicas (extracción de ADN, digestión de proteínas en análisis)",
+      ],
+      importanciaAmbiental: "Las aguas residuales alcalinas de NaOH deben neutralizarse antes de verterlas. La industria cloro-álcali requiere mucha energía eléctrica; la transición a energía renovable es clave para su descarbonización. Los productos derivados (jabones, papel) son fundamentales para higiene y sanidad pública.",
+    },
+  },
+  "Ca(OH)2": {
+    propiedades: {
+      estadoFisico: "Sólido (polvo cristalino blanco) (25°C)",
+      color: "Blanco",
+      olor: "Inodoro",
+      puntoFusion: "512°C (descomposición → CaO + H₂O, no fusión real)",
+      puntoEbullicion: "No aplicable (descompone antes de hervir)",
+      densidad: "2.211 g/cm³",
+      solubilidadAgua: "0.173 g/100 mL (20°C) — poco soluble; solubilidad retrógrada (↓ al calentar). pH sat. ≈ 12.4. 'Agua de cal' = solución saturada",
+      propiedadesQuimicas: [
+        "Base moderada de Arrhenius: Ca(OH)₂ ⇌ Ca²⁺ + 2OH⁻ (Ksp = 4.68×10⁻⁶)",
+        "Base dibásica: neutraliza 2 mol de ácido monoprótico por mol de Ca(OH)₂",
+        "Reacciona con CO₂ → CaCO₃↓ (precipitado blanco): prueba clásica para detectar CO₂",
+        "Fraguado del mortero: Ca(OH)₂ + CO₂ atmosférico → CaCO₃ (lentamente, semanas/meses)",
+        "Solubilidad retrógrada: se disuelve menos al aumentar la temperatura (opuesto a la mayoría de sales)",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Construcción: mortero de cal, enlucidos, estuco (mezcla con arena y agua)",
+        "Industria del azúcar: clarificación del jugo de caña (neutralización de ácidos, precipitación de impurezas)",
+        "Tratamiento de aguas: eliminación de dureza temporal (Ca²⁺ + CO₂ + H₂O) y elevación de pH",
+        "Producción de hipoclorito de calcio Ca(ClO)₂ (lejía de piscina): Ca(OH)₂ + Cl₂ → Ca(ClO)Cl + H₂O",
+      ],
+      cotidiano: [
+        "Cal apagada: corrección de suelos ácidos en agricultura (eleva pH del suelo)",
+        "Revoque y pintura de cal: paredes blancas tradicionales (efecto antimicrobiano por pH alto)",
+        "Encurtidos: elaboración de tortillas y tamales de maíz (nixtamalización con Ca(OH)₂)",
+        "Cal de piscinas: elevación del pH del agua",
+      ],
+      biologico: [
+        "Fuente de calcio biodisponible en algunos suplementos y alimentos (tortillas nixtamalizadas)",
+        "Endodoncia dental: relleno de conductos radiculares (bactericida por pH elevado)",
+        "Desinfección de fosas sépticas y eliminación de patógenos en suelos contaminados",
+        "Encalado de pastos: corrección de suelos ácidos mejora absorción de nutrientes por plantas",
+      ],
+      importanciaAmbiental: "La cal Ca(OH)₂ se produce calcinando CaCO₃ (cal viva CaO) y añadiendo agua. La producción de CaO libera CO₂ (proceso Kraft, cemento). Sin embargo, la carbonatación posterior del Ca(OH)₂ en construcción reabsorbe parte del CO₂. El encalado de suelos y lagos acidificados por lluvia ácida es una medida de mitigación ambiental.",
+    },
+  },
+  "MgS": {
+    propiedades: {
+      estadoFisico: "Sólido cristalino (25°C)",
+      color: "Rojo-naranja (natural, impuro); blanco a amarillento (sintético puro)",
+      olor: "Inodoro (puro); olor a huevo podrido (H₂S) en presencia de humedad",
+      puntoFusion: ">2000°C (descompone a T alta antes de fundir limpiamente)",
+      puntoEbullicion: "No aplica (descompone a T extremas)",
+      densidad: "2.68 g/cm³",
+      solubilidadAgua: "Reacciona con agua: MgS + H₂O → Mg(OH)₂ + H₂S↑. Prácticamente insoluble como tal",
+      propiedadesQuimicas: [
+        "Compuesto iónico con ΔEN(Mg–S) = 1.27: en el límite iónico-covalente (reglas de Fajans)",
+        "Reacciona con ácidos: MgS + 2HCl → MgCl₂ + H₂S↑ (gas tóxico y maloliente)",
+        "Se hidroliza en agua: MgS + H₂O → Mg(OH)₂↓ + H₂S↑",
+        "Semiconductor de brecha amplia: Eg ≈ 4.9 eV (potencial uso en electrónica de potencia UV)",
+        "Elevada energía reticular (≈3300 kJ/mol) → altísimo punto de fusión",
+      ],
+    },
+    aplicaciones: {
+      industrial: [
+        "Investigación en semiconductores: semiconductores II–VI de brecha ancha (junto con ZnS, CdS)",
+        "Fotoluminiscencia: MgS dopado con Eu²⁺ emite en rojo (pantallas y luces de emergencia)",
+        "Síntesis de H₂S controlado en laboratorio: MgS + ácido → H₂S",
+        "Estudio de energía reticular en laboratorio de química del estado sólido",
+      ],
+      cotidiano: [
+        "No tiene aplicaciones domésticas directas",
+        "El mineral natural (ninigerita) aparece en meteoritos carbonáceos",
+      ],
+      biologico: [
+        "No tiene función biológica conocida directa",
+        "El Mg²⁺ liberado es esencial: cofactor de >300 enzimas, incluida la ATP-sintasa",
+        "El S²⁻ liberado puede reaccionar con proteínas (grupos tiol); se relaciona con metabolismo del azufre en bacterias sulfato-reductoras",
+      ],
+      importanciaAmbiental: "Compuesto de interés geoquímico: MgS aparece en meteoritos condríticos y en depósitos de reducción de sulfatos en entornos anóxicos. Su hidrólisis libera H₂S, gas tóxico con LT50 inhalación en roedores a ∼600 ppm (similar al HCN). Relevante en química de sedimentos marinos.",
+    },
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -708,6 +1336,8 @@ const ALIASES: Record<string, string> = {
   "ca(oh)2": "Ca(OH)2", "caoh2": "Ca(OH)2", "ca(oh)₂": "Ca(OH)2",
   "ch3cooh": "CH3COOH", "ch3co2h": "CH3COOH", "acoh": "CH3COOH",
   "mgs": "MgS",
+  "nh4+": "NH4+", "nh4": "NH4+", "amonio": "NH4+", "ion amonio": "NH4+", "azanio": "NH4+",
+  "naoh": "NaOH", "sosa": "NaOH", "lejia": "NaOH", "lejía": "NaOH", "sosa caustica": "NaOH", "sosa cáustica": "NaOH",
 };
 
 function desubscript(s: string): string {
@@ -729,10 +1359,13 @@ export const MVP_COMPOUNDS = Object.keys(PERFILES);
 
 export function generarPerfil(formula: string): PerfilUniversal | null {
   const key = normalizeFormula(formula);
-  const perfil = PERFILES[key];
-  if (!perfil) return null;
+  const base = PERFILES[key];
+  if (!base) return null;
+  const extras = PROPIEDADES_DATA[key];
+  if (!extras) return null;
   return {
-    ...perfil,
-    lewis: { ...perfil.lewis, lewissvg: LEWIS_SVG[key] },
+    ...base,
+    ...extras,
+    lewis: { ...base.lewis, lewissvg: LEWIS_SVG[key] },
   };
 }

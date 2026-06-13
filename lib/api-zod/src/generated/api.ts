@@ -287,6 +287,22 @@ export const GenerarPerfilUniversalResponse = zod.object({
   "ejerciciosPrincipiante": zod.array(zod.string()),
   "ejerciciosSecundario": zod.array(zod.string()),
   "ejerciciosUniversitario": zod.array(zod.string())
+}),
+  "propiedades": zod.object({
+  "estadoFisico": zod.string(),
+  "color": zod.string(),
+  "olor": zod.string(),
+  "puntoFusion": zod.string(),
+  "puntoEbullicion": zod.string(),
+  "densidad": zod.string(),
+  "solubilidadAgua": zod.string(),
+  "propiedadesQuimicas": zod.array(zod.string())
+}),
+  "aplicaciones": zod.object({
+  "industrial": zod.array(zod.string()),
+  "cotidiano": zod.array(zod.string()),
+  "biologico": zod.array(zod.string()),
+  "importanciaAmbiental": zod.string()
 })
 })
 
