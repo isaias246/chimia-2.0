@@ -1,0 +1,271 @@
+CHEMIA QUALITY AUDIT AND COMPLETE PLATFORM FIX
+
+Stop adding new modules.
+
+Before creating anything else, perform a complete audit of the current CHEMIA platform and fix all missing requirements.
+
+The goal is to transform CHEMIA into a professional chemistry learning platform.
+
+==================================================
+CRITICAL ISSUES TO FIX
+==================================================
+
+1. SPANISH LANGUAGE
+
+The platform is still partially in English.
+
+Examples currently visible:
+
+- Dashboard
+- Compound Library
+- Molecular Mass Calculator
+- Formula Input
+- Calculate Mass
+- Awaiting Input
+- Sign In
+- Register
+- Atomic Structure
+- Bonding
+- Acids & Bases
+- Thermochemistry
+- Kinetics
+
+Translate EVERYTHING.
+
+No English should remain visible anywhere.
+
+This includes:
+
+- Menus
+- Buttons
+- Labels
+- Tooltips
+- Error messages
+- Notifications
+- Tutor interface
+- Placeholders
+- Educational content
+
+CHEMIA must feel like a platform originally built in Spanish.
+
+==================================================
+2. AI TUTOR IS NOT INTELLIGENT ENOUGH
+==================================================
+
+The tutor currently behaves like a template system.
+
+It often responds incorrectly to normal conversation.
+
+Examples:
+
+User:
+"¿Hablas español?"
+
+Current behavior:
+Treats it as a chemistry question.
+
+Required behavior:
+
+Respond naturally.
+
+Example:
+
+"Sí, hablo español. ¿En qué tema de química puedo ayudarte?"
+
+The Tutor must:
+
+- Detect Spanish automatically.
+- Understand natural conversation.
+- Maintain context.
+- Understand follow-up questions.
+- Behave like a real chemistry professor.
+- Explain concepts step by step.
+- Adapt explanations to student level.
+
+==================================================
+3. SMART SOLVER IS NOT PHOTOMATH-LIKE YET
+==================================================
+
+For every calculation:
+
+Show:
+
+- Concept
+- Formula
+- Variable definitions
+- Substitution
+- Units
+- Calculation steps
+- Final answer
+- Interpretation
+
+Never show only results.
+
+Always teach.
+
+==================================================
+4. FORMULA PARSER IMPROVEMENTS
+==================================================
+
+The molecular formula parser is failing for common compounds.
+
+Accept:
+
+CH3COOH
+ch3cooh
+Ch3CoOh
+Acetic Acid
+Ácido Acético
+
+All should resolve to the same compound.
+
+Support:
+
+- Uppercase
+- Lowercase
+- IUPAC names
+- Common names
+- Chemical formulas
+
+==================================================
+5. MOLECULAR EXPLORER
+==================================================
+
+The current Compound Library is too simple.
+
+For every compound display:
+
+- Nombre
+- Fórmula
+- Masa molar
+- Clasificación
+- Estados de oxidación
+- Aplicaciones
+- Riesgos
+- Propiedades físicas
+
+Add:
+
+- Estructura de Lewis
+- Geometría molecular
+- Polaridad
+- Hibridación
+- Teoría VSEPR
+
+==================================================
+6. HOW COMPOUNDS FORM
+==================================================
+
+Students must learn how compounds are formed.
+
+Create educational pages for:
+
+Ácidos
+
+Bases
+
+Sales
+
+Óxidos
+
+Hidróxidos
+
+Peróxidos
+
+Hidruros
+
+Compuestos iónicos
+
+Compuestos covalentes
+
+For each one explain:
+
+- Definition
+- Formation process
+- Examples
+- Nomenclature
+- Applications
+- Exercises
+
+==================================================
+7. VISUAL LEARNING
+==================================================
+
+CHEMIA must teach visually.
+
+Add:
+
+- Lewis diagrams
+- Molecular geometry diagrams
+- Reaction diagrams
+- Bond formation diagrams
+
+Example:
+
+Na + Cl
+
+Show:
+
+- Electron transfer
+- Ion formation
+- Ionic bond formation
+
+Example:
+
+H + H
+
+Show:
+
+- Electron sharing
+- Covalent bond formation
+
+==================================================
+8. REMOVE LOGIN BARRIERS
+==================================================
+
+Users must be able to use:
+
+- Tutor
+- Smart Solver
+- Periodic Table
+- Molecular Explorer
+- Calculators
+
+Without creating an account.
+
+Accounts should only be needed for:
+
+- Save progress
+- Save history
+- Achievements
+
+==================================================
+9. EDUCATIONAL PRIORITY
+==================================================
+
+CHEMIA is not a calculator collection.
+
+CHEMIA is a chemistry learning ecosystem.
+
+Prioritize:
+
+Understanding > Calculation
+
+Learning > Answer
+
+Education > Tools
+
+==================================================
+FINAL GOAL
+==================================================
+
+After this audit, CHEMIA should feel closer to:
+
+- Photomath
+- Khan Academy
+- Quimify
+- Wolfram Alpha
+
+combined into one platform.
+
+Focus on fixing and improving existing features before adding new modules.
