@@ -445,7 +445,10 @@ export const SmartSolveResponse = zod.object({
 }),
   "commonMistakes": zod.array(zod.string()),
   "relatedTopics": zod.array(zod.string()),
-  "canCompute": zod.boolean()
+  "canCompute": zod.boolean(),
+  "variables": zod.record(zod.string(), zod.string()).describe('Dictionary of variable symbols to their definitions with units'),
+  "datosExtraidos": zod.record(zod.string(), zod.string()).describe('Data extracted from the problem text — what the solver actually parsed'),
+  "interpretacion": zod.string().describe('Physical meaning and real-world interpretation of the computed result')
 })
 
 

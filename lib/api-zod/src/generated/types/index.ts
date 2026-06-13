@@ -46,6 +46,8 @@ export * from './smartSolverInputAction';
 export * from './smartSolverInputLevel';
 export * from './smartSolverInputTopic';
 export * from './smartSolverResult';
+export * from './smartSolverResultDatosExtraidos';
+export * from './smartSolverResultVariables';
 export * from './solverStep';
 export * from './stoichiometryInput';
 export * from './stoichiometryReagentAmount';

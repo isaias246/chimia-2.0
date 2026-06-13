@@ -1227,7 +1227,7 @@ components:
 
     SmartSolverResult:
       type: object
-      required: [detectedType, topic, problem, level, answer, steps, formulas, levelExplanations, workedExample, practiceExercise, commonMistakes, relatedTopics, canCompute]
+      required: [detectedType, topic, problem, level, answer, steps, formulas, levelExplanations, workedExample, practiceExercise, commonMistakes, relatedTopics, canCompute, variables, datosExtraidos, interpretacion]
       properties:
         detectedType:
           type: string
@@ -1263,6 +1263,19 @@ components:
             type: string
         canCompute:
           type: boolean
+        variables:
+          type: object
+          additionalProperties:
+            type: string
+          description: "Dictionary of variable symbols to their definitions with units"
+        datosExtraidos:
+          type: object
+          additionalProperties:
+            type: string
+          description: "Data extracted from the problem text — what the solver actually parsed"
+        interpretacion:
+          type: string
+          description: "Physical meaning and real-world interpretation of the computed result"
 
     StoichiometryInput:
       type: object

@@ -7,6 +7,8 @@
  */
 import type { LevelExplanations } from './levelExplanations';
 import type { PracticeExercise } from './practiceExercise';
+import type { SmartSolverResultDatosExtraidos } from './smartSolverResultDatosExtraidos';
+import type { SmartSolverResultVariables } from './smartSolverResultVariables';
 import type { SolverStep } from './solverStep';
 import type { WorkedExample } from './workedExample';
 
@@ -24,4 +26,10 @@ export interface SmartSolverResult {
   commonMistakes: string[];
   relatedTopics: string[];
   canCompute: boolean;
+  /** Dictionary of variable symbols to their definitions with units */
+  variables: SmartSolverResultVariables;
+  /** Data extracted from the problem text — what the solver actually parsed */
+  datosExtraidos: SmartSolverResultDatosExtraidos;
+  /** Physical meaning and real-world interpretation of the computed result */
+  interpretacion: string;
 }

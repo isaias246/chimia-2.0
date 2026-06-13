@@ -109,19 +109,66 @@ function ResultPanel({ result, onAction, loading }: { result: SmartSolverResult;
   const [revealAnswer, setRevealAnswer] = useState(false);
   const [expandMistakes, setExpandMistakes] = useState(false);
 
+  const hasDatos = result.datosExtraidos && Object.keys(result.datosExtraidos).length > 0;
+  const hasVariables = result.variables && Object.keys(result.variables).length > 0;
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
+      {/* ── Answer ── */}
       <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-        <div className="relative">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="relative space-y-3">
+          <div className="flex items-center gap-2">
             <span className="text-primary text-xs font-bold uppercase tracking-widest">Respuesta</span>
             <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs border border-primary/20">{result.topic}</span>
             {result.canCompute && <span className="px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 text-xs border border-green-500/20">Calculado</span>}
           </div>
           <p className="text-xl font-bold text-foreground font-mono">{result.answer}</p>
+          {result.interpretacion && result.canCompute && (
+            <p className="text-sm text-muted-foreground leading-relaxed border-t border-primary/10 pt-3 italic">{result.interpretacion}</p>
+          )}
         </div>
       </div>
+
+      {/* ── Datos extraídos + Variables ── */}
+      {(hasDatos || hasVariables) && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {hasDatos && (
+            <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-4 space-y-2">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest">🔍 Datos del Problema</span>
+              </div>
+              <p className="text-[10px] text-cyan-400/60 mb-2">Esto es lo que CHEMIA extrajo de tu enunciado</p>
+              <div className="space-y-1.5">
+                {Object.entries(result.datosExtraidos).map(([k, v]) => (
+                  <div key={k} className="flex items-baseline gap-2">
+                    <span className="text-xs font-mono font-semibold text-cyan-300 shrink-0">{k}</span>
+                    <span className="text-[10px] text-cyan-400/50">→</span>
+                    <span className="text-xs text-foreground/80 font-mono">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {hasVariables && (
+            <div className="rounded-xl border border-violet-500/20 bg-violet-500/5 p-4 space-y-2">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-bold text-violet-400 uppercase tracking-widest">∑ Leyenda de Variables</span>
+              </div>
+              <p className="text-[10px] text-violet-400/60 mb-2">Significado de cada símbolo usado en la solución</p>
+              <div className="space-y-1.5">
+                {Object.entries(result.variables).map(([sym, def]) => (
+                  <div key={sym} className="flex items-baseline gap-2">
+                    <code className="text-xs font-mono font-bold text-violet-300 shrink-0">{sym}</code>
+                    <span className="text-[10px] text-violet-400/50">=</span>
+                    <span className="text-xs text-muted-foreground">{def}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-wrap gap-2">
         {ACTION_BUTTONS.filter(b => b.id !== "solve").map(btn => (

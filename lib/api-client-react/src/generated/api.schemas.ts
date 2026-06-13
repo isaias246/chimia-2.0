@@ -337,6 +337,16 @@ export interface LevelExplanations {
   university: string;
 }
 
+/**
+ * Dictionary of variable symbols to their definitions with units
+ */
+export type SmartSolverResultVariables = {[key: string]: string};
+
+/**
+ * Data extracted from the problem text — what the solver actually parsed
+ */
+export type SmartSolverResultDatosExtraidos = {[key: string]: string};
+
 export interface SmartSolverResult {
   detectedType: string;
   topic: string;
@@ -351,6 +361,12 @@ export interface SmartSolverResult {
   commonMistakes: string[];
   relatedTopics: string[];
   canCompute: boolean;
+  /** Dictionary of variable symbols to their definitions with units */
+  variables: SmartSolverResultVariables;
+  /** Data extracted from the problem text — what the solver actually parsed */
+  datosExtraidos: SmartSolverResultDatosExtraidos;
+  /** Physical meaning and real-world interpretation of the computed result */
+  interpretacion: string;
 }
 
 export interface StoichiometryInput {
