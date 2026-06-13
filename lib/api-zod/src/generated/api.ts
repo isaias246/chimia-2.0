@@ -249,7 +249,8 @@ export const GenerarPerfilUniversalResponse = zod.object({
   "enlacesSimples": zod.number().optional(),
   "enlacesDobles": zod.number().optional(),
   "enlacesTriples": zod.number().optional(),
-  "notaResonancia": zod.string().optional()
+  "notaResonancia": zod.string().optional(),
+  "lewissvg": zod.string().optional().describe('Pre-authored inline SVG string of the Lewis dot structure diagram (IUPAC conventions)')
 }),
   "vsepr": zod.object({
   "descripcion": zod.string(),

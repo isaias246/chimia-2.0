@@ -1484,6 +1484,9 @@ components:
           type: integer
         notaResonancia:
           type: string
+        lewissvg:
+          type: string
+          description: Pre-authored inline SVG string of the Lewis dot structure diagram (IUPAC conventions)
       required:
         - descripcion
         - esIonico

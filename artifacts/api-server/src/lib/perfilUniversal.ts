@@ -5,6 +5,8 @@
 // sourced from IUPAC 2021, NIST WebBook, or standard university textbooks.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LEWIS_SVG } from "./lewissvg.js";
+
 export interface PerfilNomenclatura {
   tradicional: string;
   stock: string;
@@ -23,6 +25,7 @@ export interface PerfilLewis {
   enlacesDobles?: number;
   enlacesTriples?: number;
   notaResonancia?: string;
+  lewissvg?: string;
 }
 
 export interface PerfilVSEPR {
@@ -726,5 +729,10 @@ export const MVP_COMPOUNDS = Object.keys(PERFILES);
 
 export function generarPerfil(formula: string): PerfilUniversal | null {
   const key = normalizeFormula(formula);
-  return PERFILES[key] ?? null;
+  const perfil = PERFILES[key];
+  if (!perfil) return null;
+  return {
+    ...perfil,
+    lewis: { ...perfil.lewis, lewissvg: LEWIS_SVG[key] },
+  };
 }

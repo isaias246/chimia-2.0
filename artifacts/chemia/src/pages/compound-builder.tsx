@@ -276,6 +276,12 @@ export default function PerfilUniversalPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
+                {perfil.lewis.lewissvg && (
+                  <div
+                    className="w-full rounded-lg bg-slate-900/60 border border-border/30 overflow-hidden flex items-center justify-center py-1"
+                    dangerouslySetInnerHTML={{ __html: perfil.lewis.lewissvg }}
+                  />
+                )}
                 <p className="text-sm text-foreground/80 leading-relaxed">{perfil.lewis.descripcion}</p>
                 {perfil.lewis.notaResonancia && (
                   <div className="p-2.5 rounded-lg bg-primary/5 border border-primary/20 text-xs text-foreground/70 leading-relaxed">

@@ -442,6 +442,8 @@ export interface PerfilLewis {
   enlacesDobles?: number;
   enlacesTriples?: number;
   notaResonancia?: string;
+  /** Pre-authored inline SVG string of the Lewis dot structure diagram (IUPAC conventions) */
+  lewissvg?: string;
 }
 
 export interface PerfilVSEPR {
