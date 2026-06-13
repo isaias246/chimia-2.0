@@ -1,0 +1,170 @@
+Transform CHEMIA into a premium scientific SaaS platform.
+
+Do not add new chemistry modules yet.
+
+Focus on UI, UX, visual identity, user engagement, and professional appearance.
+
+GOAL
+
+Make CHEMIA look like a product that could compete with:
+
+* Wolfram Alpha
+* Brilliant
+* Khan Academy
+* Notion
+* Linear
+* Stripe Dashboard
+
+====================================================
+VISUAL REDESIGN
+===============
+
+Create a complete design system.
+
+Colors:
+
+* Deep navy background
+* Scientific cyan accents
+* Modern gradients
+* Premium glassmorphism effects
+
+Typography:
+
+* Modern scientific typography
+* Better hierarchy
+* Better spacing
+
+Components:
+
+* Professional cards
+* Interactive buttons
+* Hover effects
+* Animations
+* Smooth transitions
+
+====================================================
+NEW DASHBOARD
+=============
+
+Create a modern dashboard showing:
+
+* Total calculations
+* Recent activity
+* Favorite formulas
+* Learning progress
+* Chemistry modules
+* Quick access widgets
+
+Add beautiful charts.
+
+====================================================
+PERIODIC TABLE
+==============
+
+Redesign completely.
+
+Requirements:
+
+* Better colors
+* Hover animations
+* Search animations
+* Detailed side panel
+* Element visualization
+* Category filters
+* Mobile responsive
+
+====================================================
+MOLECULAR MASS CALCULATOR
+=========================
+
+Add:
+
+* Step-by-step solution
+* Element breakdown
+* Formula validation
+* Calculation history
+* Save results
+
+====================================================
+COMPOUND BUILDER
+================
+
+Add:
+
+* Visual oxidation balancing
+* Lewis structure preview
+* Compound information cards
+* Better educational explanations
+
+====================================================
+EQUATION BALANCER
+=================
+
+Add:
+
+* Step-by-step balancing
+* Reaction classification
+* Visual coefficient explanation
+* Export results
+
+====================================================
+AI TUTOR
+========
+
+Transform into ChatGPT-style interface.
+
+Add:
+
+* Chat history
+* Suggested questions
+* Topic shortcuts
+* Learning recommendations
+* Chemistry topic categories
+
+====================================================
+USER SYSTEM
+===========
+
+Create user profiles.
+
+Track:
+
+* Progress
+* Calculations
+* Saved formulas
+* Favorite topics
+* Learning statistics
+
+====================================================
+GAMIFICATION
+============
+
+Add:
+
+* XP points
+* Levels
+* Achievements
+* Daily streaks
+* Chemistry badges
+
+====================================================
+RESPONSIVENESS
+==============
+
+Perfect support for:
+
+* Desktop
+* Tablet
+* Mobile
+
+====================================================
+FINAL REQUIREMENT
+=================
+
+Improve existing code.
+
+Do not replace working functionality.
+
+Upgrade the platform visually and professionally.
+
+Continue automatically until all redesign tasks are completed.

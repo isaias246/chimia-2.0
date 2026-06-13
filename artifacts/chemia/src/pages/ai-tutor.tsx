@@ -13,21 +13,17 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageSquare, Plus, Trash2, Send, Loader2, Bot, User } from "lucide-react";
+import { MessageSquare, Plus, Trash2, Send, Loader2, Bot, User, Hexagon, Sparkles } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { Link } from "wouter";
+import { format } from "date-fns";
 
-// Simple markdown parser
 function formatMessage(content: string) {
-  // Bold
-  let formatted = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  // Inline code
-  formatted = formatted.replace(/`([^`]+)`/g, '<code class="bg-secondary/50 px-1 py-0.5 rounded text-primary font-mono text-sm">$1</code>');
-  // Code blocks
-  formatted = formatted.replace(/```([\s\S]*?)```/g, '<pre class="bg-secondary/30 p-3 rounded-md overflow-x-auto font-mono text-sm border border-border/50 my-2"><code>$1</code></pre>');
-  // Line breaks
+  let formatted = content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+  formatted = formatted.replace(/`([^`]+)`/g, '<code class="bg-black/30 px-1.5 py-0.5 rounded text-primary font-mono text-[13px] border border-primary/20">$1</code>');
+  formatted = formatted.replace(/```([\s\S]*?)```/g, '<pre class="bg-[#050d1a] p-4 rounded-lg overflow-x-auto font-mono text-[13px] border border-border/50 my-3 text-muted-foreground leading-relaxed"><code>$1</code></pre>');
   formatted = formatted.replace(/\n/g, '<br/>');
-  return <div dangerouslySetInnerHTML={{ __html: formatted }} />;
+  return <div dangerouslySetInnerHTML={{ __html: formatted }} className="leading-relaxed" />;
 }
 
 export default function AiTutor() {
@@ -51,7 +47,6 @@ export default function AiTutor() {
   const sendMutation = useSendMessage();
 
   useEffect(() => {
-    // Auto-scroll to bottom of messages
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -59,26 +54,37 @@ export default function AiTutor() {
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center h-[70vh] space-y-4">
-        <Bot className="h-16 w-16 text-primary opacity-50" />
-        <h2 className="text-2xl font-bold">AI Chemistry Tutor</h2>
-        <p className="text-muted-foreground text-center max-w-md">
-          Sign in to interact with the AI tutor, ask complex chemistry questions, and get detailed explanations.
-        </p>
+      <div className="flex flex-col items-center justify-center h-[70vh] space-y-6">
+        <div className="relative">
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
+          <Hexagon className="h-20 w-20 text-primary relative z-10 drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]" />
+        </div>
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl font-bold tracking-tight">AI Chemistry Assistant</h2>
+          <p className="text-muted-foreground max-w-md mx-auto">
+            Advanced conceptual breakdowns, problem-solving, and theoretical explanations.
+          </p>
+        </div>
         <Link href="/login">
-          <Button>Log In to Continue</Button>
+          <Button className="h-12 px-8 font-semibold tracking-wide">Sign In to Access</Button>
         </Link>
       </div>
     );
   }
 
-  const handleCreate = () => {
+  const handleCreateAndAsk = (initialQuestion?: string) => {
     createMutation.mutate(
-      { data: { title: "New Conversation" } },
+      { data: { title: initialQuestion ? initialQuestion.substring(0, 30) + "..." : "New Conversation" } },
       {
         onSuccess: (data) => {
           queryClient.invalidateQueries({ queryKey: getListConversationsQueryKey() });
           setActiveId(data.id);
+          if (initialQuestion) {
+            sendMutation.mutate(
+              { conversationId: data.id, data: { content: initialQuestion } },
+              { onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetConversationQueryKey(data.id) }) }
+            );
+          }
         }
       }
     );
@@ -97,14 +103,13 @@ export default function AiTutor() {
     );
   };
 
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSend = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!input.trim() || !activeId) return;
 
     const messageContent = input.trim();
     setInput("");
 
-    // Optimistically update UI could go here, but relying on invalidate for simplicity
     sendMutation.mutate(
       { conversationId: activeId, data: { content: messageContent } },
       {
@@ -115,15 +120,27 @@ export default function AiTutor() {
     );
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  const suggestedQuestions = [
+    "What is an ionic bond?", "Explain the periodic table trends", "How does pH work?",
+    "What are gas laws?", "Explain electron configuration", "How to balance redox equations?"
+  ];
+
+  const topics = ["Atomic Structure", "Bonding", "Acids & Bases", "Thermochemistry", "Kinetics"];
+
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col md:flex-row gap-6">
+    <div className="h-[calc(100vh-8rem)] flex flex-col md:flex-row gap-6 max-w-6xl mx-auto">
       {/* Sidebar */}
-      <Card className="w-full md:w-80 flex flex-col border-border/50 h-full md:h-auto overflow-hidden shrink-0">
-        <div className="p-4 border-b border-border flex items-center justify-between">
-          <h2 className="font-semibold flex items-center gap-2">
-            <MessageSquare className="h-4 w-4" /> Chats
-          </h2>
-          <Button size="icon" variant="ghost" onClick={handleCreate} disabled={createMutation.isPending}>
+      <div className="w-full md:w-72 flex flex-col h-full md:h-auto overflow-hidden shrink-0 glass rounded-xl border-border/50">
+        <div className="p-4 border-b border-border/50 flex items-center justify-between bg-black/20">
+          <span className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">History</span>
+          <Button size="icon" variant="ghost" className="h-8 w-8 text-primary hover:text-primary hover:bg-primary/10" onClick={() => handleCreateAndAsk()} disabled={createMutation.isPending}>
             {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
           </Button>
         </div>
@@ -131,110 +148,185 @@ export default function AiTutor() {
           <div className="p-2 space-y-1">
             {isListLoading ? (
               Array(5).fill(0).map((_, i) => (
-                <div key={i} className="h-10 bg-secondary/50 animate-pulse rounded-md m-1" />
+                <div key={i} className="h-14 bg-secondary/30 animate-pulse rounded-lg m-1" />
               ))
             ) : conversations?.length === 0 ? (
-              <p className="text-center text-sm text-muted-foreground p-4">No conversations yet.</p>
+              <p className="text-center text-xs text-muted-foreground p-8 opacity-50">Empty history</p>
             ) : (
               conversations?.map((conv) => (
                 <div
                   key={conv.id}
                   onClick={() => setActiveId(conv.id)}
-                  className={`flex items-center justify-between p-3 rounded-md cursor-pointer transition-colors ${
-                    activeId === conv.id ? "bg-primary/10 text-primary" : "hover:bg-secondary text-foreground"
+                  className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all group ${
+                    activeId === conv.id ? "bg-primary/10 border border-primary/20 text-primary shadow-[inset_4px_0_0_0_rgba(0,229,255,1)]" : "border border-transparent hover:bg-white/5 text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  <span className="truncate text-sm font-medium">{conv.title}</span>
+                  <div className="overflow-hidden pr-2">
+                    <div className="truncate text-sm font-medium">{conv.title}</div>
+                    <div className="text-[10px] opacity-50 mt-1">{format(new Date(conv.createdAt), "MMM d, yyyy")}</div>
+                  </div>
                   <Button 
                     size="icon" 
                     variant="ghost" 
-                    className="h-6 w-6 opacity-0 hover:opacity-100 group-hover:opacity-100 focus:opacity-100 transition-opacity" 
+                    className="h-6 w-6 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20" 
                     onClick={(e) => handleDelete(conv.id, e)}
                   >
-                    <Trash2 className="h-3 w-3 text-muted-foreground hover:text-destructive" />
+                    <Trash2 className="h-3.5 w-3.5 text-muted-foreground hover:text-destructive" />
                   </Button>
                 </div>
               ))
             )}
           </div>
         </ScrollArea>
-      </Card>
+      </div>
 
       {/* Main Chat Area */}
-      <Card className="flex-1 flex flex-col border-border/50 h-[60vh] md:h-auto overflow-hidden">
+      <div className="flex-1 flex flex-col h-[60vh] md:h-auto overflow-hidden glass rounded-xl border-border/50 relative">
         {activeId ? (
           <>
-            <div className="p-4 border-b border-border bg-card/50">
-              <h3 className="font-semibold">{activeConversation?.title || "Loading..."}</h3>
+            {/* Header */}
+            <div className="p-4 border-b border-border/50 bg-black/20 flex items-center justify-between">
+              <h3 className="font-semibold text-sm">{activeConversation?.title || "Loading..."}</h3>
+              <div className="flex gap-2">
+                {topics.map(topic => (
+                  <button 
+                    key={topic} 
+                    className="text-[10px] px-2 py-1 rounded border border-border/40 text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors hidden sm:block"
+                    onClick={() => handleCreateAndAsk(`Explain the concepts of ${topic}`)}
+                  >
+                    {topic}
+                  </button>
+                ))}
+              </div>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-4 space-y-4" ref={scrollRef}>
+            <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6" ref={scrollRef}>
               {isActiveLoading ? (
                 <div className="flex justify-center items-center h-full">
-                  <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                  <Loader2 className="h-6 w-6 animate-spin text-primary opacity-50" />
                 </div>
               ) : activeConversation?.messages.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-4">
-                  <Bot className="h-12 w-12 opacity-20" />
-                  <p>Start a conversation. Ask me about chemistry!</p>
+                <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-6">
+                  <div className="p-4 bg-primary/5 rounded-full ring-1 ring-primary/20 glow-primary">
+                    <Hexagon className="h-8 w-8 text-primary" />
+                  </div>
+                  <div className="text-center space-y-2">
+                    <h3 className="text-lg font-medium text-foreground">How can I help you today?</h3>
+                    <p className="text-sm max-w-md mx-auto">Ask any question related to chemistry, elements, equations, or theoretical concepts.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xl mt-4">
+                    {suggestedQuestions.map((q, i) => (
+                      <button 
+                        key={i}
+                        onClick={() => {
+                          setInput(q);
+                          setTimeout(() => {
+                            sendMutation.mutate(
+                              { conversationId: activeId, data: { content: q } },
+                              { onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetConversationQueryKey(activeId) }) }
+                            );
+                            setInput("");
+                          }, 50);
+                        }}
+                        className="text-left p-3 rounded-lg border border-border/40 bg-secondary/20 hover:bg-primary/5 hover:border-primary/30 transition-all text-sm flex items-center gap-2 group"
+                      >
+                        <Sparkles className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors" />
+                        <span className="truncate">{q}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               ) : (
-                activeConversation?.messages.map((msg, i) => (
-                  <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                      msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-foreground'
-                    }`}>
-                      {msg.role === 'user' ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+                <div className="space-y-8 max-w-4xl mx-auto w-full">
+                  {activeConversation?.messages.map((msg, i) => (
+                    <div key={i} className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 ${
+                        msg.role === 'user' ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-secondary border border-border text-foreground'
+                      }`}>
+                        {msg.role === 'user' ? <User className="h-4 w-4" /> : <Hexagon className="h-4 w-4 text-primary" />}
+                      </div>
+                      <div className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-[85%]`}>
+                        <div className={`text-[10px] text-muted-foreground mb-1 font-medium tracking-wide uppercase px-1`}>
+                          {msg.role === 'user' ? 'You' : 'Chemia AI'}
+                        </div>
+                        <div className={`rounded-2xl px-5 py-3.5 text-sm shadow-sm ${
+                          msg.role === 'user' 
+                            ? 'bg-primary text-primary-foreground rounded-tr-sm' 
+                            : 'bg-secondary/40 border border-border/60 text-foreground/90 rounded-tl-sm'
+                        }`}>
+                          {msg.role === 'user' ? (
+                            <div className="whitespace-pre-wrap">{msg.content}</div>
+                          ) : (
+                            formatMessage(msg.content)
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className={`max-w-[80%] rounded-lg p-3 ${
-                      msg.role === 'user' 
-                        ? 'bg-primary/10 text-foreground border border-primary/20' 
-                        : 'bg-secondary/50 text-foreground border border-border/50'
-                    }`}>
-                      {formatMessage(msg.content)}
+                  ))}
+                  
+                  {sendMutation.isPending && (
+                    <div className="flex gap-4">
+                      <div className="w-8 h-8 rounded-full bg-secondary border border-border text-foreground flex items-center justify-center shrink-0 mt-1">
+                        <Hexagon className="h-4 w-4 text-primary animate-pulse" />
+                      </div>
+                      <div className="flex flex-col items-start">
+                        <div className="text-[10px] text-muted-foreground mb-1 font-medium tracking-wide uppercase px-1">Chemia AI</div>
+                        <div className="bg-secondary/40 border border-border/60 rounded-2xl rounded-tl-sm px-5 py-4 flex items-center gap-2">
+                          <span className="flex space-x-1">
+                            <span className="w-1.5 h-1.5 bg-primary/50 rounded-full animate-bounce"></span>
+                            <span className="w-1.5 h-1.5 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                            <span className="w-1.5 h-1.5 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))
-              )}
-              {sendMutation.isPending && (
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 rounded-full bg-secondary text-foreground flex items-center justify-center shrink-0">
-                    <Bot className="h-4 w-4" />
-                  </div>
-                  <div className="bg-secondary/50 text-foreground border border-border/50 rounded-lg p-4 flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                    <span className="text-sm text-muted-foreground">Thinking...</span>
-                  </div>
+                  )}
                 </div>
               )}
             </div>
 
-            <div className="p-4 border-t border-border bg-card/50">
-              <form onSubmit={handleSend} className="flex gap-2">
-                <Input
-                  placeholder="Ask a chemistry question..."
+            <div className="p-4 border-t border-border/50 bg-black/20">
+              <div className="max-w-4xl mx-auto relative">
+                <textarea
+                  placeholder="Ask a chemistry question... (Shift+Enter for new line)"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={onKeyDown}
                   disabled={sendMutation.isPending}
-                  className="bg-background"
+                  className="w-full bg-secondary/30 border border-border/60 rounded-xl pl-4 pr-14 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 resize-none min-h-[56px] max-h-[200px] overflow-hidden"
+                  rows={1}
                 />
-                <Button type="submit" disabled={!input.trim() || sendMutation.isPending} size="icon">
-                  <Send className="h-4 w-4" />
+                <Button 
+                  onClick={handleSend}
+                  disabled={!input.trim() || sendMutation.isPending} 
+                  size="icon"
+                  className="absolute right-2 bottom-2 h-10 w-10 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground transition-all disabled:opacity-50"
+                >
+                  <Send className="h-4 w-4 ml-0.5" />
                 </Button>
-              </form>
+              </div>
+              <div className="text-center mt-2">
+                <span className="text-[10px] text-muted-foreground/50 font-mono">Chemia AI can make mistakes. Verify important calculations.</span>
+              </div>
             </div>
           </>
         ) : (
-          <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-4">
-            <MessageSquare className="h-12 w-12 opacity-20" />
-            <p>Select a conversation or create a new one to start learning.</p>
-            <Button variant="outline" onClick={handleCreate} disabled={createMutation.isPending}>
+          <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-6">
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full"></div>
+              <MessageSquare className="h-16 w-16 opacity-30 relative z-10" />
+            </div>
+            <div className="text-center space-y-2">
+              <h3 className="text-xl font-medium text-foreground">Select a conversation</h3>
+              <p className="text-sm">Choose from history or start a new analysis session.</p>
+            </div>
+            <Button className="h-10 px-6 font-semibold" onClick={() => handleCreateAndAsk()} disabled={createMutation.isPending}>
               {createMutation.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Plus className="mr-2 h-4 w-4" />}
-              New Conversation
+              New Session
             </Button>
           </div>
         )}
-      </Card>
+      </div>
     </div>
   );
 }
