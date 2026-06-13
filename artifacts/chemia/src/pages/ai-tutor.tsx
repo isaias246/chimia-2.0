@@ -33,13 +33,10 @@ export default function AiTutor() {
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { data: conversations, isLoading: isListLoading } = useListConversations({
-    query: { enabled: !!user }
-  });
+  const { data: conversations, isLoading: isListLoading } = useListConversations();
   
   const { data: activeConversation, isLoading: isActiveLoading } = useGetConversation(
-    activeId!,
-    { query: { enabled: !!activeId } }
+    activeId ?? 0,
   );
 
   const createMutation = useCreateConversation();
@@ -81,7 +78,7 @@ export default function AiTutor() {
           setActiveId(data.id);
           if (initialQuestion) {
             sendMutation.mutate(
-              { conversationId: data.id, data: { content: initialQuestion } },
+              { id: data.id, data: { content: initialQuestion } },
               { onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetConversationQueryKey(data.id) }) }
             );
           }
@@ -93,7 +90,7 @@ export default function AiTutor() {
   const handleDelete = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
     deleteMutation.mutate(
-      id,
+      { id },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getListConversationsQueryKey() });
@@ -111,7 +108,7 @@ export default function AiTutor() {
     setInput("");
 
     sendMutation.mutate(
-      { conversationId: activeId, data: { content: messageContent } },
+      { id: activeId, data: { content: messageContent } },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getGetConversationQueryKey(activeId) });
@@ -222,7 +219,7 @@ export default function AiTutor() {
                           setInput(q);
                           setTimeout(() => {
                             sendMutation.mutate(
-                              { conversationId: activeId, data: { content: q } },
+                              { id: activeId ?? 0, data: { content: q } },
                               { onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetConversationQueryKey(activeId) }) }
                             );
                             setInput("");

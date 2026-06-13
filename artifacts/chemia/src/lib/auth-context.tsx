@@ -15,12 +15,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(localStorage.getItem("chemia_token"));
   const [, setLocation] = useLocation();
 
-  const { data: user, isLoading, error, refetch } = useGetMe({
-    query: {
-      enabled: !!token,
-      retry: false,
-    },
-  });
+  const { data: user, isLoading, error, refetch } = useGetMe();
 
   useEffect(() => {
     if (error) {

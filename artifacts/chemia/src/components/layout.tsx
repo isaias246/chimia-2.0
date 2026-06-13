@@ -10,7 +10,8 @@ import {
   Menu,
   MessageSquare,
   Scale,
-  Hexagon
+  Hexagon,
+  FlaskConical,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ const navItems = [
   { href: "/molecular-mass", label: "Molecular Mass", icon: Calculator },
   { href: "/compound-builder", label: "Compound Builder", icon: Beaker },
   { href: "/equation-balancer", label: "Equation Balancer", icon: Scale },
+  { href: "/stoichiometry", label: "Stoichiometry", icon: FlaskConical },
   { href: "/ai-tutor", label: "AI Tutor", icon: MessageSquare },
   { href: "/saved-formulas", label: "Saved Formulas", icon: Library },
 ];

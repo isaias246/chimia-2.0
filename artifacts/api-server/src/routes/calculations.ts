@@ -5,8 +5,9 @@ import {
   CalculateMolecularMassBody,
   ParseFormulaBody,
   BalanceEquationBody,
+  CalculateStoichiometryBody,
 } from "@workspace/api-zod";
-import { calculateMolecularMass, parseFormula, balanceEquation } from "../lib/chemistry.js";
+import { calculateMolecularMass, parseFormula, balanceEquation, calculateStoichiometry } from "../lib/chemistry.js";
 
 const router: IRouter = Router();
 
@@ -81,6 +82,42 @@ router.post("/calculations/balance-equation", async (req, res): Promise<void> =>
     type: "balance-equation",
     input: parsed.data.equation,
     result: result.balanced,
+  }).catch(() => {});
+
+  res.json(result);
+});
+
+router.post("/calculations/stoichiometry", async (req, res): Promise<void> => {
+  const parsed = CalculateStoichiometryBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.message });
+    return;
+  }
+
+  const { equation, reactantAmounts, targetFormula, actualYieldGrams } = parsed.data;
+
+  const result = calculateStoichiometry(
+    equation,
+    reactantAmounts as Array<{ formula: string; amount: number; unit: "grams" | "moles" }>,
+    targetFormula,
+    actualYieldGrams ?? undefined,
+  );
+
+  if (!result) {
+    res.status(400).json({
+      error: "Could not calculate stoichiometry. Check that the equation balances, the target formula appears as a product, and all reactant formulas are valid.",
+    });
+    return;
+  }
+
+  await db.insert(calculationsTable).values({
+    type: "stoichiometry",
+    input: `${equation} → ${targetFormula}`,
+    result: JSON.stringify({
+      theoreticalYieldGrams: result.theoreticalYieldGrams,
+      limitingReagent: result.limitingReagent,
+      percentYield: result.percentYield,
+    }),
   }).catch(() => {});
 
   res.json(result);

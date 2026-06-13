@@ -322,6 +322,44 @@ export const SendMessageResponse = zod.object({
 
 
 /**
+ * @summary Stoichiometry calculation with limiting reagent, theoretical yield, and percent yield
+ */
+export const CalculateStoichiometryBody = zod.object({
+  "equation": zod.string(),
+  "reactantAmounts": zod.array(zod.object({
+  "formula": zod.string(),
+  "amount": zod.number(),
+  "unit": zod.enum(['grams', 'moles'])
+})),
+  "targetFormula": zod.string(),
+  "actualYieldGrams": zod.number().nullish()
+})
+
+export const CalculateStoichiometryResponse = zod.object({
+  "balancedEquation": zod.string(),
+  "targetFormula": zod.string(),
+  "targetMolarMass": zod.number(),
+  "theoreticalYieldMoles": zod.number(),
+  "theoreticalYieldGrams": zod.number(),
+  "limitingReagent": zod.string(),
+  "excessReagents": zod.array(zod.string()),
+  "actualYieldGrams": zod.number().nullish(),
+  "percentYield": zod.number().nullish(),
+  "reagentDetails": zod.array(zod.object({
+  "formula": zod.string(),
+  "amountGiven": zod.number(),
+  "unit": zod.string(),
+  "molarMass": zod.number(),
+  "molesGiven": zod.number(),
+  "coefficient": zod.number(),
+  "molesOfTargetProduced": zod.number()
+})),
+  "steps": zod.array(zod.string()),
+  "isLimitingReagentCalculation": zod.boolean()
+})
+
+
+/**
  * @summary List recent calculations
  */
 export const ListCalculationHistoryResponseItem = zod.object({

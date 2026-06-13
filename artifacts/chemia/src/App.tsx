@@ -13,6 +13,7 @@ import CompoundBuilder from "@/pages/compound-builder";
 import EquationBalancer from "@/pages/equation-balancer";
 import AiTutor from "@/pages/ai-tutor";
 import SavedFormulas from "@/pages/saved-formulas";
+import Stoichiometry from "@/pages/stoichiometry";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 
@@ -31,6 +32,7 @@ function AppRoutes() {
             <Route path="/molecular-mass" component={MolecularMass} />
             <Route path="/compound-builder" component={CompoundBuilder} />
             <Route path="/equation-balancer" component={EquationBalancer} />
+            <Route path="/stoichiometry" component={Stoichiometry} />
             <Route path="/ai-tutor" component={AiTutor} />
             <Route path="/saved-formulas" component={SavedFormulas} />
             <Route component={NotFound} />

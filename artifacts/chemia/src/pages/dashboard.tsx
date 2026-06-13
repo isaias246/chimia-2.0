@@ -13,11 +13,7 @@ export default function Dashboard() {
   const { user } = useAuth();
   
   const { data: stats, isLoading: isStatsLoading } = useGetElementStats();
-  const { data: history, isLoading: isHistoryLoading } = useListCalculationHistory({
-    query: {
-      enabled: !!user,
-    }
-  });
+  const { data: history, isLoading: isHistoryLoading } = useListCalculationHistory();
 
   const tools = [
     { title: "Periodic Table", href: "/periodic-table", icon: Grid, description: "Explore elements and their properties" },

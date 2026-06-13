@@ -276,15 +276,15 @@ export default function PeriodicTable() {
 
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Boiling Point</span>
-                    <p className="font-mono text-lg">{selectedElement.boil ? `${selectedElement.boil} K` : '-'}</p>
+                    <p className="font-mono text-lg">{selectedElement.boilingPoint ? `${selectedElement.boilingPoint} K` : '—'}</p>
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Melting Point</span>
-                    <p className="font-mono text-lg">{selectedElement.melt ? `${selectedElement.melt} K` : '-'}</p>
+                    <p className="font-mono text-lg">{selectedElement.meltingPoint ? `${selectedElement.meltingPoint} K` : '—'}</p>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Molar Heat</span>
-                    <p className="font-mono text-lg">{selectedElement.molarHeat || '-'}</p>
+                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Density</span>
+                    <p className="font-mono text-lg">{selectedElement.density ? `${selectedElement.density} g/cm³` : '—'}</p>
                   </div>
                   
                   <div className="col-span-1 md:col-span-3 space-y-1 mt-2">
@@ -299,12 +299,9 @@ export default function PeriodicTable() {
                     <p className="font-mono text-sm px-1">{selectedElement.oxidationStates || 'Unknown'}</p>
                   </div>
 
-                  <div className="col-span-1 md:col-span-3 space-y-1 mt-2 border-t border-border/50 pt-4">
-                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Summary</span>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{selectedElement.summary}</p>
-                    <a href={selectedElement.source} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline flex items-center gap-1 mt-2 inline-flex">
-                      Read more on Wikipedia <ExternalLink className="h-3 w-3" />
-                    </a>
+                  <div className="col-span-1 md:col-span-3 space-y-1 mt-2">
+                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Discovered By</span>
+                    <p className="text-sm text-muted-foreground">{selectedElement.discoveredBy || 'Unknown'}</p>
                   </div>
                 </div>
               </div>

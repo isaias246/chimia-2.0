@@ -11,9 +11,7 @@ import { Link } from "wouter";
 export default function SavedFormulas() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const { data: formulas, isLoading } = useListFormulas({
-    query: { enabled: !!user }
-  });
+  const { data: formulas, isLoading } = useListFormulas();
   const deleteMutation = useDeleteFormula();
 
   if (!user) {
@@ -38,7 +36,7 @@ export default function SavedFormulas() {
 
   const handleDelete = (id: number) => {
     deleteMutation.mutate(
-      id,
+      { id },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: getListFormulasQueryKey() });

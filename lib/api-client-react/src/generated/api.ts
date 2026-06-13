@@ -43,6 +43,8 @@ import type {
   RegisterInput,
   SavedFormula,
   SavedFormulaInput,
+  StoichiometryInput,
+  StoichiometryResult,
   User
 } from './api.schemas';
 
@@ -1529,6 +1531,77 @@ export const useSendMessage = <TError = ErrorType<ErrorResponse>,
         TContext
       > => {
       return useMutation(getSendMessageMutationOptions(options));
+    }
+
+export const getCalculateStoichiometryUrl = () => {
+
+
+
+
+  return `/api/calculations/stoichiometry`
+}
+
+/**
+ * @summary Stoichiometry calculation with limiting reagent, theoretical yield, and percent yield
+ */
+export const calculateStoichiometry = async (stoichiometryInput: StoichiometryInput, options?: RequestInit): Promise<StoichiometryResult> => {
+
+  return customFetch<StoichiometryResult>(getCalculateStoichiometryUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      stoichiometryInput,)
+  }
+);}
+
+
+
+
+export const getCalculateStoichiometryMutationOptions = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof calculateStoichiometry>>, TError,{data: BodyType<StoichiometryInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof calculateStoichiometry>>, TError,{data: BodyType<StoichiometryInput>}, TContext> => {
+
+const mutationKey = ['calculateStoichiometry'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof calculateStoichiometry>>, {data: BodyType<StoichiometryInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  calculateStoichiometry(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CalculateStoichiometryMutationResult = NonNullable<Awaited<ReturnType<typeof calculateStoichiometry>>>
+    export type CalculateStoichiometryMutationBody = BodyType<StoichiometryInput>
+    export type CalculateStoichiometryMutationError = ErrorType<ErrorResponse>
+
+    /**
+ * @summary Stoichiometry calculation with limiting reagent, theoretical yield, and percent yield
+ */
+export const useCalculateStoichiometry = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof calculateStoichiometry>>, TError,{data: BodyType<StoichiometryInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof calculateStoichiometry>>,
+        TError,
+        {data: BodyType<StoichiometryInput>},
+        TContext
+      > => {
+      return useMutation(getCalculateStoichiometryMutationOptions(options));
     }
 
 export const getListCalculationHistoryUrl = () => {

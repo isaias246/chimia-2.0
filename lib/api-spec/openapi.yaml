@@ -441,6 +441,31 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /calculations/stoichiometry:
+    post:
+      operationId: calculateStoichiometry
+      tags: [calculations]
+      summary: Stoichiometry calculation with limiting reagent, theoretical yield, and percent yield
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoichiometryInput"
+      responses:
+        "200":
+          description: Stoichiometry result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoichiometryResult"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /calculations/history:
     get:
       operationId: listCalculationHistory
@@ -893,6 +918,110 @@ components:
           type: string
       required:
         - content
+
+    StoichiometryReagentAmount:
+      type: object
+      properties:
+        formula:
+          type: string
+        amount:
+          type: number
+        unit:
+          type: string
+          enum: [grams, moles]
+      required:
+        - formula
+        - amount
+        - unit
+
+    StoichiometryInput:
+      type: object
+      properties:
+        equation:
+          type: string
+        reactantAmounts:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoichiometryReagentAmount"
+        targetFormula:
+          type: string
+        actualYieldGrams:
+          type: ["number", "null"]
+      required:
+        - equation
+        - reactantAmounts
+        - targetFormula
+
+    StoichiometryReagentDetail:
+      type: object
+      properties:
+        formula:
+          type: string
+        amountGiven:
+          type: number
+        unit:
+          type: string
+        molarMass:
+          type: number
+        molesGiven:
+          type: number
+        coefficient:
+          type: integer
+        molesOfTargetProduced:
+          type: number
+      required:
+        - formula
+        - amountGiven
+        - unit
+        - molarMass
+        - molesGiven
+        - coefficient
+        - molesOfTargetProduced
+
+    StoichiometryResult:
+      type: object
+      properties:
+        balancedEquation:
+          type: string
+        targetFormula:
+          type: string
+        targetMolarMass:
+          type: number
+        theoreticalYieldMoles:
+          type: number
+        theoreticalYieldGrams:
+          type: number
+        limitingReagent:
+          type: string
+        excessReagents:
+          type: array
+          items:
+            type: string
+        actualYieldGrams:
+          type: ["number", "null"]
+        percentYield:
+          type: ["number", "null"]
+        reagentDetails:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoichiometryReagentDetail"
+        steps:
+          type: array
+          items:
+            type: string
+        isLimitingReagentCalculation:
+          type: boolean
+      required:
+        - balancedEquation
+        - targetFormula
+        - targetMolarMass
+        - theoreticalYieldMoles
+        - theoreticalYieldGrams
+        - limitingReagent
+        - excessReagents
+        - reagentDetails
+        - steps
+        - isLimitingReagentCalculation
 
     CalculationRecord:
       type: object

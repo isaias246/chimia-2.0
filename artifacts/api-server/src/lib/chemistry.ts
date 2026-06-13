@@ -267,6 +267,151 @@ export function buildCompound(
   };
 }
 
+export interface StoichiometryReagentAmount {
+  formula: string;
+  amount: number;
+  unit: "grams" | "moles";
+}
+
+export interface StoichiometryReagentDetail {
+  formula: string;
+  amountGiven: number;
+  unit: "grams" | "moles";
+  molarMass: number;
+  molesGiven: number;
+  coefficient: number;
+  molesOfTargetProduced: number;
+}
+
+export interface StoichiometryResult {
+  balancedEquation: string;
+  targetFormula: string;
+  targetMolarMass: number;
+  theoreticalYieldMoles: number;
+  theoreticalYieldGrams: number;
+  limitingReagent: string;
+  excessReagents: string[];
+  actualYieldGrams: number | null;
+  percentYield: number | null;
+  reagentDetails: StoichiometryReagentDetail[];
+  steps: string[];
+  isLimitingReagentCalculation: boolean;
+}
+
+export function calculateStoichiometry(
+  equation: string,
+  reactantAmounts: StoichiometryReagentAmount[],
+  targetFormula: string,
+  actualYieldGrams?: number,
+): StoichiometryResult | null {
+  if (reactantAmounts.length === 0) return null;
+
+  // Balance the equation
+  const balanced = balanceEquation(equation);
+  if (!balanced || !balanced.isBalanced) return null;
+
+  const getMolarMass = (formula: string): number | null => {
+    const result = calculateMolecularMass(formula);
+    return result ? result.molarMass : null;
+  };
+
+  // Find target in products
+  const targetProduct = balanced.products.find(p => p.formula === targetFormula);
+  if (!targetProduct) return null;
+
+  const targetMolarMass = getMolarMass(targetFormula);
+  if (!targetMolarMass) return null;
+
+  const steps: string[] = [];
+  steps.push(`Step 1: Confirm balanced equation — ${balanced.balanced}`);
+
+  // Calculate molar masses step
+  const molarMassLines: string[] = [];
+  for (const ra of reactantAmounts) {
+    const mm = getMolarMass(ra.formula);
+    if (mm) molarMassLines.push(`${ra.formula}: ${mm.toFixed(3)} g/mol`);
+  }
+  molarMassLines.push(`${targetFormula}: ${targetMolarMass.toFixed(3)} g/mol`);
+  steps.push(`Step 2: Look up molar masses — ${molarMassLines.join(', ')}`);
+
+  // Build reagent details
+  const reagentDetails: StoichiometryReagentDetail[] = [];
+  for (const ra of reactantAmounts) {
+    const reactant = balanced.reactants.find(r => r.formula === ra.formula);
+    if (!reactant) continue;
+    const molarMass = getMolarMass(ra.formula);
+    if (!molarMass) continue;
+
+    const molesGiven = ra.unit === "grams" ? ra.amount / molarMass : ra.amount;
+    const molesOfTargetProduced = molesGiven * (targetProduct.coefficient / reactant.coefficient);
+
+    reagentDetails.push({
+      formula: ra.formula,
+      amountGiven: ra.amount,
+      unit: ra.unit,
+      molarMass,
+      molesGiven,
+      coefficient: reactant.coefficient,
+      molesOfTargetProduced,
+    });
+  }
+
+  if (reagentDetails.length === 0) return null;
+
+  // Conversion step
+  const conversionLines = reagentDetails.map(r =>
+    r.unit === "grams"
+      ? `${r.amountGiven} g ${r.formula} ÷ ${r.molarMass.toFixed(3)} g/mol = ${r.molesGiven.toFixed(4)} mol`
+      : `${r.amountGiven} mol ${r.formula} (given directly)`,
+  );
+  steps.push(`Step 3: Convert to moles — ${conversionLines.join('; ')}`);
+
+  // Mole ratio step
+  const ratioLines = reagentDetails.map(r =>
+    `${r.molesGiven.toFixed(4)} mol ${r.formula} × (${targetProduct.coefficient}/${r.coefficient}) = ${r.molesOfTargetProduced.toFixed(4)} mol ${targetFormula}`,
+  );
+  steps.push(`Step 4: Apply mole ratio from balanced equation — ${ratioLines.join('; ')}`);
+
+  // Find limiting reagent
+  const limitingDetail = reagentDetails.reduce((min, r) =>
+    r.molesOfTargetProduced < min.molesOfTargetProduced ? r : min,
+  );
+
+  const limitingReagent = limitingDetail.formula;
+  const theoreticalYieldMoles = limitingDetail.molesOfTargetProduced;
+  const theoreticalYieldGrams = theoreticalYieldMoles * targetMolarMass;
+  const excessReagents = reagentDetails.filter(r => r.formula !== limitingReagent).map(r => r.formula);
+
+  if (reagentDetails.length > 1) {
+    steps.push(`Step 5: Identify limiting reagent — ${limitingReagent} produces the least ${targetFormula} (${theoreticalYieldMoles.toFixed(4)} mol); ${excessReagents.join(', ')} ${excessReagents.length === 1 ? 'is' : 'are'} in excess`);
+  }
+
+  const yieldStep = reagentDetails.length > 1 ? "Step 6" : "Step 5";
+  steps.push(`${yieldStep}: Calculate theoretical yield — ${theoreticalYieldMoles.toFixed(4)} mol × ${targetMolarMass.toFixed(3)} g/mol = ${theoreticalYieldGrams.toFixed(4)} g ${targetFormula}`);
+
+  let percentYield: number | null = null;
+  if (actualYieldGrams !== undefined && actualYieldGrams !== null) {
+    percentYield = (actualYieldGrams / theoreticalYieldGrams) * 100;
+    const percentStep = reagentDetails.length > 1 ? "Step 7" : "Step 6";
+    steps.push(`${percentStep}: Calculate percent yield — (${actualYieldGrams} g actual ÷ ${theoreticalYieldGrams.toFixed(4)} g theoretical) × 100 = ${percentYield.toFixed(2)}%`);
+  }
+
+  return {
+    balancedEquation: balanced.balanced,
+    targetFormula,
+    targetMolarMass,
+    theoreticalYieldMoles,
+    theoreticalYieldGrams,
+    limitingReagent,
+    excessReagents,
+    actualYieldGrams: actualYieldGrams ?? null,
+    percentYield,
+    reagentDetails,
+    steps,
+    isLimitingReagentCalculation: reagentDetails.length > 1,
+  };
+}
+
 function generateCompoundName(name1: string, name2: string, count1: number, count2: number, ox1: number, ox2: number): string {
   const prefixes = ['', 'mono', 'di', 'tri', 'tetra', 'penta', 'hexa', 'hepta', 'octa', 'nona', 'deca'];
   

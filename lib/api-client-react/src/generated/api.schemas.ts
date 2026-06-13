@@ -192,6 +192,55 @@ export interface MessageInput {
   content: string;
 }
 
+export type StoichiometryReagentAmountUnit = typeof StoichiometryReagentAmountUnit[keyof typeof StoichiometryReagentAmountUnit];
+
+
+export const StoichiometryReagentAmountUnit = {
+  grams: 'grams',
+  moles: 'moles',
+} as const;
+
+export interface StoichiometryReagentAmount {
+  formula: string;
+  amount: number;
+  unit: StoichiometryReagentAmountUnit;
+}
+
+export interface StoichiometryInput {
+  equation: string;
+  reactantAmounts: StoichiometryReagentAmount[];
+  targetFormula: string;
+  /** @nullable */
+  actualYieldGrams?: number | null;
+}
+
+export interface StoichiometryReagentDetail {
+  formula: string;
+  amountGiven: number;
+  unit: string;
+  molarMass: number;
+  molesGiven: number;
+  coefficient: number;
+  molesOfTargetProduced: number;
+}
+
+export interface StoichiometryResult {
+  balancedEquation: string;
+  targetFormula: string;
+  targetMolarMass: number;
+  theoreticalYieldMoles: number;
+  theoreticalYieldGrams: number;
+  limitingReagent: string;
+  excessReagents: string[];
+  /** @nullable */
+  actualYieldGrams?: number | null;
+  /** @nullable */
+  percentYield?: number | null;
+  reagentDetails: StoichiometryReagentDetail[];
+  steps: string[];
+  isLimitingReagentCalculation: boolean;
+}
+
 export interface CalculationRecord {
   id: number;
   type: string;
