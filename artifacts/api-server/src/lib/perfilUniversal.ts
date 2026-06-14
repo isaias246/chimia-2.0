@@ -664,6 +664,1155 @@ const PERFILES: Record<string, PerfilBase> = {
     },
   },
 
+  // ── NaOH ─────────────────────────────────────────────────────────────────
+  "NaOH": {
+    formula: "NaOH", formulaDisplay: "NaOH",
+    nombre: "Hidróxido de Sodio", familia: "Hidróxido metálico (base fuerte)", color: "blue", masaMolar: 39.997,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Hidróxido sódico",
+      stock: "Hidróxido de sodio",
+      sistematica: "Hidróxido de sodio",
+      tipo: "Hidróxido metálico (base de Arrhenius fuerte)",
+      nota: "Nombres triviales: 'sosa cáustica' o 'lejía sólida'. Na tiene estado de oxidación +1 (no requiere número romano). Es una de las bases más importantes en la industria química.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: Na⁺ + OH⁻. Na cede 1 e⁻ (IE₁ = 496 kJ/mol), quedando con configuración del Ne. OH⁻ tiene 1 enlace covalente O–H y 3 pares libres en O. La carga formal del O en OH⁻ es −1.",
+      esIonico: true, electronosValenciaTotal: 8,
+      notaResonancia: "Estructura cristalina de NaOH: capas con Na⁺ coordinado por 6 O y los grupos OH⁻ orientados perpendicularmente a las capas.",
+    },
+    vsepr: {
+      descripcion: "Compuesto iónico: Na⁺ y OH⁻ forman una red cristalina ortorrómbica. El ión OH⁻ aislado tiene geometría lineal (AX₁E₃ en O). VSEPR molecular no aplica al sólido iónico.",
+      esIonico: true, notacionAXE: "N/A (iónico) / OH⁻: AX₁E₃",
+      geometriaMolecular: "Red cristalina ortorrómbica",
+      hibridacion: "sp³ (O en OH⁻)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (Na–O) / Covalente polar (O–H)",
+      diferenciaEN: 2.51, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(Na–O) = 3.44 − 0.93 = 2.51 → enlace iónico puro. Na transfiere completamente 1 e⁻ al grupo OH⁻. El enlace O–H interno del OH⁻ es covalente polar (ΔEN = 1.24).",
+    },
+    formacion: {
+      proceso: "Electrólisis de salmuera (proceso cloroálcali): oxidación del Cl⁻ en el ánodo, reducción del H₂O en el cátodo, Na⁺ migra y se combina con OH⁻.",
+      ecuacion: "2 NaCl(aq) + 2 H₂O(l) → 2 NaOH(aq) + Cl₂(g) + H₂(g)  (electrólisis)",
+      tipoEnlaceFormado: "Iónico (Na⁺ + OH⁻)",
+      estadosOxidacion: { "Na": "+1", "O": "−2", "H": "+1" },
+      entalpiaFormacion: "−425.8 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Neutralización con ácido fuerte", ecuacion: "NaOH(aq) + HCl(aq) → NaCl(aq) + H₂O(l)  ΔH = −57.3 kJ/mol", tipo: "neutralización", descripcion: "Base fuerte + ácido fuerte → sal neutra. Reacción cuantitativa usada en titulaciones. La solución resultante tiene pH = 7." },
+      { nombre: "Saponificación", ecuacion: "RCOO–C₃H₇ + 3 NaOH → RCOONa + C₃H₇(OH)  (calor)", tipo: "síntesis", descripcion: "Hidrólisis básica de triglicéridos para producir jabón (sal sódica de ácido graso) y glicerol. Base de la industria del jabón." },
+      { nombre: "Reacción con CO₂", ecuacion: "2 NaOH(aq) + CO₂(g) → Na₂CO₃(aq) + H₂O(l)", tipo: "ácido-base", descripcion: "Absorbe CO₂ del aire formando carbonato sódico. Por eso el NaOH sólido se 'carbonata' en contacto con el aire." },
+      { nombre: "Reacción con Al (anfotérico)", ecuacion: "2 Al(s) + 2 NaOH(aq) + 2 H₂O(l) → 2 NaAlO₂(aq) + 3 H₂(g)↑", tipo: "redox", descripcion: "El Al es anfotérico: reacciona tanto con ácidos como con bases fuertes. Produce aluminato sódico e H₂ gaseoso." },
+    ],
+    educacion: {
+      teoriaResumida: "NaOH es una base de Arrhenius fuerte: se disocia completamente en agua → Na⁺ + OH⁻. pH de 1M NaOH = 14. Es corrosivo: hidroliza proteínas y lípidos (grasa de la piel). Se produce mundialmente ∼70 Mt/año por el proceso cloroálcali. Su gran utilidad en la industria química hace que se lo conozca como la 'reina de las bases'.",
+      erroresComunes: [
+        "Confundir NaOH (base fuerte) con NH₃ (base débil) — NaOH se disocia completamente.",
+        "Olvidar que NaOH(s) absorbe humedad (higroscópico) y CO₂ del aire — almacenar sellado.",
+        "Calcular mal la concentración: NaOH sólido tiene masa molar 40 g/mol (no 39 ni 41).",
+        "Creer que la solución de NaOH es neutra — pH de 1M NaOH = 14, altamente básico.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el NaOH se llama 'sosa cáustica'?", "¿Qué le ocurre a una grasa en contacto con NaOH?", "¿El NaOH se ioniza completa o parcialmente en agua?"],
+      ejerciciosSecundario: ["Calcula el pH de NaOH 0.050 M.", "Determina el volumen de NaOH 0.10 M necesario para neutralizar 25 mL de H₂SO₄ 0.10 M.", "Escribe la ecuación de saponificación de la estearina (triestearato de glicerilo) con NaOH."],
+      ejerciciosUniversitario: ["Calcula el ΔH de disolución de NaOH en agua usando las entalpías de hidratación de Na⁺ y OH⁻.", "Diseña una titulación potenciométrica para determinar la concentración de NaOH con HCl patrón.", "Explica por qué la lejía (NaOH + NaClO) es un limpiador eficaz usando la teoría ácido-base de Lewis."],
+    },
+  },
+
+  // ── KOH ──────────────────────────────────────────────────────────────────
+  "KOH": {
+    formula: "KOH", formulaDisplay: "KOH",
+    nombre: "Hidróxido de Potasio", familia: "Hidróxido metálico (base fuerte)", color: "violet", masaMolar: 56.105,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Hidróxido potásico",
+      stock: "Hidróxido de potasio",
+      sistematica: "Hidróxido de potasio",
+      tipo: "Hidróxido metálico (base de Arrhenius fuerte)",
+      nota: "Nombre trivial: 'potasa cáustica'. K tiene estado de oxidación +1 (no requiere número romano). Muy similar al NaOH pero con mayor solubilidad en alcoholes.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: K⁺ + OH⁻. K cede 1 e⁻ (IE₁ = 419 kJ/mol, menor que Na), quedando con configuración del Ar. OH⁻ tiene 1 enlace covalente O–H y 3 pares libres en O.",
+      esIonico: true, electronosValenciaTotal: 8,
+      notaResonancia: "KOH cristaliza en estructura tipo NaCl (cúbica). Radio iónico de K⁺ (138 pm) es mayor que Na⁺ (102 pm), lo que le da mayor solubilidad.",
+    },
+    vsepr: {
+      descripcion: "Compuesto iónico con red cristalina cúbica tipo NaCl. El ión OH⁻ aislado tiene geometría lineal. VSEPR no aplica al sólido. A alta temperatura forma gas diatómico KOH con geometría angular.",
+      esIonico: true, notacionAXE: "N/A (iónico)",
+      geometriaMolecular: "Red cristalina cúbica (tipo NaCl)",
+      hibridacion: "sp³ (O en OH⁻)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (K–O) / Covalente polar (O–H)",
+      diferenciaEN: 2.62, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(K–O) = 3.44 − 0.82 = 2.62 → enlace fuertemente iónico. K es uno de los metales más electropositivos. El OH⁻ interno tiene enlace O–H covalente polar (ΔEN = 1.24).",
+    },
+    formacion: {
+      proceso: "Electrólisis de solución de KCl (proceso cloroálcali con cloruro de potasio). También por reacción de K₂O con agua o K metálico con agua.",
+      ecuacion: "2 KCl(aq) + 2 H₂O(l) → 2 KOH(aq) + Cl₂(g) + H₂(g)  (electrólisis)",
+      tipoEnlaceFormado: "Iónico (K⁺ + OH⁻)",
+      estadosOxidacion: { "K": "+1", "O": "−2", "H": "+1" },
+      entalpiaFormacion: "−424.8 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Neutralización con HNO₃", ecuacion: "KOH(aq) + HNO₃(aq) → KNO₃(aq) + H₂O(l)", tipo: "neutralización", descripcion: "Produce nitrato de potasio (salitre), componente de fertilizantes y pólvora negra." },
+      { nombre: "Reacción con CO₂", ecuacion: "2 KOH(aq) + CO₂(g) → K₂CO₃(aq) + H₂O(l)", tipo: "ácido-base", descripcion: "Forma carbonato de potasio (K₂CO₃). El KOH es un absorbente eficaz de CO₂ en laboratorio." },
+      { nombre: "Saponificación en jabones de potasio", ecuacion: "RCOO–C₃H₇ + 3 KOH → RCOOK + C₃H₇(OH)  (calor)", tipo: "síntesis", descripcion: "El KOH produce jabones blandos (jabones de potasio) más solubles en agua que los de sodio. Usados en jabones líquidos." },
+    ],
+    educacion: {
+      teoriaResumida: "KOH es una base fuerte muy similar al NaOH. Se prefiere en aplicaciones donde se necesita una base soluble en alcoholes (saponificación, electrólitos alcalinos). Las baterías alcalinas usan KOH como electrolito porque su conductividad iónica es mayor que la de NaOH a igual concentración, gracias al mayor radio y mobilidad del K⁺.",
+      erroresComunes: [
+        "Confundir KOH (base fuerte) con K₂CO₃ (base moderada) — son diferentes productos.",
+        "Olvidar que K metálico reacciona explosivamente con agua: 2K + 2H₂O → 2KOH + H₂.",
+        "Creer que KOH y NaOH son intercambiables en todos los usos — KOH es preferible en baterías y jabones líquidos.",
+        "Confundir potasio (K) con sodio (Na) en las fórmulas — son metales alcalinos del grupo 1 pero con propiedades distintas.",
+      ],
+      ejerciciosPrincipiante: ["¿En qué se parece el KOH al NaOH?", "¿Por qué las baterías alcalinas usan KOH?", "¿Qué diferencia hay entre el jabón de sodio y el de potasio?"],
+      ejerciciosSecundario: ["Calcula el pH de KOH 0.020 M.", "¿Cuántos gramos de KOH se necesitan para preparar 500 mL de solución 0.10 M?", "Escribe la ecuación de la reacción de K metálico con agua."],
+      ejerciciosUniversitario: ["Compara la movilidad iónica de K⁺ y Na⁺ en solución acuosa y explica por qué KOH es preferido como electrolito.", "Calcula el ΔH de neutralización de KOH con HCl y compara con NaOH + HCl.", "Diseña un experimento para determinar la pureza de una muestra de KOH comercial por titulación."],
+    },
+  },
+
+  // ── Mg(OH)₂ ──────────────────────────────────────────────────────────────
+  "Mg(OH)2": {
+    formula: "Mg(OH)2", formulaDisplay: "Mg(OH)₂",
+    nombre: "Hidróxido de Magnesio", familia: "Hidróxido metálico (base débil por insolubilidad)", color: "emerald", masaMolar: 58.320,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Hidróxido magnésico",
+      stock: "Hidróxido de magnesio(II)",
+      sistematica: "Dihidróxido de magnesio",
+      tipo: "Hidróxido metálico dibásico (base de Arrhenius poco soluble)",
+      nota: "Nombre trivial: 'leche de magnesia' (suspensión en agua). Mg tiene estado de oxidación +2. Actúa como base débil por su muy baja solubilidad (Ksp = 5.61×10⁻¹²), no por ionización parcial.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: Mg²⁺ + 2 OH⁻. Mg cede 2 e⁻, quedando con configuración del Ne. Cada OH⁻ tiene enlace covalente O–H y 3 pares libres en O.",
+      esIonico: true, electronosValenciaTotal: 8,
+      notaResonancia: "Estructura cristalina de brucita (tipo Ca(OH)₂): capas de Mg²⁺ coordinados octaédricamente por 6 O de los grupos OH⁻.",
+    },
+    vsepr: {
+      descripcion: "Compuesto iónico con estructura de brucita (hexagonal, P3̄m1). Mg²⁺ con coordinación octaédrica (6 OH⁻). Los grupos OH⁻ apuntan perpendiculares a las capas. VSEPR no aplica al sólido.",
+      esIonico: true, notacionAXE: "N/A (iónico)",
+      geometriaMolecular: "Red cristalina hexagonal (brucita)",
+      hibridacion: "N/A",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (Mg–O) / Covalente polar (O–H)",
+      diferenciaEN: 2.44, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(Mg–O) = 3.44 − 1.31 = 2.13 → enlace iónico. Mg²⁺ (carga +2, radio pequeño: 72 pm) tiene alto poder polarizante pero la diferencia de EN sigue siendo suficiente para clasificarlo como iónico.",
+    },
+    formacion: {
+      proceso: "Reacción del óxido de magnesio con agua. También precipita al añadir una base a una solución de sal de Mg²⁺.",
+      ecuacion: "MgO(s) + H₂O(l) → Mg(OH)₂(s)  ΔH = −37 kJ/mol",
+      tipoEnlaceFormado: "Iónico (Mg²⁺ + OH⁻)",
+      estadosOxidacion: { "Mg": "+2", "O": "−2", "H": "+1" },
+      entalpiaFormacion: "−924.5 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Disolución / ionización", ecuacion: "Mg(OH)₂(s) ⇌ Mg²⁺(aq) + 2 OH⁻(aq)  Ksp = 5.61×10⁻¹²", tipo: "ácido-base", descripcion: "Muy poco soluble: solo ∼9 mg/L se disuelven a 25°C. pH de la solución saturada ≈ 10.5. Actúa como base tamponante." },
+      { nombre: "Neutralización con HCl", ecuacion: "Mg(OH)₂(s) + 2 HCl(aq) → MgCl₂(aq) + 2 H₂O(l)", tipo: "neutralización", descripcion: "Neutralización completa con ácido fuerte. Base de los antiácidos estomacales (leche de magnesia): neutraliza el HCl gástrico sin sobrecarga de Na⁺." },
+      { nombre: "Descomposición térmica", ecuacion: "Mg(OH)₂(s) → MgO(s) + H₂O(g)  (>350°C)", tipo: "descomposición", descripcion: "Deshidratación térmica. El MgO obtenido absorbe calor (ignifugante): usado como retardante de llamas en materiales de construcción." },
+    ],
+    educacion: {
+      teoriaResumida: "Mg(OH)₂ es el componente activo de la 'leche de magnesia' (antiácido). Actúa como base débil por ser poco soluble, no porque se ionice parcialmente como el NH₃. Su baja toxicidad, mecanismo tamponante (no eleva el pH gástrico excesivamente) y efecto laxante suave lo hacen ideal como antiácido. El MgO se usa industrialmente como refractario (p.f. >2800°C).",
+      erroresComunes: [
+        "Confundir la 'debilidad' de Mg(OH)₂ (baja solubilidad) con la de NH₃ (ionización parcial) — mecanismos diferentes.",
+        "Creer que Mg(OH)₂ y Ca(OH)₂ son igualmente solubles — Ca(OH)₂ es ∼100× más soluble.",
+        "Olvidar que Mg(OH)₂ es dibásico — consume 2 moles de ácido por mol de base.",
+        "Confundir Mg(OH)₂ (blanco, insoluble) con MgCl₂ (sal soluble, usada como coagulante).",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué la leche de magnesia ayuda con la acidez?", "¿Mg(OH)₂ es base fuerte o débil?", "¿Qué gas se libera al calentar fuertemente Mg(OH)₂?"],
+      ejerciciosSecundario: ["Calcula el pH de la solución saturada de Mg(OH)₂ (Ksp = 5.61×10⁻¹²).", "¿Cuántos mL de HCl 0.10 M neutraliza 1.00 g de Mg(OH)₂?", "Compara la solubilidad de Mg(OH)₂ y Ca(OH)₂ usando sus respectivos Ksp."],
+      ejerciciosUniversitario: ["Calcula la solubilidad de Mg(OH)₂ a pH = 8 (solución amortiguada) y compárala con la del agua pura.", "Explica por qué el Mg(OH)₂ es un buen retardante de llamas usando datos termodinámicos.", "Calcula la concentración de Mg²⁺ en una solución de NaOH 0.010 M (efecto del ion común)."],
+    },
+  },
+
+  // ── H₃PO₄ ────────────────────────────────────────────────────────────────
+  "H3PO4": {
+    formula: "H3PO4", formulaDisplay: "H₃PO₄",
+    nombre: "Ácido Fosfórico", familia: "Oxoácido (ácido ternario triprótido)", color: "red", masaMolar: 97.994,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Ácido fosfórico",
+      stock: "Tetraoxofosfato(V) de trihidrógeno",
+      sistematica: "Ácido tetraoxofosfórico(V)",
+      tipo: "Oxoácido triprótido de P en estado +5",
+      nota: "P en estado +5 (máximo). El ácido fosfórico es el H₃PO₄; el 'metafosfórico' es HPO₃ (P también en +5). El 'ácido fosfónico' H₃PO₃ tiene P en +3.",
+    },
+    lewis: {
+      descripcion: "P central con 5 e⁻ de valencia. Forma 1 doble enlace P=O y 3 enlaces P–OH. Sin pares libres en P (puede expandir el octeto con orbitales 3d). Total: 32 e⁻ de valencia.",
+      esIonico: false, electronosValenciaTotal: 32,
+      atomoCentral: "P", paresLibresCentral: 0, enlacesSimples: 3, enlacesDobles: 1, enlacesTriples: 0,
+      notaResonancia: "En el ión fosfato PO₄³⁻, los 4 enlaces P–O son equivalentes (resonancia). En H₃PO₄, el enlace P=O es más corto (1.50 Å) que los P–OH (1.57 Å).",
+    },
+    vsepr: {
+      descripcion: "P central con 4 grupos de electrones (1 P=O + 3 P–OH), sin pares libres → geometría tetraédrica. Similar al H₂SO₄ pero con un grupo –OH más y el átomo central es P.",
+      esIonico: false, notacionAXE: "AX₄",
+      geometriaElectronica: "Tetraédrica", geometriaMolecular: "Tetraédrica (entorno del P)",
+      anguloEnlace: "≈109.5° (O=P–O: 115.8°; HO–P–OH: 102.0°)", hibridacion: "sp³",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 1.24, momentoDipolar: "≈2.7 D",
+      explicacion: "ΔEN(O–H) = 1.24; ΔEN(P–O) = 3.44 − 2.19 = 1.25. Múltiples grupos polares sin cancelación simétrica → μ ≈ 2.7 D. La molécula es muy polar y miscible con agua en todas proporciones.",
+    },
+    formacion: {
+      proceso: "Industrial: reacción de P₄O₁₀ con agua (proceso seco) o ataque de roca fosfórica (Ca₃(PO₄)₂) con H₂SO₄ (proceso húmedo, ∼90% de la producción mundial).",
+      ecuacion: "P₄O₁₀(s) + 6 H₂O(l) → 4 H₃PO₄(l)  ΔH = −178 kJ/mol",
+      tipoEnlaceFormado: "Covalente polar (P–O, P=O, O–H)",
+      estadosOxidacion: { "H": "+1", "P": "+5", "O": "−2" },
+      entalpiaFormacion: "−1284.4 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Primera ionización (ácido débil)", ecuacion: "H₃PO₄(aq) ⇌ H⁺ + H₂PO₄⁻  pKa₁ = 2.15", tipo: "ácido-base", descripcion: "Primera ionización moderada. H₃PO₄ es un ácido débil en la primera ionización (a diferencia de H₂SO₄). Predomina en soluciones muy ácidas." },
+      { nombre: "Segunda y tercera ionización", ecuacion: "H₂PO₄⁻ ⇌ H⁺ + HPO₄²⁻  pKa₂ = 7.20\nHPO₄²⁻ ⇌ H⁺ + PO₄³⁻  pKa₃ = 12.35", tipo: "ácido-base", descripcion: "Los tres pKa permiten tampones en rangos muy diferentes. Los fosfatos son tamponantes fisiológicos esenciales (sangre: tampón H₂PO₄⁻/HPO₄²⁻ en pH 7.4)." },
+      { nombre: "Neutralización total con Ca(OH)₂", ecuacion: "2 H₃PO₄ + 3 Ca(OH)₂ → Ca₃(PO₄)₂↓ + 6 H₂O", tipo: "neutralización", descripcion: "Produce fosfato de calcio insoluble, componente principal del esmalte dental y los huesos." },
+      { nombre: "Reacción con NaOH (selectiva)", ecuacion: "H₃PO₄ + NaOH → NaH₂PO₄ + H₂O  (1:1)\nH₃PO₄ + 2 NaOH → Na₂HPO₄ + 2 H₂O  (1:2)", tipo: "neutralización", descripcion: "Según la relación molar base/ácido, se obtienen fosfato monosódico, disódico o trisódico — aditivos alimentarios." },
+    ],
+    educacion: {
+      teoriaResumida: "H₃PO₄ es el ácido más importante del fósforo. Se produce a razón de ∼45 Mt/año (principalmente para fertilizantes: superfosfato triple). Los tres pKa (2.15, 7.20, 12.35) lo hacen el tampón fisiológico más versátil. El fósforo es esencial para ADN, ARN, ATP y los huesos (como Ca₃(PO₄)₂ e hidroxiapatita).",
+      erroresComunes: [
+        "Creer que H₃PO₄ es ácido fuerte — es ácido débil (pKa₁ = 2.15); el H₂SO₄ tiene la primera ionización completa.",
+        "Confundir los tres estados de protonación: H₃PO₄ (ácido), H₂PO₄⁻ (anfótero), HPO₄²⁻ (anfótero), PO₄³⁻ (base).",
+        "Escribir el estado de oxidación del P como +3 — en H₃PO₄ el P tiene +5.",
+        "Olvidar que los fosfatos son los tamponantes sanguíneos y celulares más importantes.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué los refrescos de cola contienen ácido fosfórico?", "¿Para qué sirven los fosfatos en los fertilizantes?", "¿Cuántos H ácidos tiene el H₃PO₄?"],
+      ejerciciosSecundario: ["Calcula el pH de H₃PO₄ 0.10 M (pKa₁ = 2.15, considera solo la primera ionización).", "Dibuja la estructura de Lewis del H₃PO₄ e indica los estados de oxidación.", "¿Qué sale de mezclar H₃PO₄ con exceso de Ca(OH)₂? Escribe la ecuación ajustada."],
+      ejerciciosUniversitario: ["Calcula el pH de una solución 0.10 M de Na₂HPO₄ (pKa₂ = 7.20, pKa₃ = 12.35).", "Diseña un tampón fosfato de pH 7.20 con [H₂PO₄⁻] = [HPO₄²⁻] = 0.050 M.", "Explica por qué pKa₂ de H₃PO₄ (7.20) es ideal para tampones fisiológicos."],
+    },
+  },
+
+  // ── H₂CO₃ ────────────────────────────────────────────────────────────────
+  "H2CO3": {
+    formula: "H2CO3", formulaDisplay: "H₂CO₃",
+    nombre: "Ácido Carbónico", familia: "Oxoácido (ácido ternario diprótido, inestable)", color: "gray", masaMolar: 62.024,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Ácido carbónico",
+      stock: "Trioxocarbonato(IV) de dihidrógeno",
+      sistematica: "Ácido trioxocarbónico(IV)",
+      tipo: "Oxoácido diprótido de C en estado +4 (muy inestable en solución)",
+      nota: "El H₂CO₃ 'verdadero' existe en pequeñísima proporción (< 0.3%) en agua carbonatada. La mayoría del 'ácido carbónico' es en realidad CO₂ disuelto. El pKa₁ aparente = 6.35 refleja [CO₂(aq)] + [H₂CO₃]; el pKa del H₂CO₃ puro ≈ 3.5.",
+    },
+    lewis: {
+      descripcion: "C central (sp²) con 2 grupos C=O y 2 grupos C–OH. Geometría plana trigonal similar al CO₂ pero con 2 grupos –OH en lugar de un segundo =O. Total: 24 e⁻ de valencia.",
+      esIonico: false, electronosValenciaTotal: 24,
+      atomoCentral: "C", paresLibresCentral: 0, enlacesSimples: 2, enlacesDobles: 2, enlacesTriples: 0,
+      notaResonancia: "El ión carbonato CO₃²⁻ presenta resonancia perfecta (D₃h): 3 enlaces C–O equivalentes (longitud ≈ 1.29 Å). El anión es más estable que el ácido, lo que favorece la ionización.",
+    },
+    vsepr: {
+      descripcion: "C central con 3 grupos de electrones (2 C–OH + 1 C=O) → geometría plana trigonal (≈120°). La molécula es plana. En solución, se descompone rápidamente a CO₂ + H₂O.",
+      esIonico: false, notacionAXE: "AX₃",
+      geometriaElectronica: "Trigonal plana", geometriaMolecular: "Trigonal plana",
+      anguloEnlace: "≈120°", hibridacion: "sp²",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 1.24, momentoDipolar: "≈2.1 D",
+      explicacion: "ΔEN(O–H) = 1.24; ΔEN(C=O) = 0.89. Geometría plana no simétrica → momento dipolar neto ≈ 2.1 D. La molécula es polar pero extremadamente inestable en solución.",
+    },
+    formacion: {
+      proceso: "Disolución de CO₂ en agua, seguida de hidratación (reacción lenta). Solo una fracción muy pequeña del CO₂(aq) se convierte en H₂CO₃ verdadero.",
+      ecuacion: "CO₂(g) + H₂O(l) ⇌ H₂CO₃(aq)  K = 1.7×10⁻³ (a 25°C)",
+      tipoEnlaceFormado: "Covalente polar (C–O, O–H)",
+      estadosOxidacion: { "H": "+1", "C": "+4", "O": "−2" },
+      entalpiaFormacion: "−699.65 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Descomposición (reacción dominante)", ecuacion: "H₂CO₃(aq) → CO₂(g) + H₂O(l)  (muy rápido)", tipo: "descomposición", descripcion: "El H₂CO₃ es muy inestable: se descompone en microsegundos. Al abrir una bebida carbonatada, el CO₂ escapa por esta reacción." },
+      { nombre: "Primera ionización (aparente)", ecuacion: "CO₂(aq) + H₂O ⇌ H⁺(aq) + HCO₃⁻(aq)  pKa₁(aparente) = 6.35", tipo: "ácido-base", descripcion: "El pKa₁ aparente incluye [CO₂(aq)] + [H₂CO₃]. Responsable de la acidez del agua de lluvia (pH ≈ 5.6) y del efecto tampón del bicarbonato en la sangre." },
+      { nombre: "Segunda ionización", ecuacion: "HCO₃⁻(aq) ⇌ H⁺(aq) + CO₃²⁻(aq)  pKa₂ = 10.33", tipo: "ácido-base", descripcion: "El HCO₃⁻ (bicarbonato) puede ionizarse más. En condiciones normales de pH sanguíneo (7.4), domina el HCO₃⁻." },
+      { nombre: "Neutralización con NaOH", ecuacion: "H₂CO₃ + 2 NaOH → Na₂CO₃ + 2 H₂O", tipo: "neutralización", descripcion: "Neutralización completa produce carbonato sódico (sosa). Parcial (1 mol NaOH) produce bicarbonato sódico (bicarbonato de sodio)." },
+    ],
+    educacion: {
+      teoriaResumida: "H₂CO₃ es el ácido del CO₂ en agua y el motor del tampón bicarbonato (H₂CO₃/HCO₃⁻), responsable de mantener el pH sanguíneo en 7.4. El sistema respiratorio lo regula variando la presión de CO₂ (ecuación de Henderson-Hasselbalch). El pKa aparente de 6.35 (no 3.5 del H₂CO₃ puro) refleja que la mayor parte del 'ácido' es CO₂(aq) disuelto.",
+      erroresComunes: [
+        "Confundir el pKa aparente (6.35, incluye CO₂ disuelto) con el pKa del H₂CO₃ puro (≈3.5).",
+        "Creer que el agua de lluvia es neutra — contiene CO₂ disuelto (pH ≈ 5.6) incluso sin contaminación.",
+        "Confundir carbonato (CO₃²⁻) con bicarbonato (HCO₃⁻) — son aniones diferentes del mismo ácido.",
+        "Pensar que el bicarbonato de sodio es ácido — en solución es ligeramente básico (pH ≈ 8.3).",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué las bebidas carbonatadas son ácidas?", "¿Qué le ocurre al bicarbonato de sodio en el estómago?", "¿Qué es la lluvia ácida 'natural'?"],
+      ejerciciosSecundario: ["Calcula el pH del agua en equilibrio con CO₂ atmosférico ([CO₂] = 1.2×10⁻⁵ M, pKa₁ = 6.35).", "Escribe las ecuaciones de las dos ionizaciones del H₂CO₃ e indica los pKa.", "¿Cuántos mL de HCl 0.10 M reaccionan con 5.0 g de Na₂CO₃?"],
+      ejerciciosUniversitario: ["Usando la ecuación de Henderson-Hasselbalch, calcula la relación HCO₃⁻/CO₂(aq) en la sangre (pH = 7.40, pKa₁ = 6.35).", "Explica el mecanismo de compensación respiratoria de la acidosis metabólica.", "Calcula el pH de Na₂CO₃ 0.10 M (pKa₂ = 10.33)."],
+    },
+  },
+
+  // ── H₂S ──────────────────────────────────────────────────────────────────
+  "H2S": {
+    formula: "H2S", formulaDisplay: "H₂S",
+    nombre: "Sulfuro de Hidrógeno", familia: "Hidrácido (ácido binario)", color: "gray", masaMolar: 34.082,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Ácido sulfhídrico (en solución acuosa)",
+      stock: "Sulfuro de hidrógeno (gas puro)",
+      sistematica: "Sulfuro de dihidrógeno",
+      tipo: "Hidrácido (análogo al H₂O pero con S en lugar de O)",
+      nota: "Similar nomenclatura al HCl: gas = sulfuro de hidrógeno; solución acuosa = ácido sulfhídrico. Es el análogo con azufre del agua, pero con muy diferentes propiedades (ángulo 92.1° vs 104.5° del H₂O).",
+    },
+    lewis: {
+      descripcion: "S central con 6 e⁻ de valencia. Forma 2 enlaces simples S–H (4 e⁻). Los 8 e⁻ restantes forman 2 pares libres en S. Análogo al H₂O pero S (radio mayor, EN = 2.58) forma enlaces S–H más débiles y largos.",
+      esIonico: false, electronosValenciaTotal: 8,
+      atomoCentral: "S", paresLibresCentral: 2, enlacesSimples: 2, enlacesDobles: 0, enlacesTriples: 0,
+    },
+    vsepr: {
+      descripcion: "Análogo al H₂O: 2 pares enlazantes + 2 pares libres en S → geometría electrónica tetraédrica → geometría molecular angular. Pero el ángulo H–S–H = 92.1° (< 104.5° del H₂O) porque los orbitales 3p del S son más grandes y los pares libres comprimen menos el ángulo.",
+      esIonico: false, notacionAXE: "AX₂E₂",
+      geometriaElectronica: "Tetraédrica", geometriaMolecular: "Angular (doblada)",
+      anguloEnlace: "92.1°", hibridacion: "sp³ (con mayor carácter p que H₂O)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 0.38, momentoDipolar: "0.97 D",
+      explicacion: "ΔEN(S–H) = 2.58 − 2.20 = 0.38 (mucho menor que O–H: 1.24). Geometría angular → momento dipolar neto de 0.97 D (mucho menor que H₂O: 1.85 D). H₂S es polar pero mucho menos que H₂O.",
+    },
+    formacion: {
+      proceso: "Natural: descomposición anaerobia de proteínas con azufre (huevos podridos, volcanes, fuentes hidrotermales). Industrial: subproducto del refinado del petróleo (eliminación de azufre por hidrodesulfuración).",
+      ecuacion: "H₂(g) + S(s) → H₂S(g)  ΔHf° = −20.6 kJ/mol",
+      tipoEnlaceFormado: "Covalente polar (S–H)",
+      estadosOxidacion: { "H": "+1", "S": "−2" },
+      entalpiaFormacion: "−20.6 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Ionización en agua (ácido débil)", ecuacion: "H₂S(aq) ⇌ H⁺ + HS⁻  pKa₁ = 7.0\nHS⁻ ⇌ H⁺ + S²⁻  pKa₂ = 17", tipo: "ácido-base", descripcion: "Ácido diprótido débil. El pKa₁ = 7.0 lo hace útil en análisis gravimétrico para precipitar sulfuros metálicos selectivamente." },
+      { nombre: "Combustión completa", ecuacion: "2 H₂S(g) + 3 O₂(g) → 2 SO₂(g) + 2 H₂O(g)  ΔH = −1124 kJ", tipo: "combustión", descripcion: "Arde con llama azul. En la industria del petróleo, el H₂S se quema en antorchas o se convierte en azufre elemental (proceso Claus)." },
+      { nombre: "Precipitación de sulfuros metálicos", ecuacion: "Pb²⁺(aq) + H₂S(aq) → PbS(s)↓ + 2 H⁺(aq)  (negro)", tipo: "síntesis", descripcion: "El H₂S precipita selectivamente sulfuros metálicos según su Ksp. Usado en análisis cualitativo clásico (Grupo II de cationes)." },
+    ],
+    educacion: {
+      teoriaResumida: "H₂S es el análogo con azufre del agua, pero con propiedades muy diferentes: ángulo más pequeño (92.1°), menor polaridad (μ = 0.97 D vs 1.85 D), menor punto de ebullición (−60°C vs 100°C) — sin puentes H fuertes. Es un gas tóxico (umbral olfativo: 0.005 ppm; mortal >700 ppm). Paradójicamente, el cuerpo humano lo produce en pequeñas cantidades como molécula señalizadora.",
+      erroresComunes: [
+        "Creer que H₂S tiene el mismo ángulo de enlace que H₂O — 92.1° vs 104.5° (diferencia por el tamaño del S).",
+        "Confundir H₂S (gas, ácido débil, tóxico) con H₂SO₄ (líquido, ácido fuerte, corrosivo).",
+        "Pensar que H₂S huele a azufre — el azufre elemental es inodoro; el olor a 'huevo podrido' es del H₂S.",
+        "Olvidar que H₂S es diprótido: tiene dos pKa (7.0 y 17), no uno solo.",
+      ],
+      ejerciciosPrincipiante: ["¿A qué huele el H₂S?", "¿Por qué H₂S es más peligroso que CO₂?", "¿Por qué el H₂O hierve a 100°C y el H₂S a −60°C?"],
+      ejerciciosSecundario: ["Compara los ángulos de enlace de H₂O (104.5°) y H₂S (92.1°) y justifica la diferencia.", "Calcula el pH de H₂S 0.10 M (pKa₁ = 7.0).", "¿Qué sulfuro precipita primero, CuS (Ksp = 10⁻³⁶) o FeS (Ksp = 10⁻¹⁸), al burbujear H₂S en una solución mixta?"],
+      ejerciciosUniversitario: ["Explica usando orbitales moleculares por qué el ángulo H–S–H es casi 90° (casi puro p para los enlaces S–H).", "Calcula [S²⁻] en H₂S 0.10 M a pH = 9 (pKa₁=7.0, pKa₂=17).", "En el proceso Claus, 2 H₂S + SO₂ → 3 S + 2 H₂O. Calcula ΔH° usando ΔHf°."],
+    },
+  },
+
+  // ── HF ───────────────────────────────────────────────────────────────────
+  "HF": {
+    formula: "HF", formulaDisplay: "HF",
+    nombre: "Fluoruro de Hidrógeno / Ácido Fluorhídrico", familia: "Hidrácido (ácido débil por paradoja del F)", color: "green", masaMolar: 20.006,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Ácido fluorhídrico (en solución acuosa)",
+      stock: "Fluoruro de hidrógeno (gas puro)",
+      sistematica: "Fluoruro de hidrógeno",
+      tipo: "Hidrácido (análogo al HCl pero con F; es el único hidrácido débil de los halogenuros)",
+      nota: "Paradoja del HF: aunque F es el elemento más electronegativo (EN = 3.98), HF es un ÁCIDO DÉBIL (pKa = 3.17). El enlace H–F es muy fuerte (BDE = 568 kJ/mol vs 432 kJ/mol en H–Cl), lo que dificulta la ionización.",
+    },
+    lewis: {
+      descripcion: "F es el átomo pesado (único átomo no-H). 7 e⁻ de valencia de F + 1 de H = 8 e⁻. 1 enlace simple H–F usa 2 e⁻; los 6 e⁻ restantes forman 3 pares libres en F. Igual estructura que HCl pero F más electronegativo.",
+      esIonico: false, electronosValenciaTotal: 8,
+      atomoCentral: "F", paresLibresCentral: 3, enlacesSimples: 1, enlacesDobles: 0, enlacesTriples: 0,
+    },
+    vsepr: {
+      descripcion: "Molécula diatómica lineal. El entorno de F es AX₁E₃ (como HCl). La longitud de enlace H–F (91.7 pm) es la más corta de todos los halogenuros de hidrógeno, reflejo del radio atómico pequeño del F.",
+      esIonico: false, notacionAXE: "AX₁E₃ (en F)",
+      geometriaElectronica: "Tetraédrica (entorno de F)", geometriaMolecular: "Lineal (diatómica)",
+      anguloEnlace: "N/A", hibridacion: "sp³ (F)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 1.78, momentoDipolar: "1.91 D",
+      explicacion: "ΔEN(H–F) = 3.98 − 2.20 = 1.78 (el mayor de todos los H–X). Molécula diatómica → dipolo directo = μ = 1.91 D, el más alto de todos los halogenuros de hidrógeno. A pesar de ello, el enlace es tan fuerte que HF no ioniza completamente (ácido débil).",
+    },
+    formacion: {
+      proceso: "Reacción de fluorita (CaF₂) con H₂SO₄ concentrado. Proceso industrial principal de producción de HF.",
+      ecuacion: "CaF₂(s) + H₂SO₄(conc.) → 2 HF(g) + CaSO₄(s)  ΔH = −58 kJ/mol",
+      tipoEnlaceFormado: "Covalente polar (H–F)",
+      estadosOxidacion: { "H": "+1", "F": "−1" },
+      entalpiaFormacion: "−271.1 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Ionización (ácido débil)", ecuacion: "HF(aq) ⇌ H⁺(aq) + F⁻(aq)  Ka = 6.8×10⁻⁴  pKa = 3.17", tipo: "ácido-base", descripcion: "HF es el único hidrácido del grupo 17 que es ácido DÉBIL. La fuerza del enlace H–F (568 kJ/mol) impide la ionización completa." },
+      { nombre: "Grabado del vidrio (SiO₂)", ecuacion: "SiO₂(s) + 4 HF(aq) → SiF₄(g) + 2 H₂O(l)", tipo: "síntesis", descripcion: "ÚNICO ácido que disuelve el vidrio (SiO₂). Forma SiF₄ gaseoso. Uso: grabado de vidrio, fabricación de semiconductores. MUY PELIGROSO: penetra piel y destruye huesos." },
+      { nombre: "Reacción con NaOH", ecuacion: "HF(aq) + NaOH(aq) → NaF(aq) + H₂O(l)", tipo: "neutralización", descripcion: "Produce fluoruro de sodio (NaF), ingrediente del pasta dental para la prevención de caries (remineralización del esmalte)." },
+    ],
+    educacion: {
+      teoriaResumida: "HF es la 'excepción de Pauling': a pesar de que F es el elemento más electronegativo, HF es ácido débil. La razón es la fuerza del enlace H–F (568 kJ/mol), que requiere demasiada energía para romperse. El ácido fluorhídrico es extremadamente peligroso: penetra tejidos, extrae Ca²⁺ de los huesos formando CaF₂ (insoluble), y puede causar hipocalcemia sistémica mortal incluso con pequeñas exposiciones cutáneas.",
+      erroresComunes: [
+        "Creer que HF es ácido fuerte porque F es el elemento más electronegativo — el pKa = 3.17 indica ácido débil.",
+        "Confundir ácido fluorhídrico (HF, corroe vidrio) con ácido fluoroacético (CH₂FCOOH, tóxico diferente).",
+        "Pensar que los demás hidrácidos de halógenos (HCl, HBr, HI) son débiles — solo HF es débil.",
+        "Olvidar que HF forma puentes de hidrógeno inusualmente fuertes, lo que eleva su punto de ebullición (19.5°C) mucho más de lo esperado.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el HF graba el vidrio pero no el HCl?", "¿Es el HF ácido fuerte o débil?", "¿Para qué sirve el fluoruro en la pasta dental?"],
+      ejerciciosSecundario: ["Calcula el pH de HF 0.10 M (pKa = 3.17).", "Compara la fuerza ácida de HF (pKa=3.17) y HCl (pKa≈−7). Explica la tendencia.", "Escribe la ecuación del grabado del vidrio con HF y explica por qué el SiO₂ reacciona."],
+      ejerciciosUniversitario: ["Usando energías de enlace, explica cuantitativamente por qué HF es ácido débil y HCl fuerte.", "Calcula la concentración de H⁺ y F⁻ en HF 0.10 M considerando el efecto de la formación del dímero HF₂⁻ (K=3.9).", "Compara los puentes H del HF (entalpía ~29 kJ/mol) con los del H₂O (~21 kJ/mol) y explica la diferencia."],
+    },
+  },
+
+  // ── SO₂ ──────────────────────────────────────────────────────────────────
+  "SO2": {
+    formula: "SO2", formulaDisplay: "SO₂",
+    nombre: "Dióxido de Azufre", familia: "Óxido no metálico (óxido ácido del S⁴⁺)", color: "orange", masaMolar: 64.065,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Anhídrido sulfuroso",
+      stock: "Óxido de azufre(IV)",
+      sistematica: "Dióxido de azufre",
+      tipo: "Óxido no metálico del azufre en estado +4",
+      nota: "Estado de oxidación del S: +4 (no +6 como en SO₃). Anhídrido del ácido sulfuroso (H₂SO₃). No confundir con SO₃ (anhídrido sulfúrico, S en +6).",
+    },
+    lewis: {
+      descripcion: "S central con 6 e⁻ de valencia. Estructura real: resonancia entre 2 formas. Una forma: S con doble enlace S=O, enlace simple S–O (con pares libres) y 1 par libre en S. Total: 18 e⁻ de valencia.",
+      esIonico: false, electronosValenciaTotal: 18,
+      atomoCentral: "S", paresLibresCentral: 1, enlacesSimples: 0, enlacesDobles: 2, enlacesTriples: 0,
+      notaResonancia: "Resonancia: dos estructuras equivalentes con S=O y S–O intercambiados. Los dos enlaces S–O son equivalentes (longitud: 1.432 Å), intermedios entre S–O simple y S=O doble.",
+    },
+    vsepr: {
+      descripcion: "S central con 2 dobles enlaces (o grupos de e⁻ por resonancia) + 1 par libre → AX₂E₁ → geometría electrónica trigonal plana → geometría molecular angular. El par libre comprime el ángulo O=S=O a 119.5°.",
+      esIonico: false, notacionAXE: "AX₂E₁",
+      geometriaElectronica: "Trigonal plana", geometriaMolecular: "Angular (doblada)",
+      anguloEnlace: "119.5°", hibridacion: "sp²",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 0.86, momentoDipolar: "1.63 D",
+      explicacion: "ΔEN(S=O) = 3.44 − 2.58 = 0.86. Geometría angular → los dos dipolos S=O no se cancelan (a diferencia del CO₂ lineal) → μ = 1.63 D. El S es el centro de carga positiva (δ⁺), los O son δ⁻.",
+    },
+    formacion: {
+      proceso: "Combustión de azufre o de compuestos con azufre. Subproducto de la tostación de minerales sulfurosos en metalurgia. Principal contaminante de las emisiones industriales y volcánicas.",
+      ecuacion: "S(s) + O₂(g) → SO₂(g)  ΔHf° = −296.8 kJ/mol",
+      tipoEnlaceFormado: "Covalente polar (S=O)",
+      estadosOxidacion: { "S": "+4", "O": "−2" },
+      entalpiaFormacion: "−296.8 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Disolución en agua (ácido sulfuroso)", ecuacion: "SO₂(g) + H₂O(l) ⇌ H₂SO₃(aq) ⇌ H⁺ + HSO₃⁻  pKa₁ = 1.81", tipo: "ácido-base", descripcion: "Forma ácido sulfuroso (H₂SO₃). Principal causa de lluvia ácida junto con NOₓ. Reacción reversible: SO₂ escapa al calentar." },
+      { nombre: "Oxidación a SO₃ (proceso de contacto)", ecuacion: "2 SO₂(g) + O₂(g) ⇌ 2 SO₃(g)  (V₂O₅, 450°C)  ΔH = −197 kJ", tipo: "síntesis", descripcion: "Paso clave en la producción de H₂SO₄. Reacción reversible y exotérmica — se controla la temperatura para maximizar rendimiento." },
+      { nombre: "Reacción con NaOH", ecuacion: "SO₂(g) + 2 NaOH(aq) → Na₂SO₃(aq) + H₂O(l)", tipo: "ácido-base", descripcion: "Produce sulfito de sodio (Na₂SO₃), agente reductor y conservante alimentario (E-221 en la UE)." },
+    ],
+    educacion: {
+      teoriaResumida: "SO₂ es el principal contaminante de la lluvia ácida (junto con NOₓ). Las fuentes volcánicas y la combustión de carbón y petróleo lo emiten en enormes cantidades. Como conservante alimentario (código E-220/E-221), inhibe bacterias y hongos. La geometría angular (119.5°) es clave: hace que SO₂ sea polar (μ=1.63D), a diferencia del CO₂ lineal y apolar.",
+      erroresComunes: [
+        "Confundir SO₂ (S+4, dióxido) con SO₃ (S+6, trióxido) — diferentes estados de oxidación y propiedades.",
+        "Creer que SO₂ es lineal como CO₂ — el par libre en S produce geometría angular (119.5°).",
+        "Confundir el ácido sulfuroso (H₂SO₃, de SO₂) con el sulfúrico (H₂SO₄, de SO₃) — son distintos.",
+        "Olvidar que SO₂ es el gas de la lluvia ácida, mientras que el COO₂ contribuye a la acidez natural.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el SO₂ causa lluvia ácida?", "¿Cómo se diferencia SO₂ de SO₃?", "¿Por qué los volcanes emiten SO₂?"],
+      ejerciciosSecundario: ["Dibuja la estructura de Lewis del SO₂ con resonancia y justifica por qué es angular.", "Calcula el pH del agua de lluvia si [SO₂] disuelto = 1.0×10⁻⁴ M (pKa₁ = 1.81).", "Compara la polaridad de SO₂ y CO₂ — ambos tienen dos dobles enlaces pero son muy diferentes."],
+      ejerciciosUniversitario: ["Calcula la constante de equilibrio para 2SO₂ + O₂ ⇌ 2SO₃ a 450°C usando ΔGf°.", "Explica usando VSEPR y MO por qué SO₂ es angular y CO₂ es lineal.", "El SO₂ puede actuar como ácido de Lewis. Escribe la reacción con Na₂O y explica el mecanismo."],
+    },
+  },
+
+  // ── SO₃ ──────────────────────────────────────────────────────────────────
+  "SO3": {
+    formula: "SO3", formulaDisplay: "SO₃",
+    nombre: "Trióxido de Azufre", familia: "Óxido no metálico (óxido ácido del S⁶⁺)", color: "yellow", masaMolar: 80.065,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Anhídrido sulfúrico",
+      stock: "Óxido de azufre(VI)",
+      sistematica: "Trióxido de azufre",
+      tipo: "Óxido no metálico del azufre en estado +6 (máximo)",
+      nota: "Estado de oxidación del S: +6 (máximo). Es el anhídrido del ácido sulfúrico (H₂SO₄). No confundir con SO₂ (anhídrido sulfuroso, S en +4). La reacción SO₃ + H₂O → H₂SO₄ es violentamente exotérmica.",
+    },
+    lewis: {
+      descripcion: "S central con 6 e⁻ de valencia (puede expandir octeto con 3d). Forma 3 dobles enlaces S=O. Sin pares libres en S. Total: 24 e⁻. En el ión sulfato SO₄²⁻ hay resonancia perfecta entre las 4 formas.",
+      esIonico: false, electronosValenciaTotal: 24,
+      atomoCentral: "S", paresLibresCentral: 0, enlacesSimples: 0, enlacesDobles: 3, enlacesTriples: 0,
+      notaResonancia: "SO₃ tiene resonancia entre 3 estructuras equivalentes. Los 3 enlaces S=O son iguales (longitud: 1.42 Å). Altísima simetría D₃h.",
+    },
+    vsepr: {
+      descripcion: "S central con 3 grupos de electrones (3 dobles enlaces), sin pares libres → geometría electrónica y molecular trigonal plana perfecta. Los tres ángulos O=S=O son exactamente 120°. Molécula COMPLETAMENTE PLANA Y SIMÉTRICA.",
+      esIonico: false, notacionAXE: "AX₃",
+      geometriaElectronica: "Trigonal plana", geometriaMolecular: "Trigonal plana",
+      anguloEnlace: "120°", hibridacion: "sp²",
+    },
+    polaridad: {
+      esPolar: false, tipoEnlace: "Covalente polar (enlaces) / apolar (molécula)",
+      diferenciaEN: 0.86, momentoDipolar: "0 D",
+      explicacion: "ΔEN(S=O) = 0.86 → cada enlace S=O es polar. Pero la geometría trigonal plana perfectamente simétrica (D₃h) cancela exactamente los tres dipolos → μ = 0 D. Paradójico: tiene 3 enlaces polares pero la molécula es apolar.",
+    },
+    formacion: {
+      proceso: "Oxidación catalítica de SO₂ con O₂ (proceso de contacto). El V₂O₅ activa la reacción a 450°C y >1 atm. Paso clave en la industria del H₂SO₄.",
+      ecuacion: "2 SO₂(g) + O₂(g) ⇌ 2 SO₃(g)  ΔH = −197 kJ/mol  (V₂O₅, 450°C)",
+      tipoEnlaceFormado: "Covalente polar (S=O)",
+      estadosOxidacion: { "S": "+6", "O": "−2" },
+      entalpiaFormacion: "−395.7 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Reacción con agua (formación de H₂SO₄)", ecuacion: "SO₃(g) + H₂O(l) → H₂SO₄(l)  ΔH = −130 kJ/mol", tipo: "síntesis", descripcion: "Reacción violentamente exotérmica. Por eso en industria se absorbe SO₃ en H₂SO₄ concentrado (oleum) y no directamente en agua — evita niebla sulfúrica." },
+      { nombre: "Formación de oleum", ecuacion: "SO₃(g) + H₂SO₄(l) → H₂S₂O₇(l)  (oleum o ácido disulfúrico)", tipo: "síntesis", descripcion: "El oleum (o ácido de Nordhausen) es la disolución de SO₃ en H₂SO₄ concentrado. Más reactivo y corrosivo que el H₂SO₄ puro." },
+      { nombre: "Con NaOH", ecuacion: "SO₃(g) + 2 NaOH(aq) → Na₂SO₄(aq) + H₂O(l)", tipo: "neutralización", descripcion: "Produce sulfato de sodio. La reacción es directa del óxido ácido con la base." },
+    ],
+    educacion: {
+      teoriaResumida: "SO₃ es el intermedio más importante en la producción industrial de H₂SO₄ (>200 Mt/año). Su geometría trigonal plana y perfecta simetría D₃h lo hacen apolar a pesar de sus enlaces polares — análogo al CO₂ y SO₃ frente a H₂O y SO₂. Como ácido de Lewis muy fuerte (S en +6, sin pares libres), reacciona con casi cualquier base de Lewis.",
+      erroresComunes: [
+        "Confundir SO₃ (S+6, apolar, plano) con SO₂ (S+4, polar, angular) — geometrías completamente diferentes.",
+        "Creer que SO₃ reacciona lentamente con agua — es una reacción violentamente exotérmica.",
+        "Olvidar que el SO₃ en gas puede causar niebla ácida al reaccionar con la humedad del aire.",
+        "Confundir 'oleum' con H₂SO₄ concentrado — el oleum es una mezcla de SO₃ en H₂SO₄.",
+      ],
+      ejerciciosPrincipiante: ["¿Qué produce la reacción de SO₃ con agua?", "¿Cómo se diferencia SO₂ de SO₃?", "¿Por qué el SO₃ se absorbe en H₂SO₄ en vez de agua en la industria?"],
+      ejerciciosSecundario: ["Dibuja las 3 estructuras de resonancia del SO₃ y la del ión sulfato SO₄²⁻.", "¿Por qué SO₃ es apolar y SO₂ es polar si ambos tienen solo enlaces S–O?", "Calcula el ΔH de la reacción SO₂ + ½O₂ → SO₃ usando ΔHf° de SO₂ y SO₃."],
+      ejerciciosUniversitario: ["Aplica el principio de Le Châtelier para determinar las condiciones óptimas (T, P) para producir SO₃ en el proceso de contacto.", "Explica por qué SO₃ es un ácido de Lewis más fuerte que CO₂.", "Usando SALC, describe el enlace π deslocalizado en SO₃."],
+    },
+  },
+
+  // ── NO₂ ──────────────────────────────────────────────────────────────────
+  "NO2": {
+    formula: "NO2", formulaDisplay: "NO₂",
+    nombre: "Dióxido de Nitrógeno", familia: "Óxido no metálico (radical libre paramagnético)", color: "rose", masaMolar: 46.006,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Dióxido de nitrógeno",
+      stock: "Óxido de nitrógeno(IV)",
+      sistematica: "Dióxido de nitrógeno",
+      tipo: "Óxido no metálico del N en estado +4 (radical con e⁻ impar)",
+      nota: "NO₂ es un radical (tiene 17 e⁻ totales, número impar). Por eso es paramagnético y se dimeriza espontáneamente a N₂O₄ incoloro. El gas marrón-rojizo de los tubos de ensayo al disolver metales en HNO₃ concentrado es NO₂.",
+    },
+    lewis: {
+      descripcion: "N central con 5 e⁻ de valencia + 2×6 (O) = 17 e⁻ TOTALES (impar). No puede satisfacer el octeto sin un e⁻ desapareado. Una forma: N=O doble, N–O simple con e⁻ suelto en N. Molécula radical (1 e⁻ sin pareja).",
+      esIonico: false, electronosValenciaTotal: 17,
+      atomoCentral: "N", paresLibresCentral: 0, enlacesSimples: 1, enlacesDobles: 1, enlacesTriples: 0,
+      notaResonancia: "Resonancia con e⁻ desapareado en N: 2 estructuras donde el doble enlace N=O y el sencillo N–O se intercambian. Ambos enlaces N–O son equivalentes (longitud 1.197 Å).",
+    },
+    vsepr: {
+      descripcion: "N central con 2 grupos enlazantes + 1 e⁻ desapareado (cuenta como 'medio par libre'). AX₂E₀·₅ → ángulo O–N–O = 134.1° (mayor que en SO₂: 119.5° porque el e⁻ desapareado ocupa menos espacio que un par libre completo).",
+      esIonico: false, notacionAXE: "AX₂E₀·₅ (radical)",
+      geometriaElectronica: "Trigonal plana (aproximada)", geometriaMolecular: "Angular",
+      anguloEnlace: "134.1°", hibridacion: "sp²",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 1.04, momentoDipolar: "0.316 D",
+      explicacion: "ΔEN(N–O) = 3.44 − 3.04 = 0.40. Geometría angular → los dipolos N–O no se cancelan → μ = 0.316 D (pequeño). El e⁻ desapareado asimétrico contribuye a la polaridad total.",
+    },
+    formacion: {
+      proceso: "Oxidación de NO con O₂ (proceso Ostwald, paso 2). También se forma en motores de combustión y en la atmósfera durante tormentas eléctricas.",
+      ecuacion: "2 NO(g) + O₂(g) → 2 NO₂(g)  ΔH = −113 kJ/mol",
+      tipoEnlaceFormado: "Covalente polar (N=O, N–O)",
+      estadosOxidacion: { "N": "+4", "O": "−2" },
+      entalpiaFormacion: "+33.2 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Dimerización (equilibrio)", ecuacion: "2 NO₂(g) ⇌ N₂O₄(g)  ΔH = −57.2 kJ/mol  (K a 25°C = 9.1 atm⁻¹)", tipo: "síntesis", descripcion: "NO₂ marrón-rojizo dimeriza al N₂O₄ incoloro. Al enfriar → más N₂O₄ (incoloro); al calentar → más NO₂ (marrón). Ejemplo clásico de equilibrio químico visible." },
+      { nombre: "Reacción con agua (paso final del proceso Ostwald)", ecuacion: "3 NO₂(g) + H₂O(l) → 2 HNO₃(aq) + NO(g)", tipo: "síntesis", descripcion: "Produce ácido nítrico. El NO liberado puede oxidarse de nuevo a NO₂ y reiniciar el ciclo." },
+      { nombre: "Contribución a smog fotoquímico", ecuacion: "NO₂(g) + hν → NO(g) + O(g)  (λ < 400 nm)\nO(g) + O₂(g) → O₃(g)", tipo: "síntesis", descripcion: "La luz UV rompe el NO₂, liberando O atómico que forma ozono troposférico (O₃). Base del smog fotoquímico." },
+    ],
+    educacion: {
+      teoriaResumida: "NO₂ es un contaminante atmosférico de primer orden (fuentes: motores de combustión, industria química). El equilibrio NO₂ ⇌ N₂O₄ es el ejemplo más clásico de equilibrio homogéneo visible en el laboratorio — el cambio de color pardo a incoloro al enfriar es dramático y directo. Su carácter radical lo hace altamente reactivo y responsable del smog fotoquímico.",
+      erroresComunes: [
+        "Creer que NO₂ tiene un número par de electrones — tiene 17 e⁻ (impar), es un radical.",
+        "Confundir el ángulo de NO₂ (134.1°) con el de SO₂ (119.5°) — el e⁻ desapareado ocupa menos espacio que un par libre.",
+        "Pensar que N₂O₄ y NO₂ son sustancias diferentes — son formas de equilibrio del mismo sistema.",
+        "Confundir NO₂ (N+4) con N₂O (N+1), NO (N+2) y N₂O₃ (N+3) — estados de oxidación distintos.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el NO₂ es marrón?", "¿Por qué el tubo de N₂O₄/NO₂ cambia de color con la temperatura?", "¿Qué tiene de especial el NO₂ que lo hace tan reactivo?"],
+      ejerciciosSecundario: ["Escribe la estructura de Lewis del NO₂ e indica el electrón desapareado.", "Calcula Kc para 2NO₂ ⇌ N₂O₄ a 25°C (Kp = 9.1 atm⁻¹). ¿Cómo afecta la temperatura a K?", "Explica el smog fotoquímico: ¿qué papel tiene el NO₂?"],
+      ejerciciosUniversitario: ["Calcula la fracción de NO₂ disociado en N₂O₄ a 25°C y 1 atm (Kp = 9.1 atm⁻¹).", "Usando OM, describe el e⁻ desapareado del NO₂ y por qué es un radical.", "Propón un mecanismo para la reacción 3NO₂ + H₂O → 2HNO₃ + NO."],
+    },
+  },
+
+  // ── NO ───────────────────────────────────────────────────────────────────
+  "NO": {
+    formula: "NO", formulaDisplay: "NO",
+    nombre: "Monóxido de Nitrógeno", familia: "Óxido no metálico (radical diatómico, gas señalizador)", color: "gray", masaMolar: 30.006,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Monóxido de nitrógeno",
+      stock: "Óxido de nitrógeno(II)",
+      sistematica: "Monóxido de nitrógeno",
+      tipo: "Óxido no metálico del N en estado +2 (radical, molécula biológica activa)",
+      nota: "NO es un radical libre (11 e⁻ totales) y la primera molécula gaseosa descubierta como neurotransmisor/señalizador biológico (Premio Nobel de Medicina 1998). No confundir con N₂O (óxido nitroso) ni con NO₂ (dióxido).",
+    },
+    lewis: {
+      descripcion: "N y O: 5+6 = 11 e⁻ TOTALES (impar). Estructura mejor representada con triple enlace N≡O y un e⁻ desapareado en N, o con doble enlace N=O con e⁻ desapareado. El orbital molecular antienlazante π* está semilleno (1 e⁻).",
+      esIonico: false, electronosValenciaTotal: 11,
+      atomoCentral: "N", paresLibresCentral: 0, enlacesSimples: 0, enlacesDobles: 0, enlacesTriples: 1,
+      notaResonancia: "La teoría de OM describe NO como N≡O con un e⁻ en un OM π* antienlazante. Orden de enlace = (8−3)/2 = 2.5 (entre doble y triple). Longitud: 1.154 Å.",
+    },
+    vsepr: {
+      descripcion: "Molécula diatómica lineal. La VSEPR no aplica de forma directa. El orden de enlace 2.5 (OM) hace el enlace más corto y fuerte que un N=O doble. El e⁻ desapareado en π* antienlazante le da carácter paramagnético.",
+      esIonico: false, notacionAXE: "AX₁ (lineal, diatómica)",
+      geometriaElectronica: "Lineal", geometriaMolecular: "Lineal (diatómica)",
+      anguloEnlace: "N/A", hibridacion: "sp (N y O)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 0.40, momentoDipolar: "0.159 D",
+      explicacion: "ΔEN(N–O) = 3.44 − 3.04 = 0.40 (pequeño). Molécula diatómica → dipolo neto de 0.159 D (muy pequeño). La distribución asimétrica del e⁻ desapareado en π* (principalmente en N) contribuye a la polaridad.",
+    },
+    formacion: {
+      proceso: "Proceso Ostwald (paso 1): oxidación catalítica de NH₃. También se forma en motores de combustión (N₂ + O₂ a alta temperatura) y en el cuerpo humano (enzima NOS).",
+      ecuacion: "4 NH₃(g) + 5 O₂(g) → 4 NO(g) + 6 H₂O(g)  (Pt, 850°C, Ostwald)",
+      tipoEnlaceFormado: "Covalente polar (N≡O con orden enlace 2.5)",
+      estadosOxidacion: { "N": "+2", "O": "−2" },
+      entalpiaFormacion: "+90.3 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Oxidación a NO₂", ecuacion: "2 NO(g) + O₂(g) → 2 NO₂(g)  ΔH = −113 kJ/mol", tipo: "redox", descripcion: "Reacción rápida con O₂ del aire. El NO incoloro se convierte inmediatamente en el NO₂ marrón-rojizo visible. Por eso el NO producido en procesos Ostwald se reoxida para continuar el ciclo." },
+      { nombre: "Reacción con O₃ (troposfera)", ecuacion: "NO(g) + O₃(g) → NO₂(g) + O₂(g)  k muy alta", tipo: "redox", descripcion: "Reacción clave en la química troposférica. El NO emitido por los vehículos destruye el O₃ troposférico y contribuye al ciclo del smog fotoquímico." },
+      { nombre: "Función biológica (vasodilatación)", ecuacion: "L-arginina + O₂ → NO + L-citrulina  (NOS, NO sintetasa)", tipo: "síntesis", descripcion: "Producción enzimática de NO en las células endoteliales. El NO difunde a músculo liso vascular, activa guanilato ciclasa → vasodilatación. Base del mecanismo de la nitroglicerina y el sildenafilo." },
+    ],
+    educacion: {
+      teoriaResumida: "NO fue el primer gas descubierto como molécula señalizadora biológica (Nobel 1998: Furchgott, Ignarro, Murad). La enzima NO sintetasa (NOS) produce NO endógeno que regula la presión arterial, la neurotransmisión y el sistema inmunitario. Paradoja: este contaminante atmosférico tóxico (procedente de motores) también es un mensajero fisiológico esencial en concentraciones nanomolares.",
+      erroresComunes: [
+        "Confundir NO (N+2, incoloro, radical) con NO₂ (N+4, marrón, radical) y N₂O (N+1, 'gas de la risa').",
+        "Creer que NO no puede ser un mensajero biológico porque es tóxico — la dosis hace al veneno.",
+        "Olvidar que el orden de enlace del NO es 2.5 (por teoría de OM), no 2 ni 3.",
+        "Decir que NO es 'estable' — reacciona rápidamente con O₂ del aire para dar NO₂.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el NO se vuelve marrón al salir al aire?", "¿Qué tiene que ver el NO con la nitroglicerina?", "¿Cómo se produce el NO en un motor de coche?"],
+      ejerciciosSecundario: ["Calcula el orden de enlace del NO usando la teoría de OM.", "Ajusta la ecuación de oxidación de NO a NO₂ y clasifícala como redox.", "Escribe la reacción global del proceso Ostwald (NH₃ → NO → NO₂ → HNO₃)."],
+      ejerciciosUniversitario: ["Dibuja el diagrama de OM del NO y explica su paramagnetismo y orden de enlace 2.5.", "Explica el mecanismo de vasodilatación inducida por NO (EDRF): desde la NOS hasta la activación del músculo liso.", "Calcula Kp para 2NO + O₂ ⇌ 2NO₂ a 25°C usando ΔGf°."],
+    },
+  },
+
+  // ── O₃ ───────────────────────────────────────────────────────────────────
+  "O3": {
+    formula: "O3", formulaDisplay: "O₃",
+    nombre: "Ozono", familia: "Alótropo del oxígeno (óxido activo)", color: "cyan", masaMolar: 47.998,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Ozono",
+      stock: "Trioxígeno",
+      sistematica: "Trioxídano (IUPAC 2005)",
+      tipo: "Alótropo del oxígeno (no un compuesto sino una forma alotrópica)",
+      nota: "El ozono es un alótropo del oxígeno (O₃ vs O₂), no un compuesto de diferentes elementos. Nombre 'ozono' deriva del griego 'ozein' (oler). El ozono estratosférico (capa de ozono) protege de UV-B/C; el troposférico es contaminante.",
+    },
+    lewis: {
+      descripcion: "O central con 6 e⁻ de valencia. Estructura real: resonancia entre 2 formas: cada una con O=O doble, O–O simple y 1 par libre en O central. Total: 18 e⁻. El O central tiene expansión del octeto en una forma.",
+      esIonico: false, electronosValenciaTotal: 18,
+      atomoCentral: "O (central)", paresLibresCentral: 1, enlacesSimples: 0, enlacesDobles: 2, enlacesTriples: 0,
+      notaResonancia: "Resonancia entre 2 estructuras equivalentes: O=O–O ↔ O–O=O. Los dos enlaces O–O son equivalentes (longitud 1.278 Å, entre O–O simple 1.48 Å y O=O doble 1.21 Å).",
+    },
+    vsepr: {
+      descripcion: "O central con 2 grupos enlazantes + 1 par libre → AX₂E₁ → geometría electrónica trigonal plana → geometría molecular angular. Ángulo O–O–O = 116.8°. Igual topología que SO₂.",
+      esIonico: false, notacionAXE: "AX₂E₁",
+      geometriaElectronica: "Trigonal plana", geometriaMolecular: "Angular (doblada)",
+      anguloEnlace: "116.8°", hibridacion: "sp²",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente (homonuclear, pero polar por asimetría)",
+      diferenciaEN: 0.0, momentoDipolar: "0.53 D",
+      explicacion: "Molécula homonuclear (solo O), por lo que ΔEN = 0. Sin embargo, la geometría angular asimétrica del par libre crea un momento dipolar neto de 0.53 D. Es único: molécula 'polar' compuesta por un solo elemento.",
+    },
+    formacion: {
+      proceso: "Natural: fotólisis del O₂ estratosférico por UV-C (< 240 nm). Industrial: descarga eléctrica (corona) sobre O₂ o aire seco. Se produce en las tormentas eléctricas.",
+      ecuacion: "3 O₂(g) + hν → 2 O₃(g)  ΔHf° = +142.7 kJ/mol (endotérmica)",
+      tipoEnlaceFormado: "Covalente (O–O, orden de enlace 1.5 por resonancia)",
+      estadosOxidacion: { "O": "0 (formalmente)" },
+      entalpiaFormacion: "+142.7 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Ciclo de Chapman (formación/destrucción estratosférica)", ecuacion: "O₂ + hν(UV-C) → 2 O·\nO· + O₂ → O₃\nO₃ + hν(UV-B) → O₂ + O·\nO₃ + O· → 2 O₂", tipo: "síntesis", descripcion: "Ciclo catalítico que mantiene el equilibrio del ozono estratosférico. Los CFC (ClFC) actúan como catalizadores de la destrucción de O₃." },
+      { nombre: "Oxidación de I⁻ (test de almidón-yodo)", ecuacion: "O₃(aq) + 2 KI(aq) + H₂SO₄ → I₂ + O₂ + K₂SO₄ + H₂O", tipo: "redox", descripcion: "El ozono oxida I⁻ a I₂, que tiñe el almidón de azul-violeta. Reacción cuantitativa para detectar y dosificar O₃ (ozometría)." },
+      { nombre: "Descomposición catalítica", ecuacion: "2 O₃(g) → 3 O₂(g)  (Cl·, NO·, Br· como catalizadores)", tipo: "descomposición", descripcion: "Los radicales halógenos y NOₓ catalizan la destrucción del ozono. Base de la química de destrucción de la capa de ozono." },
+    ],
+    educacion: {
+      teoriaResumida: "El ozono tiene un papel doble: en la estratosfera (15–35 km) protege la Tierra absorbiendo UV-B/C dañina; en la troposfera es un contaminante secundario del smog fotoquímico. Los CFC (clorofluorocarbonos) catalíticamente destruyen O₃ estratosférico (un átomo de Cl destruye hasta 100.000 moléculas de O₃). El olor característico cerca de las fotocopiadoras es O₃ generado por descargas eléctricas.",
+      erroresComunes: [
+        "Confundir el ozono 'bueno' (estratosférico, protector) con el ozono 'malo' (troposférico, contaminante).",
+        "Creer que O₃ es un compuesto — es un alótropo (forma alotrópica del O₂).",
+        "Decir que ΔEN = 0 implica molécula apolar — O₃ tiene μ = 0.53 D por su geometría asimétrica.",
+        "Olvidar que O₃ es más reactivo que O₂ por sus enlaces O–O más débiles (orden 1.5) y su ΔHf° positivo.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el ozono nos protege del sol?", "¿Por qué los CFC dañan la capa de ozono?", "¿Qué alótropo del oxígeno eres tú al respirar? ¿Y el ozono?"],
+      ejerciciosSecundario: ["Dibuja las 2 estructuras de resonancia del O₃ y calcula el orden de enlace O–O.", "Explica por qué el O₃ es más reactivo que el O₂ usando argumentos energéticos.", "¿Por qué el O₃ tiene momento dipolar si está compuesto por un solo elemento?"],
+      ejerciciosUniversitario: ["Calcula el ΔG° de la reacción 2O₃ → 3O₂ y determina si el ozono es termodinámicamente estable.", "Escribe el mecanismo detallado de destrucción del O₃ por radicales Cl· (ciclo catalítico completo).", "Explica usando teoría de OM por qué el O₃ tiene un OM LUMO de baja energía que lo hace buen oxidante."],
+    },
+  },
+
+  // ── N₂O ──────────────────────────────────────────────────────────────────
+  "N2O": {
+    formula: "N2O", formulaDisplay: "N₂O",
+    nombre: "Óxido Nitroso", familia: "Óxido no metálico (anestésico general)", color: "purple", masaMolar: 44.013,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Óxido nitroso",
+      stock: "Óxido de dinitrógeno(I)",
+      sistematica: "Dinitrógeno monóxido",
+      tipo: "Óxido no metálico del N en estado formal +1 (promedio: N₂ tiene 2 N en distintos estados +2 y 0, media +1)",
+      nota: "Nombre popular: 'gas de la risa' o 'óxido de diazonio'. Es lineal como CO₂ y N₂. Estado de oxidación: en N₂O, los 2 N no son equivalentes: N terminal ≈ −1/3, N interno ≈ +1/3 aproximadamente (o +1 promedio formal).",
+    },
+    lewis: {
+      descripcion: "Molécula lineal N–N–O. Forma canónica más importante: N≡N⁺–O⁻. Segunda forma: ⁻N=N=O → ⁺N=N–O⁻. Los 3 átomos tienen 4+5+6 = 16 e⁻ totales.",
+      esIonico: false, electronosValenciaTotal: 16,
+      atomoCentral: "N (terminal, más electroneg.)", paresLibresCentral: 0, enlacesSimples: 0, enlacesDobles: 0, enlacesTriples: 1,
+      notaResonancia: "Resonancia: :N=N=O: ↔ :N≡N–O:⁻ (y otras formas). El N central tiene orden de enlace N–N ≈ 2.73 y N–O ≈ 1.61. Estructura análoga al CO₂ pero con los 2 átomos centrales diferentes (N=N=O vs O=C=O).",
+    },
+    vsepr: {
+      descripcion: "Molécula triatómica lineal (AX₂ para el N central). Los 3 átomos son colineales, igual que CO₂. Sin pares libres en el átomo central → ángulo N–N–O = 180°.",
+      esIonico: false, notacionAXE: "AX₂ (N central)",
+      geometriaElectronica: "Lineal", geometriaMolecular: "Lineal",
+      anguloEnlace: "180°", hibridacion: "sp",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 0.40, momentoDipolar: "0.166 D",
+      explicacion: "Aunque es lineal, N₂O NO es simétrico (N–N–O vs O–C–O del CO₂). La distribución asimétrica de carga crea μ = 0.166 D (pequeño). El extremo O es δ⁻ y el N terminal es δ⁺.",
+    },
+    formacion: {
+      proceso: "Descomposición térmica del nitrato de amonio. Cuidado: es una reacción exotérmica que puede ser explosiva a alta temperatura.",
+      ecuacion: "NH₄NO₃(s) → N₂O(g) + 2 H₂O(g)  ΔH = −37 kJ/mol  (200–260°C)",
+      tipoEnlaceFormado: "Covalente polar (N=N, N–O)",
+      estadosOxidacion: { "N (terminal)": "−1/3", "N (central)": "+1/3", "O": "−2" },
+      entalpiaFormacion: "+82.1 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Descomposición a alta temperatura", ecuacion: "2 N₂O(g) → 2 N₂(g) + O₂(g)  ΔH = −163 kJ/mol  (>600°C)", tipo: "descomposición", descripcion: "Produce O₂ y es exotérmica — explica por qué soporta la combustión. Ejemplo: un fósforo ardiendo se reaviva en N₂O (como en O₂)." },
+      { nombre: "Como oxidante en motores de alta performance", ecuacion: "2 N₂O(g) + C₃H₈(g) → 3 CO₂ + 2 N₂ + 4 H₂O  (combustión)", tipo: "combustión", descripcion: "Usado en automóviles de competición como oxidante adicional ('nitroso'). Al descomponerse libera N₂ y O₂, aumentando la densidad de oxígeno disponible para la combustión." },
+      { nombre: "Disolución en crema (propelente)", ecuacion: "N₂O(g) ⇌ N₂O(aq)  (alta P → expansión → espuma)", tipo: "síntesis", descripcion: "N₂O es soluble en grasa bajo presión. Propelente en latas de nata montada: el gas disuelto en la grasa se expande al abrirse la válvula, creando la espuma." },
+    ],
+    educacion: {
+      teoriaResumida: "N₂O es 300 veces más potente que el CO₂ como gas de efecto invernadero y tiene vida media atmosférica de ∼114 años. Paradójicamente, se usa como anestésico (el 'gas de la risa' de Humphry Davy en 1800), en propelentes alimentarios, y en automóviles de carrera. Su estructura lineal asimétrica (N–N–O) contrasta con la simétrica del CO₂ (O–C–O), lo que le da un pequeño momento dipolar.",
+      erroresComunes: [
+        "Confundir N₂O (N+1, anestésico, 'gas risa') con NO (N+2, biológico), NO₂ (N+4, marrón) y N₂O₄ (dímero del NO₂).",
+        "Creer que N₂O es inerte como el N₂ — se descompone a >600°C liberando O₂ activo.",
+        "Pensar que N₂O no es GEI — es un potente gas de efecto invernadero del suelo (fertilizantes nitrogenados).",
+        "Confundir que N₂O tiene 2 N en estado +1 — en realidad los 2 N tienen estados diferentes (+1/3 y −1/3 formalmente).",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué N₂O se llama 'gas de la risa'?", "¿Cómo soporta la combustión el N₂O?", "¿Por qué N₂O está en las latas de nata montada?"],
+      ejerciciosSecundario: ["Dibuja las estructuras de resonancia del N₂O (N=N=O y N≡N⁺–O⁻).", "Calcula el estado de oxidación promedio del N en el N₂O.", "Compara la polaridad de N₂O (lineal, μ=0.166D) y CO₂ (lineal, μ=0D) — ¿por qué son diferentes?"],
+      ejerciciosUniversitario: ["Usando VSEPR y OM, explica la estructura electrónica del N₂O y compara con CO₂.", "Calcula ΔGf° de N₂O a 25°C y determina si su descomposición a N₂ + O₂ es espontánea.", "Explica por qué el N₂O tiene una vida media atmosférica de ~114 años mientras el NO₂ se elimina en días."],
+    },
+  },
+
+  // ── CaO ──────────────────────────────────────────────────────────────────
+  "CaO": {
+    formula: "CaO", formulaDisplay: "CaO",
+    nombre: "Óxido de Calcio", familia: "Óxido metálico (óxido básico)", color: "orange", masaMolar: 56.077,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Óxido de calcio",
+      stock: "Óxido de calcio(II)",
+      sistematica: "Monoóxido de calcio",
+      tipo: "Óxido metálico (óxido básico del calcio en estado +2)",
+      nota: "Nombre trivial: 'cal viva' o 'cal'. La reacción de CaO con agua (apagado de la cal) es muy exotérmica y produce Ca(OH)₂ (cal apagada). Uno de los materiales más producidos por la humanidad (~420 Mt/año).",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: Ca²⁺ + O²⁻. Ca cede 2 e⁻ y O acepta 2 e⁻. Ca²⁺ queda con configuración del Ar; O²⁻ (óxido) queda con 8 e⁻ (4 pares libres), configuración del Ne.",
+      esIonico: true, electronosValenciaTotal: 8,
+      notaResonancia: "Estructura cristalina de tipo NaCl (cúbica de cara centrada, Fm3̄m). Ca²⁺ coordinado por 6 O²⁻ y viceversa. Parámetro de red: a = 4.80 Å.",
+    },
+    vsepr: {
+      descripcion: "Compuesto iónico con estructura tipo NaCl. VSEPR no aplica. Alta energía reticular (−3414 kJ/mol) — mayor que NaCl (−788 kJ/mol) porque las cargas son ±2. Punto de fusión muy alto: 2613°C.",
+      esIonico: true, notacionAXE: "N/A (iónico)",
+      geometriaMolecular: "Red cristalina cúbica (tipo NaCl)",
+      hibridacion: "N/A",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico",
+      diferenciaEN: 2.44, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(Ca–O) = 3.44 − 1.00 = 2.44 → enlace fuertemente iónico. En la molécula gaseosa CaO (diatómica), μ ≈ 8.3 D (uno de los mayores). En sólido es red iónica.",
+    },
+    formacion: {
+      proceso: "Calcinación de caliza (CaCO₃) a 900–1200°C en hornos industriales. Una de las reacciones químicas industriales más antiguas del mundo.",
+      ecuacion: "CaCO₃(s) → CaO(s) + CO₂(g)  ΔH = +178 kJ/mol  (>900°C)",
+      tipoEnlaceFormado: "Iónico (Ca²⁺ + O²⁻)",
+      estadosOxidacion: { "Ca": "+2", "O": "−2" },
+      entalpiaFormacion: "−635.1 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Apagado de la cal (exotérmico)", ecuacion: "CaO(s) + H₂O(l) → Ca(OH)₂(s)  ΔH = −65.2 kJ/mol", tipo: "síntesis", descripcion: "Reacción muy exotérmica: la cal viva puede alcanzar >300°C al contacto con agua. 'Apagar la cal' era la reacción más peligrosa de las construcciones antiguas." },
+      { nombre: "Reacción con CO₂", ecuacion: "CaO(s) + CO₂(g) → CaCO₃(s)  ΔH = −178 kJ/mol", tipo: "síntesis", descripcion: "Reacción inversa a la calcinación. Usada en la captura de CO₂ (ciclo CaO/CaCO₃ a alta temperatura) como tecnología para mitigación del cambio climático." },
+      { nombre: "Reacción con ácidos fuertes", ecuacion: "CaO(s) + 2 HCl(aq) → CaCl₂(aq) + H₂O(l)  ΔH ≈ −200 kJ/mol", tipo: "neutralización", descripcion: "Reacción violenta entre el óxido básico y ácidos fuertes. Produce cloruro de calcio y agua." },
+    ],
+    educacion: {
+      teoriaResumida: "CaO (cal viva) es uno de los compuestos inorgánicos más utilizados por la humanidad desde la antigüedad: construcción (cemento Portland contiene ∼65% CaO), tratamiento de agua (precipitación de metales pesados), producción de acero (extracción de impurezas silíceas), y agricultura (corrección del pH del suelo). El ciclo CaCO₃/CaO es uno de los ciclos geoquímicos más importantes del planeta (ciclo del carbono inorgánico).",
+      erroresComunes: [
+        "Confundir CaO (cal viva) con Ca(OH)₂ (cal apagada) — son compuestos diferentes con propiedades distintas.",
+        "Olvidar que CaO reacciona violentamente con agua — el apagado incorrecto puede provocar quemaduras graves.",
+        "Creer que todos los óxidos metálicos son óxidos básicos — Fe₂O₃ es anfótero, ZnO es anfótero.",
+        "Confundir el proceso de calcinación (endotérmico, CaCO₃→CaO) con el de apagado (exotérmico, CaO→Ca(OH)₂).",
+      ],
+      ejerciciosPrincipiante: ["¿Qué es la 'cal viva'?", "¿Por qué la cal viva reacciona con agua tan energéticamente?", "¿Para qué sirve la cal en la construcción?"],
+      ejerciciosSecundario: ["Escribe la reacción de calcinación del CaCO₃ y clasifícala como endotérmica o exotérmica.", "Calcula los gramos de CaO que se forman al calcinar 100 g de CaCO₃ (pureza 95%).", "¿Qué diferencia a un óxido ácido (como SO₃) de un óxido básico (como CaO)?"],
+      ejerciciosUniversitario: ["Calcula la temperatura mínima para que la descomposición CaCO₃ → CaO + CO₂ sea espontánea (ΔH = +178 kJ/mol, ΔS = +159 J/mol·K).", "Diseña el ciclo CaO/CaCO₃ para captura de CO₂ a alta temperatura y evalúa su viabilidad termodinámica.", "Explica el papel del CaO en la producción de acero (purificación del arrabio)."],
+    },
+  },
+
+  // ── Fe₂O₃ ────────────────────────────────────────────────────────────────
+  "Fe2O3": {
+    formula: "Fe2O3", formulaDisplay: "Fe₂O₃",
+    nombre: "Óxido de Hierro(III)", familia: "Óxido metálico (anfótero, mineral de hierro)", color: "orange", masaMolar: 159.688,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Óxido férrico",
+      stock: "Óxido de hierro(III)",
+      sistematica: "Trióxido de dihierro",
+      tipo: "Óxido metálico con Fe en estado +3 (número romano obligatorio por carga variable del Fe)",
+      nota: "El Fe tiene estados +2 (ferroso, FeO) y +3 (férrico, Fe₂O₃). El nombre 'trióxido de dihierro' usa prefijos multiplicadores. Nombre mineral: hematita (Fe₂O₃), la mena de hierro más importante del mundo.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: 2 Fe³⁺ + 3 O²⁻. Cada Fe³⁺ (d⁵, configuración spin alto) cede 3 e⁻. Cada O²⁻ tiene 8 e⁻ de valencia (4 pares libres). Red cristalina corindon (hexagonal compacta).",
+      esIonico: true, electronosValenciaTotal: 10,
+      notaResonancia: "Estructura corindon (R3̄c hexagonal): cada Fe³⁺ coordinado octaédricamente por 6 O²⁻; cada O²⁻ coordinado por 4 Fe³⁺. La misma estructura que Al₂O₃ (corindón, rubí, zafiro).",
+    },
+    vsepr: {
+      descripcion: "Compuesto iónico con estructura corindon. VSEPR no aplica. Fe³⁺ tiene coordinación octaédrica (6 O²⁻ vecinos). La energía reticular es muy alta por las cargas ±3 y ±2.",
+      esIonico: true, notacionAXE: "N/A (iónico)",
+      geometriaMolecular: "Red cristalina corindon (hexagonal, R3̄c)",
+      hibridacion: "N/A",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico con contribución covalente",
+      diferenciaEN: 1.83, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(Fe–O) = 3.44 − 1.61 = 1.83 → enlace predominantemente iónico. La carga +3 del Fe³⁺ le da poder polarizante significativo (regla de Fajans), añadiendo carácter covalente parcial.",
+    },
+    formacion: {
+      proceso: "Oxidación del hierro al aire ('corrosión del hierro'). Industrialmente, el mineral hematita es el principal mineral de hierro para la producción de acero.",
+      ecuacion: "4 Fe(s) + 3 O₂(g) → 2 Fe₂O₃(s)  ΔHf° = −824.2 kJ/mol",
+      tipoEnlaceFormado: "Iónico (Fe³⁺ + O²⁻)",
+      estadosOxidacion: { "Fe": "+3", "O": "−2" },
+      entalpiaFormacion: "−824.2 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Reducción en el alto horno (producción de hierro)", ecuacion: "Fe₂O₃(s) + 3 CO(g) → 2 Fe(l) + 3 CO₂(g)  ΔH = −25 kJ", tipo: "redox", descripcion: "Reacción clave de la siderurgia. El CO reduce al Fe³⁺ a Fe⁰. En el alto horno, se producen ∼1900 Mt de arrabio/año a nivel mundial." },
+      { nombre: "Reacción termita (soldadura aluminotérmica)", ecuacion: "Fe₂O₃(s) + 2 Al(s) → Al₂O₃(s) + 2 Fe(l)  ΔH = −851 kJ", tipo: "redox", descripcion: "Reacción extremadamente exotérmica (T > 2500°C). Se usa para soldar raíles de ferrocarril in situ. El hierro líquido resultante es el producto de valor." },
+      { nombre: "Disolución en ácido fuerte", ecuacion: "Fe₂O₃(s) + 6 HCl(aq) → 2 FeCl₃(aq) + 3 H₂O(l)", tipo: "neutralización", descripcion: "El Fe₂O₃ (óxido básico) reacciona con ácidos para dar la sal correspondiente y agua. Reacción de desincrustación en tuberías." },
+    ],
+    educacion: {
+      teoriaResumida: "Fe₂O₃ (hematita) es la mena de hierro más explotada del mundo (∼2500 Mt/año). La reacción termita (Fe₂O₃ + Al) es una de las más exotérmicas por gramo que se conocen (ΔH/g = −3.98 kJ/g). La 'corrosión del hierro' es Fe₂O₃·xH₂O (óxido hidratado), un proceso electroquímico que destruye infraestructuras por valor de billones de dólares anuales.",
+      erroresComunes: [
+        "Confundir Fe₂O₃ (Fe+3, hematita, rojo) con Fe₃O₄ (mezcla Fe+2/Fe+3, magnetita, negro) y FeO (Fe+2, verde-negro).",
+        "Creer que la corrosión del hierro es solo Fe₂O₃ — en realidad es Fe₂O₃·xH₂O (hidratado).",
+        "Olvidar que la termita necesita iniciación térmica muy alta (cinta de Mg ardiendo) — no se enciende sola.",
+        "Confundir el estado de oxidación: en Fe₂O₃ cada Fe es +3 (no +3/2 en total).",
+      ],
+      ejerciciosPrincipiante: ["¿Qué color tiene el óxido de hierro (herrumbre)?", "¿Por qué el hierro se oxida y el oro no?", "¿Para qué sirve la mena de hierro en la industria?"],
+      ejerciciosSecundario: ["Calcula los gramos de Fe₂O₃ que reaccionan con 100 g de Al en la reacción termita.", "Ajusta la ecuación redox de Fe₂O₃ + CO → Fe + CO₂ por el método del cambio de oxidación.", "¿Cuál es el estado de oxidación del Fe en: FeO, Fe₂O₃, Fe₃O₄?"],
+      ejerciciosUniversitario: ["Calcula el ΔG° de la reacción termita y determina si es espontánea a 25°C.", "Explica el mecanismo electroquímico de la corrosión del hierro (cátodo y ánodo de la pila de corrosión).", "Calcula el ΔH de la reacción en el alto horno: Fe₂O₃ + 3CO → 2Fe + 3CO₂ usando ΔHf° de los reactivos y productos."],
+    },
+  },
+
+  // ── C₂H₅OH ───────────────────────────────────────────────────────────────
+  "C2H5OH": {
+    formula: "C2H5OH", formulaDisplay: "C₂H₅OH",
+    nombre: "Etanol", familia: "Alcohol (hidrocarburo oxigenado)", color: "emerald", masaMolar: 46.069,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Alcohol etílico",
+      stock: "Etanol",
+      sistematica: "Etanol",
+      tipo: "Alcohol primario (grupo –OH en carbono primario de cadena etílica)",
+      nota: "Para compuestos orgánicos, la nomenclatura IUPAC usa la cadena carbonada: et- (2C) + an (saturado) + ol (grupo –OH). El nombre 'alcohol' a secas se refiere al etanol. Fórmula condensada: CH₃CH₂OH.",
+    },
+    lewis: {
+      descripcion: "2 C y 1 O: C₁(metilo, sp³): 3 C–H + 1 C–C. C₂(metileno del OH, sp³): 2 C–H + 1 C–O + 1 C–C. O(alcohol, sp³): 1 O–H + 1 O–C + 2 pares libres. El H del –OH es el único H con carácter (débilmente) ácido.",
+      esIonico: false, electronosValenciaTotal: 20,
+      atomoCentral: "O (del grupo OH)", paresLibresCentral: 2, enlacesSimples: 6, enlacesDobles: 0, enlacesTriples: 0,
+    },
+    vsepr: {
+      descripcion: "Todos los carbonos sp³ (AX₄, tetraédrico, 109.5°). El O es sp³ (AX₂E₂, angular, ≈109.5° pero comprimido por pares libres). La molécula no es rígida — rotación libre alrededor del enlace C–C y C–O.",
+      esIonico: false, notacionAXE: "C: AX₄ / O: AX₂E₂",
+      geometriaElectronica: "C: tetraédrica / O: tetraédrica",
+      geometriaMolecular: "C: tetraédrico / O: angular",
+      anguloEnlace: "C–C–O: ≈107° / C–O–H: ≈109°", hibridacion: "C: sp³ / O: sp³",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 1.24, momentoDipolar: "1.69 D",
+      explicacion: "ΔEN(O–H) = 1.24; ΔEN(C–O) = 0.89. El grupo –OH domina la polaridad: μ = 1.69 D. La polar miscibilidad del etanol con agua se debe a su capacidad de formar 2 puentes de hidrógeno (O–H···O y O···H–O).",
+    },
+    formacion: {
+      proceso: "Fermentación alcohólica de glucosa por levaduras (Saccharomyces cerevisiae) en ausencia de O₂. Industrial: hidratación catalítica del etileno (eteno) con H₂SO₄ o ácido fosfórico.",
+      ecuacion: "C₆H₁₂O₆(aq) → 2 C₂H₅OH(aq) + 2 CO₂(g)  (levaduras, T<40°C)",
+      tipoEnlaceFormado: "Covalente polar (C–O, O–H, C–C, C–H)",
+      estadosOxidacion: { "C (metilo)": "−3", "C (metileno)": "−1", "O": "−2", "H": "+1" },
+      entalpiaFormacion: "−277.7 kJ/mol (líquido)",
+    },
+    reacciones: [
+      { nombre: "Combustión completa", ecuacion: "C₂H₅OH(l) + 3 O₂(g) → 2 CO₂(g) + 3 H₂O(g)  ΔHc = −1367 kJ/mol", tipo: "combustión", descripcion: "Combustión limpia. El etanol anhidro se usa como biocombustible (mezcla E10, E85 con gasolina). Su llama es casi invisible." },
+      { nombre: "Oxidación (aldehído → ácido)", ecuacion: "C₂H₅OH → CH₃CHO → CH₃COOH  (oxidación progresiva)", tipo: "redox", descripcion: "El etanol se oxida primero a acetaldehído (CH₃CHO, tóxico) y luego a ácido acético. El acetaldehído es el responsable de la resaca." },
+      { nombre: "Deshidratación (ácido fosfórico, 180°C)", ecuacion: "C₂H₅OH → C₂H₄ + H₂O  (H₃PO₄, 180°C)", tipo: "síntesis", descripcion: "Deshidratación intramolecular para producir etileno (eteno). A 140°C se obtiene éter dietílico (C₂H₅OC₂H₅) por deshidratación intermolecular." },
+      { nombre: "Esterificación", ecuacion: "C₂H₅OH + CH₃COOH ⇌ CH₃COOC₂H₅ + H₂O  (H⁺, reversible)", tipo: "síntesis", descripcion: "Esterificación de Fischer: produce acetato de etilo (olor a frutas, disolvente). Reacción reversible — se favorece con exceso de alcohol o extracción de agua." },
+    ],
+    educacion: {
+      teoriaResumida: "El etanol es el segundo líquido orgánico más producido industrialmente (después del metanol). Es miscible con agua en todas proporciones gracias a los puentes H que forma el grupo –OH. La fermentación alcohólica (C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂) es una de las biotransformaciones más antiguas de la humanidad (∼10.000 años) y la base del bioetanol como combustible renovable.",
+      erroresComunes: [
+        "Confundir etanol (C₂H₅OH, potable en concentraciones adecuadas) con metanol (CH₃OH, tóxico, produce ceguera).",
+        "Creer que el etanol y el éter dietílico son lo mismo — son compuestos diferentes (C₂H₅OH vs C₂H₅OC₂H₅).",
+        "Olvidar que el acetaldehído (no el etanol) es el principal responsable de la toxicidad de la resaca.",
+        "Confundir 'grados Brix' (azúcar en mosto) con 'grados de alcohol' (% vol. de etanol).",
+      ],
+      ejerciciosPrincipiante: ["¿Cómo se produce el alcohol en la fermentación?", "¿Por qué el alcohol se mezcla con agua?", "¿Por qué el etanol arde?"],
+      ejerciciosSecundario: ["Calcula los moles de CO₂ producidos al fermentar 180 g de glucosa.", "Escribe la reacción de oxidación del etanol a ácido acético (dos pasos).", "Calcula el calor liberado al quemar 46 g de etanol (ΔHc = −1367 kJ/mol)."],
+      ejerciciosUniversitario: ["Calcula el rendimiento teórico de etanol por fermentación de 1 kg de glucosa y compáralo con el valor industrial.", "Diseña una síntesis de acetato de etilo a partir de etanol maximizando el rendimiento (Le Châtelier).", "Explica por qué la mezcla 95.6% etanol / 4.4% agua es un azeótropo (no se puede separar por destilación normal)."],
+    },
+  },
+
+  // ── C₆H₁₂O₆ ──────────────────────────────────────────────────────────────
+  "C6H12O6": {
+    formula: "C6H12O6", formulaDisplay: "C₆H₁₂O₆",
+    nombre: "Glucosa (D-glucosa)", familia: "Monosacárido (azúcar simple, carbohidrato)", color: "green", masaMolar: 180.156,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Glucosa",
+      stock: "No aplica nomenclatura inorgánica a orgánicos complejos",
+      sistematica: "(2R,3S,4R,5R)-2,3,4,5,6-pentahidroxihexanal (forma abierta, IUPAC)",
+      tipo: "Monosacárido aldopentosa-6 (aldosa de 6 C); en solución existe mayoritariamente como glucopiranosa (forma cíclica)",
+      nota: "La glucosa existe en 3 formas: cadena abierta (aldehído), α-D-glucopiranosa (OH anomérico axial) y β-D-glucopiranosa (OH anomérico ecuatorial). En solución acuosa: ~0.002% cadena abierta, ~36% α, ~64% β.",
+    },
+    lewis: {
+      descripcion: "Forma abierta: cadena de 6C con grupo aldehído (–CHO) en C1 y grupos –OH en C2–C6. Forma cíclica (pyranosa): el –OH de C5 ataca al C1 aldehídico, formando un anillo de 6 miembros con un enlace O glicosídico.",
+      esIonico: false, electronosValenciaTotal: 96,
+      atomoCentral: "C1 (anomérico)", paresLibresCentral: 0, enlacesSimples: 11, enlacesDobles: 1, enlacesTriples: 0,
+      notaResonancia: "En solución acuosa, la glucosa muta-rota entre las formas α y β pasando por la forma abierta (mutarrotación). La mezcla equilibrio tiene [α]D²⁰ = +52.7°.",
+    },
+    vsepr: {
+      descripcion: "Todos los C son sp³ en la forma piranosa (tetraédrico, AX₄). El C1 en la forma aldehídica (cadena abierta) es sp² (AX₃, plano trigonal). La conformación de silla de la glucopiranosa permite que todos los grupos voluminosos (OH, CH₂OH) sean ecuatoriales en β-D-glucosa.",
+      esIonico: false, notacionAXE: "C piranosa: AX₄ / C1 aldehído: AX₃",
+      geometriaElectronica: "C: tetraédrica / C1 aldehído: trigonal plana",
+      geometriaMolecular: "Conformación silla (β-D-glucopiranosa, más estable)",
+      anguloEnlace: "C–O–C glicosídico: ≈113° / C–C–C: ≈109.5°", hibridacion: "C: sp³ (piranosa)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Covalente polar",
+      diferenciaEN: 1.24, momentoDipolar: "múltiple (5 grupos OH)",
+      explicacion: "Cinco grupos –OH con ΔEN(O–H) = 1.24. La glucosa es extremadamente polar (solubilidad en agua: 909 g/L a 25°C). Los múltiples puentes H con el agua explican su extraordinaria solubilidad.",
+    },
+    formacion: {
+      proceso: "Fotosíntesis: CO₂ y H₂O se convierten en glucosa usando energía lumínica (clorofila). Base de toda la cadena trófica de la Tierra.",
+      ecuacion: "6 CO₂(g) + 6 H₂O(l) + hν → C₆H₁₂O₆(aq) + 6 O₂(g)  ΔG° = +2870 kJ/mol",
+      tipoEnlaceFormado: "Covalente polar (C–O, O–H, C–H, C–C)",
+      estadosOxidacion: { "C (promedio)": "0", "H": "+1", "O": "−2" },
+      entalpiaFormacion: "−1274 kJ/mol (sólido)",
+    },
+    reacciones: [
+      { nombre: "Combustión (respiración celular)", ecuacion: "C₆H₁₂O₆(aq) + 6 O₂(g) → 6 CO₂(g) + 6 H₂O(l)  ΔHc = −2803 kJ/mol", tipo: "combustión", descripcion: "Respiración aeróbica: proceso inverso a la fotosíntesis. Produce 38 moles de ATP por mol de glucosa. La energía libre (ΔG° = −2870 kJ/mol) impulsa la vida." },
+      { nombre: "Fermentación alcohólica", ecuacion: "C₆H₁₂O₆(aq) → 2 C₂H₅OH(aq) + 2 CO₂(g)  ΔG° = −235 kJ/mol", tipo: "descomposición", descripcion: "Vía anaeróbica: las levaduras obtienen 2 moles de ATP por mol de glucosa. Mucho menos eficiente que la respiración aeróbica. Base de la producción de alcohol y pan." },
+      { nombre: "Prueba de Benedict/Fehling (aldehídos reductores)", ecuacion: "C₆H₁₂O₆ + 2 Cu²⁺(azul) → ácido glucónico + Cu₂O(s)↓ (rojo ladrillo)", tipo: "redox", descripcion: "El grupo aldehído de la glucosa reduce los iones Cu²⁺ a Cu₂O (precipitado rojo). Prueba diagnóstica para diabetes (glucosa en orina)." },
+    ],
+    educacion: {
+      teoriaResumida: "La glucosa es la molécula energética central de la vida: fuente de energía en respiración (36–38 ATP/molécula), monómero del almidón y la celulosa, y señal regulatoria de la insulina. La diferencia entre α-D-glucosa (almidón, digestible) y β-D-glucosa (celulosa, no digestible) es solo la configuración del C1 anomérico — ¡un solo cambio estereoquímico cambia el alimento de material de construcción!",
+      erroresComunes: [
+        "Confundir glucosa (C₆H₁₂O₆, monosacárido, dulce) con sacarosa (C₁₂H₂₂O₁₁, disacárido, azúcar de mesa).",
+        "Creer que α y β glucosa son compuestos diferentes — son el mismo molécula con diferente configuración en C1.",
+        "Olvidar que la celulosa (β-glucosa, enlace β-1,4) y el almidón (α-glucosa, enlace α-1,4) son ambos polímeros de glucosa.",
+        "Confundir la fórmula molecular de la glucosa (C₆H₁₂O₆) con la de la fructosa — ambas tienen la misma fórmula (isómeros).",
+      ],
+      ejerciciosPrincipiante: ["¿Qué es la fotosíntesis en términos de glucosa?", "¿Por qué la glucosa es importante para las células?", "¿Qué diferencia hay entre glucosa y fructosa?"],
+      ejerciciosSecundario: ["Escribe la ecuación balanceada de la combustión completa de la glucosa.", "Explica la prueba de Benedict: ¿qué indica el precipitado rojo-ladrillo?", "¿Cuántos ATP se obtienen teóricamente de la respiración aeróbica de 1 mol de glucosa?"],
+      ejerciciosUniversitario: ["Calcula la eficiencia energética de la fermentación (ΔG = −235 kJ/mol) vs respiración (ΔG = −2870 kJ/mol).", "Explica la mutarrotación de la glucosa y calcula la composición en equilibrio usando rotaciones ópticas (α: +112.2°, β: +18.7°, equilibrio: +52.7°).", "Compara los puentes de hidrógeno en celulosa (cristalina, insoluble) vs almidón (amorfo, soluble) y justifica sus diferencias de solubilidad."],
+    },
+  },
+
+  // ── C₂H₄ ─────────────────────────────────────────────────────────────────
+  "C2H4": {
+    formula: "C2H4", formulaDisplay: "C₂H₄",
+    nombre: "Etileno (Eteno)", familia: "Hidrocarburo insaturado (alqueno)", color: "yellow", masaMolar: 28.054,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Etileno",
+      stock: "Eteno",
+      sistematica: "Eteno",
+      tipo: "Alqueno de 2 carbonos (hidrocarburo con doble enlace C=C)",
+      nota: "IUPAC prefiere 'eteno'. El nombre 'etileno' es el nombre trivial más usado industrialmente. Es el monómero del polietileno (PE) y la molécula orgánica de síntesis más producida del mundo (∼200 Mt/año).",
+    },
+    lewis: {
+      descripcion: "2 átomos de C, cada uno sp². Doble enlace C=C: 1 enlace σ (orbital sp-sp) + 1 enlace π (orbitales p-p perpendiculares al plano). Cada C forma 2 enlaces C–H adicionales. 6 átomos, 12 e⁻ de valencia.",
+      esIonico: false, electronosValenciaTotal: 12,
+      atomoCentral: "C=C (ambos)", paresLibresCentral: 0, enlacesSimples: 4, enlacesDobles: 1, enlacesTriples: 0,
+    },
+    vsepr: {
+      descripcion: "Cada C con 3 grupos enlazantes (1 C=C + 2 C–H), 0 pares libres → AX₃ → trigonal plana → ángulos ≈ 120°. TODA LA MOLÉCULA ES PLANA (los 6 átomos son coplanares). La barrera de rotación alrededor del C=C es alta (~263 kJ/mol) → no hay libre rotación.",
+      esIonico: false, notacionAXE: "AX₃ (cada C)",
+      geometriaElectronica: "Trigonal plana (cada C)", geometriaMolecular: "Plana (molécula completa coplanar)",
+      anguloEnlace: "H–C=C: 121.3° / H–C–H: 117.4°", hibridacion: "sp² (ambos C)",
+    },
+    polaridad: {
+      esPolar: false, tipoEnlace: "Covalente apolar",
+      diferenciaEN: 0.35, momentoDipolar: "0 D",
+      explicacion: "ΔEN(C–H) = 0.35 (pequeño). Molécula con plano de simetría: los 4 grupos C–H y el enlace C=C se cancelan simétricamente → μ = 0 D. Apolar, no soluble en agua, soluble en disolventes orgánicos.",
+    },
+    formacion: {
+      proceso: "Industrial: craqueo (steam cracking) del etano o nafta a 750–900°C. Es la molécula orgánica más producida industrialmente del mundo.",
+      ecuacion: "C₂H₆(g) → C₂H₄(g) + H₂(g)  ΔH = +137 kJ/mol  (craqueo térmico, 750°C)",
+      tipoEnlaceFormado: "Covalente (C=C σ+π, C–H σ)",
+      estadosOxidacion: { "C": "−2", "H": "+1" },
+      entalpiaFormacion: "+52.5 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Hidrogenación catalítica", ecuacion: "C₂H₄(g) + H₂(g) → C₂H₆(g)  ΔH = −137 kJ/mol  (Ni, Pd o Pt)", tipo: "síntesis", descripcion: "Adición de H₂ al doble enlace. El catalizador (Ni, Pd, Pt) adsorbe y activa el H₂. Base para obtener grasas sólidas de aceites vegetales (margarina)." },
+      { nombre: "Polimerización (polietileno)", ecuacion: "n C₂H₄ → [–CH₂–CH₂–]ₙ  (catalizador de Ziegler-Natta)", tipo: "síntesis", descripcion: "La reacción industrial más importante del etileno. Produce polietileno (PE-LD, PE-HD, PE-UHMW). La catálisis de Ziegler-Natta recibió el Nobel en 1963." },
+      { nombre: "Hormona vegetal natural", ecuacion: "C₂H₄ + proteínas receptor → maduración (proceso enzimático)", tipo: "síntesis", descripcion: "El etileno es una hormona vegetal gaseosa: induce maduración de frutas, caída de hojas y senescencia. Por eso las frutas cerca de otras maduras maduran más rápido." },
+    ],
+    educacion: {
+      teoriaResumida: "El etileno es la molécula orgánica de síntesis más producida en el mundo (∼200 Mt/año). Es la base del polietileno (material plástico más común del mundo), del anticongelante (etilenglicol), del etanol industrial y de muchos otros productos. Paradójicamente, también es una hormona vegetal (fitohormona) natural que regula la maduración de frutas — los camiones de transporte usan atmósferas controladas de CO₂ para inhibir el etileno y retrasar la maduración.",
+      erroresComunes: [
+        "Confundir etileno (C₂H₄, doble enlace, plano) con etano (C₂H₆, simple enlace, sin restricción de rotación).",
+        "Creer que el doble enlace C=C permite libre rotación — la barrera π (~263 kJ/mol) lo impide a temperatura ambiente.",
+        "Olvidar que el etileno es la fitohormona que madura las frutas — base de la tecnología de maduración controlada.",
+        "Confundir 'etileno' (nombre trivial) con 'eteno' (nombre IUPAC) — son el mismo compuesto.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el etileno madura las frutas?", "¿Qué diferencia hay entre etileno y polietileno?", "¿Por qué el etileno es 'plano'?"],
+      ejerciciosSecundario: ["Dibuja la estructura de Lewis del C₂H₄ e indica la hibridación de cada C.", "Escribe la ecuación de polimerización del etileno y describe la estructura del polietileno.", "¿Por qué la hidrogenación catalítica requiere un catalizador? ¿Qué hace el catalizador?"],
+      ejerciciosUniversitario: ["Usando la teoría de orbitales moleculares, describe el enlace σ y π del C₂H₄ y explica por qué hay restricción de rotación.", "Calcula ΔH° de la combustión del etileno a partir de ΔHf° y compáralo con el metano por gramo de combustible.", "Explica el mecanismo de la polimerización del etileno con catalizador de Ziegler-Natta (mecanismo de inserción-migración)."],
+    },
+  },
+
+  // ── CaCO₃ ─────────────────────────────────────────────────────────────────
+  "CaCO3": {
+    formula: "CaCO3", formulaDisplay: "CaCO₃",
+    nombre: "Carbonato de Calcio", familia: "Sal oxoácida (carbonato metálico)", color: "yellow", masaMolar: 100.087,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Carbonato cálcico",
+      stock: "Carbonato de calcio",
+      sistematica: "Trioxidocarbonato(2−) de calcio(2+)",
+      tipo: "Sal del ácido carbónico (H₂CO₃) con calcio(II)",
+      nota: "Minerales naturales: calcita (trigonal, más estable), aragonita (ortorrómbica, metaestable). Presente en mármol, caliza, creta, conchas de moluscos, corales, cáscaras de huevo y huesos.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: Ca²⁺ + CO₃²⁻. El ión carbonato tiene resonancia perfecta: C central con 3 grupos C–O equivalentes (1 doble enlace deslocalizado sobre 3 O por resonancia). Cada O tiene carga formal −2/3.",
+      esIonico: true, electronosValenciaTotal: 24,
+      notaResonancia: "CO₃²⁻ tiene 3 estructuras de resonancia equivalentes (D₃h). Todos los enlaces C–O son iguales (longitud 1.29 Å, entre simple 1.43 Å y doble 1.23 Å). El π deslocalizado cubre los 3 O.",
+    },
+    vsepr: {
+      descripcion: "Ca²⁺ es iónico (no aplica VSEPR). El CO₃²⁻ tiene C central con 3 grupos enlazantes, sin pares libres → AX₃ → trigonal plana perfecta (D₃h, 120°). El ión carbonato es completamente plano.",
+      esIonico: true, notacionAXE: "CO₃²⁻: AX₃ (C central)",
+      geometriaMolecular: "Ca²⁺: iónico / CO₃²⁻: trigonal plana",
+      hibridacion: "sp² (C en CO₃²⁻)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (Ca–CO₃) / Covalente polar deslocalizado (C–O en CO₃²⁻)",
+      diferenciaEN: 2.44, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(Ca–O) = 3.44 − 1.00 = 2.44 → iónico. Dentro del CO₃²⁻: los 3 enlaces C–O polares con resonancia perfecta → μ = 0 (cancelación simétrica D₃h).",
+    },
+    formacion: {
+      proceso: "Natural: precipitación biológica de CO₂ + Ca²⁺ disueltos por organismos marinos (fotosíntesis de algas, corales). Geológicamente forma caliza, mármol (metamorfismo) y travertino.",
+      ecuacion: "Ca²⁺(aq) + CO₃²⁻(aq) → CaCO₃(s)↓  Ksp = 3.4×10⁻⁹ (calcita)",
+      tipoEnlaceFormado: "Iónico (Ca²⁺ + CO₃²⁻)",
+      estadosOxidacion: { "Ca": "+2", "C": "+4", "O": "−2" },
+      entalpiaFormacion: "−1207.6 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Reacción con HCl (efervescencia de CO₂)", ecuacion: "CaCO₃(s) + 2 HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)↑", tipo: "ácido-base", descripcion: "Reacción clásica para identificar carbonatos (efervescencia viva). También explica la erosión de la caliza por lluvia ácida y el 'sarro' en tuberías." },
+      { nombre: "Calcinación (producción de cal viva)", ecuacion: "CaCO₃(s) → CaO(s) + CO₂(g)  ΔH = +178 kJ/mol  (>900°C)", tipo: "descomposición", descripcion: "Reacción industrial fundamental: produce CaO (cal viva) para construcción, acero, tratamiento de agua. Emite ∼7% del CO₂ industrial mundial." },
+      { nombre: "Disolución en CO₂ (cárstico)", ecuacion: "CaCO₃(s) + CO₂(aq) + H₂O(l) ⇌ Ca²⁺(aq) + 2 HCO₃⁻(aq)", tipo: "ácido-base", descripcion: "El CO₂ del suelo disuelve la caliza, formando cavernas y estalactitas/estalagmitas. La reacción inversa precipita CaCO₃ al desgasificar el CO₂." },
+    ],
+    educacion: {
+      teoriaResumida: "CaCO₃ es el mineral más abundante de la corteza terrestre después del feldespato y el cuarzo. Es la fuente primaria de Ca²⁺ en los ecosistemas acuáticos y la principal reguladora del pH oceánico. La acidificación de los océanos por CO₂ disuelve los arrecifes de coral (CaCO₃) según: CaCO₃ + CO₂ + H₂O → Ca²⁺ + 2HCO₃⁻. La calcinación industrial de CaCO₃ produce el 7–8% de las emisiones globales de CO₂.",
+      erroresComunes: [
+        "Creer que 'caliza', 'mármol' y 'creta' son compuestos diferentes — todos son CaCO₃ (diferentes formas cristalinas o pureza).",
+        "Confundir carbonato de calcio (CaCO₃) con bicarbonato de calcio Ca(HCO₃)₂ — el bicarbonato es soluble, el carbonato no.",
+        "Olvidar que la reacción CaCO₃ + HCl produce CO₂ y es la prueba clásica de identificación de carbonatos.",
+        "Pensar que el 'sarro' de las tuberías es CaCO₃ puro — es mezcla de CaCO₃, Mg(OH)₂ y otros minerales.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué la caliza efervece con vinagre?", "¿De qué está hecho el mármol?", "¿Por qué los corales están en peligro por el CO₂?"],
+      ejerciciosSecundario: ["Calcula los gramos de CaCO₃ que reaccionan con 50 mL de HCl 2.0 M.", "Escribe la ecuación de disolución cárstica del CaCO₃ y explica la formación de estalactitas.", "¿Cuántos litros de CO₂ (CNTP) se liberan al calcinar 1 kg de caliza (95% CaCO₃)?"],
+      ejerciciosUniversitario: ["Calcula el pH del agua de mar en equilibrio con CaCO₃ y CO₂ atmosférico (Ksp=3.4×10⁻⁹, pKa₁=6.35, pKa₂=10.33).", "Calcula el Ksp de CaCO₃ a 25°C usando ΔGf° de los iones y del sólido.", "Diseña un experimento para medir la tasa de disolución de CaCO₃ en función del pH (relevante para acidificación oceánica)."],
+    },
+  },
+
+  // ── Na₂CO₃ ────────────────────────────────────────────────────────────────
+  "Na2CO3": {
+    formula: "Na2CO3", formulaDisplay: "Na₂CO₃",
+    nombre: "Carbonato de Sodio", familia: "Sal oxoácida (carbonato alcalino)", color: "blue", masaMolar: 105.988,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Carbonato sódico",
+      stock: "Carbonato de disodio",
+      sistematica: "Trioxidocarbonato(2−) de disodio",
+      tipo: "Sal del ácido carbónico (H₂CO₃) con sodio(I)",
+      nota: "Nombres triviales: 'sosa de lavar', 'sosa de Solvay', 'barilla'. Con 10 H₂O de cristalización: Na₂CO₃·10H₂O ('cristal de soda', 'sal de Glauber' del Na). No confundir con NaHCO₃ (bicarbonato de sodio, 'baking soda').",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: 2 Na⁺ + CO₃²⁻. Na⁺ cede 1 e⁻ cada uno (IE₁ = 496 kJ/mol). CO₃²⁻ tiene resonancia perfecta: C con 3 enlaces C–O equivalentes y deslocalización π sobre los 4 átomos.",
+      esIonico: true, electronosValenciaTotal: 24,
+      notaResonancia: "CO₃²⁻ tiene resonancia D₃h: todos los enlaces C–O equivalentes (1.29 Å). El ion carbonato es plano y simétrico, análogo al ión nitrato (NO₃⁻) e isoelectrónico con él (24 e⁻).",
+    },
+    vsepr: {
+      descripcion: "2 Na⁺ iónicos + CO₃²⁻ trigonal plano (AX₃ en C central, 120°). Red cristalina monoclínica. El CO₃²⁻ es completamente plano (D₃h) con deslocalización π.",
+      esIonico: true, notacionAXE: "CO₃²⁻: AX₃ (C central)",
+      geometriaMolecular: "Red cristalina monoclínica / CO₃²⁻: trigonal plana",
+      hibridacion: "sp² (C en CO₃²⁻)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (Na–CO₃) / Covalente deslocalizado (CO₃²⁻)",
+      diferenciaEN: 2.51, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(Na–O) = 3.44 − 0.93 = 2.51 → iónico fuerte. El CO₃²⁻ tiene simetría D₃h perfecta → μ = 0 dentro del anión. La solución acuosa es básica por hidrólisis: CO₃²⁻ + H₂O ⇌ HCO₃⁻ + OH⁻.",
+    },
+    formacion: {
+      proceso: "Proceso Solvay (industrial, inventado en 1863): CO₂ + NH₃ + NaCl + H₂O → NaHCO₃ (precipita) → Na₂CO₃ (calcinación). Produce ∼45 Mt/año.",
+      ecuacion: "2 NaHCO₃(s) → Na₂CO₃(s) + H₂O(g) + CO₂(g)  ΔH = +128 kJ/mol",
+      tipoEnlaceFormado: "Iónico (2Na⁺ + CO₃²⁻)",
+      estadosOxidacion: { "Na": "+1", "C": "+4", "O": "−2" },
+      entalpiaFormacion: "−1130.7 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Hidrólisis básica (en agua)", ecuacion: "CO₃²⁻(aq) + H₂O(l) ⇌ HCO₃⁻(aq) + OH⁻(aq)  Kb = 2.1×10⁻⁴", tipo: "ácido-base", descripcion: "El CO₃²⁻ es una base moderada (pH de Na₂CO₃ 0.1M ≈ 11.6). Se usa como agente desgrasante en limpieza industrial." },
+      { nombre: "Neutralización con HCl", ecuacion: "Na₂CO₃(aq) + 2 HCl(aq) → 2 NaCl(aq) + H₂O(l) + CO₂(g)↑", tipo: "neutralización", descripcion: "Neutralización dibásica con efervescencia. El Na₂CO₃ es un patrón primario de acidimetría (determina la concentración exacta de ácidos)." },
+      { nombre: "Reacción con Ca(OH)₂ (ablandamiento de agua)", ecuacion: "Na₂CO₃(aq) + Ca(HCO₃)₂(aq) → 2 NaHCO₃(aq) + CaCO₃(s)↓", tipo: "síntesis", descripcion: "El carbonato de sodio precipita el Ca²⁺ del agua dura permanente como CaCO₃. Uso clásico en ablandamiento de agua industrial." },
+    ],
+    educacion: {
+      teoriaResumida: "Na₂CO₃ es uno de los 10 productos químicos más producidos del mundo. Sus usos principales: fabricación de vidrio (∼50% de la producción), detergentes (suavizante del agua, regulador de pH), industria del papel (proceso kraft), y en la cocina (fideo chino alcalino, mochi, pretzel). El proceso Solvay (inventado por Ernest Solvay en 1861) es uno de los mayores logros de la química industrial del s. XIX.",
+      erroresComunes: [
+        "Confundir Na₂CO₃ (carbonato, más básico, pH≈11.6) con NaHCO₃ (bicarbonato, menos básico, pH≈8.3) — son distintos.",
+        "Olvidar que Na₂CO₃ se hidroliza en agua dando una solución básica (no neutra).",
+        "Creer que el bicarbonato de sodio y la soda de lavar son lo mismo — 'baking soda' = NaHCO₃; 'washing soda' = Na₂CO₃.",
+        "Confundir Na₂CO₃ (carbonato de sodio) con Na₂SO₄ (sulfato de sodio, sal de Glauber) — aniones diferentes.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el Na₂CO₃ se llama 'sosa de lavar'?", "¿Cómo se diferencia el carbonato del bicarbonato de sodio?", "¿Para qué se usa el Na₂CO₃ en la fabricación de vidrio?"],
+      ejerciciosSecundario: ["Calcula el pH de Na₂CO₃ 0.10 M (Kb = 2.1×10⁻⁴).", "Na₂CO₃ es patrón primario: calcula la concentración de HCl si 0.530 g de Na₂CO₃ consume 25.0 mL de HCl.", "Describe el proceso Solvay y las ecuaciones de cada etapa."],
+      ejerciciosUniversitario: ["Calcula el pH de una solución de Na₂CO₃ 0.10 M considerando las dos hidrólisis del CO₃²⁻ (pKa₁=6.35, pKa₂=10.33).", "Diseña una titulación con Na₂CO₃ como patrón primario para HCl, indica el indicador adecuado y el punto final.", "Explica por qué el vidrio de sosa-cal-sílice (Na₂O·CaO·6SiO₂) tiene un punto de fusión mucho más bajo que el SiO₂ puro."],
+    },
+  },
+
+  // ── KNO₃ ─────────────────────────────────────────────────────────────────
+  "KNO3": {
+    formula: "KNO3", formulaDisplay: "KNO₃",
+    nombre: "Nitrato de Potasio", familia: "Sal oxoácida (nitrato alcalino)", color: "rose", masaMolar: 101.103,
+    esCompuestoMVP: true,
+    nomenclatura: {
+      tradicional: "Nitrato potásico",
+      stock: "Nitrato de potasio",
+      sistematica: "Trioxidonitrato(−) de potasio",
+      tipo: "Sal del ácido nítrico (HNO₃) con potasio(I)",
+      nota: "Nombre histórico: 'salitre' o 'nitro'. K tiene estado de oxidación +1 (no requiere romano). El NO₃⁻ es la base conjugada débil del HNO₃. No confundir con KNO₂ (nitrito de potasio) ni con K₂NO₃.",
+    },
+    lewis: {
+      descripcion: "Compuesto iónico: K⁺ + NO₃⁻. K⁺ es iónico (configuración del Ar). NO₃⁻ tiene resonancia perfecta: N central con 3 grupos N–O equivalentes (1 doble enlace deslocalizado). Total 24 e⁻ en el anión.",
+      esIonico: true, electronosValenciaTotal: 24,
+      notaResonancia: "NO₃⁻ es isoelectrónico con CO₃²⁻: resonancia D₃h perfecta con 3 estructuras equivalentes N=O, N–O⁻. Todos los enlaces N–O son iguales (1.24 Å).",
+    },
+    vsepr: {
+      descripcion: "K⁺ iónico + NO₃⁻ trigonal plano (N central: AX₃, 120°). Red cristalina ortorrómbica (aragonita-tipo). El anión NO₃⁻ es plano y simétrico (D₃h).",
+      esIonico: true, notacionAXE: "NO₃⁻: AX₃ (N central)",
+      geometriaMolecular: "Red cristalina ortorrómbica / NO₃⁻: trigonal plana",
+      hibridacion: "sp² (N en NO₃⁻)",
+    },
+    polaridad: {
+      esPolar: true, tipoEnlace: "Iónico (K–NO₃) / Covalente deslocalizado (NO₃⁻)",
+      diferenciaEN: 2.62, momentoDipolar: "N/A (sólido iónico)",
+      explicacion: "ΔEN(K–O) = 3.44 − 0.82 = 2.62 → iónico fuerte. Dentro del NO₃⁻: simetría D₃h → μ = 0. La solución acuosa es prácticamente neutra (NO₃⁻ es la base conjugada de HNO₃, ácido fuerte → no hidroliza significativamente).",
+    },
+    formacion: {
+      proceso: "Reacción de HNO₃ con KOH o K₂CO₃. Natural: mineral 'salitre' (Chile, India). Industrial: proceso Haber-Bosch + Ostwald + neutralización con KOH.",
+      ecuacion: "KOH(aq) + HNO₃(aq) → KNO₃(aq) + H₂O(l)  ΔH = −57.3 kJ/mol",
+      tipoEnlaceFormado: "Iónico (K⁺ + NO₃⁻)",
+      estadosOxidacion: { "K": "+1", "N": "+5", "O": "−2" },
+      entalpiaFormacion: "−494.6 kJ/mol",
+    },
+    reacciones: [
+      { nombre: "Descomposición térmica (oxidante fuerte)", ecuacion: "2 KNO₃(s) → 2 KNO₂(s) + O₂(g)  ΔH = +239 kJ/mol  (400°C)\n4 KNO₃(s) → 2 K₂O(s) + 4 NO₂(g) + O₂(g)  (>600°C)", tipo: "descomposición", descripcion: "Al calentar, libera O₂ activo: poderoso oxidante. Base de la pólvora negra (KNO₃ + C + S = 75:15:10) y algunos fuegos artificiales." },
+      { nombre: "Pólvora negra (oxidación del carbón)", ecuacion: "2 KNO₃(s) + S(s) + 3 C(s) → K₂S(s) + 3 CO₂(g) + N₂(g)  (simplificado)", tipo: "redox", descripcion: "El KNO₃ es el oxidante de la pólvora negra (inventada en China, s. IX). Libera N₂ y CO₂ gaseosos rápidamente → expansión explosiva." },
+      { nombre: "Uso como fertilizante (en solución)", ecuacion: "KNO₃(aq) → K⁺(aq) + NO₃⁻(aq)  (disociación completa)", tipo: "descomposición", descripcion: "Fertilizante binario (N+K): aporta simultáneamente nitrógeno (NO₃⁻) y potasio (K⁺), nutrientes esenciales para plantas. Muy soluble (316 g/L a 20°C)." },
+    ],
+    educacion: {
+      teoriaResumida: "El KNO₃ (salitre) es uno de los materiales más históricos de la química: componente de la pólvora negra desde el s. IX (China), fue el material más estratégico de la humanidad durante siglos. Hoy se usa principalmente como fertilizante (principal fuente K+N en agricultura de precisión), en fuegos artificiales, en preservación de alimentos (E252), y como sal fundida en reactores de concentración solar.",
+      erroresComunes: [
+        "Confundir KNO₃ (nitrato) con KNO₂ (nitrito) — diferente estado de oxidación del N (+5 vs +3).",
+        "Creer que KNO₃ en solución es ácido o básico — es prácticamente neutro (pH ≈ 7) porque K⁺ y NO₃⁻ no hidrolizan.",
+        "Olvidar que el KNO₃ como oxidante es peligroso en mezclas con materiales orgánicos o reductores.",
+        "Confundir el salitre (KNO₃) con el salitre de Chile (NaNO₃, nitratina) — son compuestos diferentes.",
+      ],
+      ejerciciosPrincipiante: ["¿Por qué el KNO₃ es un componente de la pólvora?", "¿Para qué sirve el KNO₃ en los fertilizantes?", "¿Es el KNO₃ ácido, básico o neutro en agua?"],
+      ejerciciosSecundario: ["Escribe la ecuación ajustada de descomposición de KNO₃ a 400°C y a >600°C.", "Calcula el pH de KNO₃ 0.10 M y justifica por qué es cercano a 7.", "¿Cuántos gramos de O₂ libera la descomposición de 50 g de KNO₃ a 400°C?"],
+      ejerciciosUniversitario: ["Calcula ΔG° para 2KNO₃ → 2KNO₂ + O₂ a 25°C y determina a qué temperatura se vuelve espontánea.", "Explica la composición y química de la pólvora negra (KNO₃/C/S) y calcula el volumen de gas producido por gramo de mezcla.", "Compara la termodinámica de KNO₃ como oxidante frente a O₂ puro para aplicaciones de almacenamiento de energía (sales fundidas)."],
+    },
+  },
+
   // ── MgS ──────────────────────────────────────────────────────────────────
   "MgS": {
     formula: "MgS", formulaDisplay: "MgS",
@@ -1336,8 +2485,24 @@ const ALIASES: Record<string, string> = {
   "ca(oh)2": "Ca(OH)2", "caoh2": "Ca(OH)2", "ca(oh)₂": "Ca(OH)2",
   "ch3cooh": "CH3COOH", "ch3co2h": "CH3COOH", "acoh": "CH3COOH",
   "mgs": "MgS",
+  // Ion amonio (main branch addition)
   "nh4+": "NH4+", "nh4": "NH4+", "amonio": "NH4+", "ion amonio": "NH4+", "azanio": "NH4+",
+  // Bases
   "naoh": "NaOH", "sosa": "NaOH", "lejia": "NaOH", "lejía": "NaOH", "sosa caustica": "NaOH", "sosa cáustica": "NaOH",
+  "koh": "KOH",
+  "mg(oh)2": "Mg(OH)2", "mgoh2": "Mg(OH)2", "mg(oh)₂": "Mg(OH)2",
+  // Ácidos
+  "h3po4": "H3PO4", "h2co3": "H2CO3", "h2s": "H2S", "hf": "HF",
+  // Óxidos
+  "so2": "SO2", "so3": "SO3", "no2": "NO2", "no": "NO",
+  "o3": "O3", "n2o": "N2O", "cao": "CaO",
+  "fe2o3": "Fe2O3", "fe₂o₃": "Fe2O3",
+  // Orgánicos
+  "c2h5oh": "C2H5OH", "etanol": "C2H5OH", "ethanol": "C2H5OH",
+  "c6h12o6": "C6H12O6", "glucosa": "C6H12O6", "glucose": "C6H12O6",
+  "c2h4": "C2H4", "etileno": "C2H4", "eteno": "C2H4",
+  // Sales
+  "caco3": "CaCO3", "na2co3": "Na2CO3", "kno3": "KNO3",
 };
 
 function desubscript(s: string): string {

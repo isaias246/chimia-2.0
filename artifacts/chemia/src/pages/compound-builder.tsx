@@ -13,22 +13,72 @@ import {
   Thermometer, Globe,
 } from "lucide-react";
 
-// ── MVP compound registry ────────────────────────────────────────────────────
-const MVP = [
-  { formula: "H2O",     display: "H₂O",      nombre: "Agua",      color: "cyan"    },
-  { formula: "CO2",     display: "CO₂",      nombre: "CO₂",       color: "gray"    },
-  { formula: "NH3",     display: "NH₃",      nombre: "Amoníaco",  color: "blue"    },
-  { formula: "NH4+",    display: "NH₄⁺",     nombre: "Amonio",    color: "indigo"  },
-  { formula: "CH4",     display: "CH₄",      nombre: "Metano",    color: "orange"  },
-  { formula: "NaCl",    display: "NaCl",     nombre: "Sal",       color: "yellow"  },
-  { formula: "HCl",     display: "HCl",      nombre: "HCl",       color: "green"   },
-  { formula: "HNO3",    display: "HNO₃",     nombre: "Nítrico",   color: "red"     },
-  { formula: "H2SO4",   display: "H₂SO₄",   nombre: "Sulfúrico", color: "rose"    },
-  { formula: "Ca(OH)2", display: "Ca(OH)₂", nombre: "Cal",       color: "violet"  },
-  { formula: "CH3COOH", display: "CH₃COOH", nombre: "Acético",   color: "emerald" },
-  { formula: "NaOH",    display: "NaOH",     nombre: "Sosa",      color: "teal"    },
-  { formula: "MgS",     display: "MgS",      nombre: "MgS",       color: "purple"  },
-] as const;
+// ── Compound registry with categories ────────────────────────────────────────
+type Compound = { formula: string; display: string; nombre: string; color: string };
+
+const CATEGORIAS: { id: string; label: string; compounds: Compound[] }[] = [
+  {
+    id: "acidos", label: "Ácidos",
+    compounds: [
+      { formula: "HCl",      display: "HCl",       nombre: "Clorhídrico", color: "green"   },
+      { formula: "HNO3",     display: "HNO₃",      nombre: "Nítrico",     color: "red"     },
+      { formula: "H2SO4",    display: "H₂SO₄",    nombre: "Sulfúrico",   color: "rose"    },
+      { formula: "H3PO4",    display: "H₃PO₄",    nombre: "Fosfórico",   color: "red"     },
+      { formula: "CH3COOH",  display: "CH₃COOH",  nombre: "Acético",     color: "emerald" },
+      { formula: "H2CO3",    display: "H₂CO₃",    nombre: "Carbónico",   color: "gray"    },
+      { formula: "H2S",      display: "H₂S",       nombre: "Sulfhídrico", color: "gray"    },
+      { formula: "HF",       display: "HF",        nombre: "Fluorhídrico",color: "green"   },
+    ],
+  },
+  {
+    id: "bases", label: "Bases",
+    compounds: [
+      { formula: "NaOH",     display: "NaOH",      nombre: "Sosa",        color: "blue"    },
+      { formula: "KOH",      display: "KOH",       nombre: "Potasa",      color: "violet"  },
+      { formula: "Ca(OH)2",  display: "Ca(OH)₂",  nombre: "Cal apagada", color: "violet"  },
+      { formula: "Mg(OH)2",  display: "Mg(OH)₂",  nombre: "Magnesia",    color: "emerald" },
+      { formula: "NH3",      display: "NH₃",       nombre: "Amoníaco",    color: "blue"    },
+      { formula: "NH4+",     display: "NH₄⁺",     nombre: "Amonio",      color: "indigo"  },
+    ],
+  },
+  {
+    id: "oxidos", label: "Óxidos",
+    compounds: [
+      { formula: "H2O",      display: "H₂O",       nombre: "Agua",        color: "cyan"    },
+      { formula: "CO2",      display: "CO₂",       nombre: "CO₂",         color: "gray"    },
+      { formula: "SO2",      display: "SO₂",       nombre: "SO₂",         color: "orange"  },
+      { formula: "SO3",      display: "SO₃",       nombre: "SO₃",         color: "yellow"  },
+      { formula: "NO2",      display: "NO₂",       nombre: "NO₂",         color: "rose"    },
+      { formula: "NO",       display: "NO",        nombre: "NO",          color: "gray"    },
+      { formula: "O3",       display: "O₃",        nombre: "Ozono",       color: "cyan"    },
+      { formula: "N2O",      display: "N₂O",       nombre: "N₂O",         color: "purple"  },
+      { formula: "CaO",      display: "CaO",       nombre: "Cal viva",    color: "orange"  },
+      { formula: "Fe2O3",    display: "Fe₂O₃",    nombre: "Hematita",    color: "orange"  },
+    ],
+  },
+  {
+    id: "organicos", label: "Orgánicos",
+    compounds: [
+      { formula: "CH4",      display: "CH₄",       nombre: "Metano",      color: "orange"  },
+      { formula: "C2H4",     display: "C₂H₄",     nombre: "Etileno",     color: "yellow"  },
+      { formula: "C2H5OH",   display: "C₂H₅OH",   nombre: "Etanol",      color: "emerald" },
+      { formula: "C6H12O6",  display: "C₆H₁₂O₆", nombre: "Glucosa",     color: "green"   },
+    ],
+  },
+  {
+    id: "sales", label: "Sales",
+    compounds: [
+      { formula: "NaCl",     display: "NaCl",      nombre: "Sal común",   color: "yellow"  },
+      { formula: "MgS",      display: "MgS",       nombre: "MgS",         color: "purple"  },
+      { formula: "CaCO3",    display: "CaCO₃",    nombre: "Caliza",      color: "yellow"  },
+      { formula: "Na2CO3",   display: "Na₂CO₃",   nombre: "Sosa lavar",  color: "blue"    },
+      { formula: "KNO3",     display: "KNO₃",     nombre: "Salitre",     color: "rose"    },
+    ],
+  },
+];
+
+// Flat list for lookups
+const MVP: Compound[] = CATEGORIAS.flatMap(c => c.compounds);
 
 // ── Static color map (Tailwind needs full literal class strings) ─────────────
 const C: Record<string, { text: string; border: string; bg: string; chip: string }> = {
@@ -98,7 +148,7 @@ export default function PerfilUniversalPage() {
           <h1 className="text-3xl font-bold tracking-tight">Perfil Universal de Compuesto</h1>
         </div>
         <p className="text-muted-foreground text-sm">
-          Motor determinístico · 13 compuestos MVP ·{" "}
+          Motor determinístico · 33 compuestos · Ácidos · Bases · Óxidos · Orgánicos · Sales ·{" "}
           <span className="text-foreground/60">Datos de IUPAC 2021 + NIST WebBook · Sin datos inventados</span>
         </p>
       </div>
@@ -106,22 +156,31 @@ export default function PerfilUniversalPage() {
       {/* ── Compound selector ── */}
       <Card className="glass border-border/50">
         <CardContent className="pt-5 pb-5 space-y-4">
-          {/* MVP chips */}
-          <div className="flex flex-wrap gap-2">
-            {MVP.map((m) => (
-              <button
-                key={m.formula}
-                onClick={() => trigger(m.formula)}
-                disabled={mutation.isPending}
-                className={`px-3 py-1.5 rounded-full border text-xs font-mono font-semibold transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
-                  activeFormula === m.formula
-                    ? `${col(m.color).bg} ${col(m.color).border} ${col(m.color).text} ring-1 ring-offset-1 ring-offset-background ring-current`
-                    : `${col(m.color).chip} border`
-                }`}
-              >
-                {m.display}
-                <span className="ml-1.5 text-[10px] opacity-60 font-sans normal-case">{m.nombre}</span>
-              </button>
+          {/* Category chip groups */}
+          <div className="space-y-3">
+            {CATEGORIAS.map((cat) => (
+              <div key={cat.id}>
+                <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-1.5 px-0.5">
+                  {cat.label}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {cat.compounds.map((m) => (
+                    <button
+                      key={m.formula}
+                      onClick={() => trigger(m.formula)}
+                      disabled={mutation.isPending}
+                      className={`px-3 py-1.5 rounded-full border text-xs font-mono font-semibold transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
+                        activeFormula === m.formula
+                          ? `${col(m.color).bg} ${col(m.color).border} ${col(m.color).text} ring-1 ring-offset-1 ring-offset-background ring-current`
+                          : `${col(m.color).chip} border`
+                      }`}
+                    >
+                      {m.display}
+                      <span className="ml-1.5 text-[10px] opacity-60 font-sans normal-case">{m.nombre}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
@@ -173,7 +232,7 @@ export default function PerfilUniversalPage() {
                 <p className="font-semibold text-yellow-400">Compuesto fuera del alcance del MVP</p>
                 <p className="text-sm text-muted-foreground">
                   <span className="font-mono text-foreground">{fueraMVP.formula}</span> no está
-                  en la lista de los 11 compuestos fundamentales. El perfil detallado está disponible para:
+                  en la lista de los 32 compuestos del catálogo. El perfil detallado está disponible para:
                 </p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {fueraMVP.compuestosMVP.map(f => {
@@ -586,7 +645,7 @@ export default function PerfilUniversalPage() {
           <div>
             <p className="text-lg font-semibold text-foreground/70">Selecciona un compuesto</p>
             <p className="text-sm text-muted-foreground mt-1 max-w-md">
-              Haz clic en cualquiera de los 13 chips del MVP o escribe una fórmula para ver el análisis completo.
+              Haz clic en cualquiera de los 33 compuestos por categoría, o escribe una fórmula para ver el análisis completo.
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground/50">
